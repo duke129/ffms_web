@@ -1,3 +1,240 @@
-<p>
-  add-ticekt works!
-</p>
+<div style="padding-top:50PX">
+</div>
+
+
+
+<div class="container-fluid">
+    <div class=row id="Ticketheader" style="border: 0px solid">
+        <h5 p class="text-success">Add Ticket</h5>
+
+    </div>
+    <!-- <div class=row id="customerType">
+        <h5 style="color:red;">Customer Type
+        </h5>
+
+    </div>
+    <div class="row justify-content-around">
+
+        <div class="col-4">
+            <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input">
+                 New Customer
+                </label>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-check">
+                <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input">
+                     Existing Customer
+                    </label>
+            </div>
+
+        </div>
+</div> -->
+
+    <!-- First Row  Field Details Start From Here -->
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-3"><label for="Asset Id"><b>Asset Id</b></label>
+            <input [(ngModel)]="ticket.assetId" type="text" class="form-control" id="assetId" placeholder="Enter Asset Id">
+        </div>
+
+        <div class="col-md-3"><label for="Asset Type">Asset Type </label>
+            <ngx-select-dropdown [config]="config" [options]="availableAssetType" [(value)]="ticket.assetType" [multiple]="false"></ngx-select-dropdown>
+        </div>
+
+
+        <div class="col-md-3"><label for="">Model</label>
+            <input [(ngModel)]="ticket.assetModel" type="text" class="form-control" id="assetModel" placeholder="Enter Model"></div>
+
+
+     
+
+        <div class="col-md-3"><label for="prefferedCallDate">Preferred Call Date</label>
+
+            <span class="glyphicon glyphicon-th"></span>
+            <angular2-date-picker [(ngModel)]="ticket.prefferedCallDate" [settings]="settings"></angular2-date-picker>
+        </div>
+
+
+    </div>
+    <!-- First Row  Field Details Completed Here  -->
+
+    <!-- Second Row  Field Details Start From  Here  -->
+
+    <div class=row style="padding-top: 11px">
+
+        <div class="col-md-3"><label for="selecttitle">Title</label>
+            <ngx-select-dropdown [config]="config" [options]="availableTitle" [(value)]="ticket.title" [multiple]="false"></ngx-select-dropdown>
+        </div>
+
+        <div class="col-md-3"><label for="exampleInputEmail1">First Name</label>
+            <!-- <input [(ngModel)]="ticket.firstName" type="text" class="form-control" id="firstname" placeholder="Enter First Name"> -->
+            <input type="text" class="form-control" id="name" placeholder="Enter First Name"
+            required
+            pattern="[a-zA-Z][a-zA-Z ]+"
+            [(ngModel)]="ticket.firstName" name="name"
+            #name="ngModel">
+            <div [hidden]="name.valid || name.pristine"
+               class="alert alert-danger">
+               <div [hidden]="!name.hasError('required')">Name is required</div>
+               <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
+            </div>
+        
+        </div>
+        <div class="col-md-3"><label for="exampleInputEmail1">Middle Name</label>
+            <input [(ngModel)]="ticket.middleName" type="text" class="form-control" id="middleName" placeholder="Enter Middle Name"></div>
+
+        <div class="col-md-3"><label for="exampleInputEmail1">Last Name</label>
+            <input type="text" [(ngModel)]="ticket.lastName" class="form-control" id="lastName" placeholder="Enter Last Name"></div>
+    </div>
+
+    <!-- Second Row  Field Details Completed Here  -->
+
+    <!-- Third  Row  Field Details Start From  Here  -->
+
+    <div class=row style="padding-top: 11px">
+
+        <div class="col-md-3"><label for="mobileNo">Mobile No <span style=''>*</span></label>
+            <!-- <input [(ngModel)]="ticket.mobileNo" type="text" class="form-control" id="mobileNo" placeholder="Enter Mobile No."> -->
+       
+            <input type="text" class="form-control" id="mobilenumber"
+            required
+            [(ngModel)]="ticket.mobileNo" name="mobilenumber"
+            pattern="[0-9]*"
+            minlength="10"
+            maxlength="10" 
+            #mobile="ngModel">
+            <div [hidden]="mobile.valid || mobile.pristine"
+               class="alert alert-danger">
+               <div [hidden]="!mobile.hasError('minlength')">Mobile should be 10digit</div>
+               <div [hidden]="!mobile.hasError('required')">Mobile is required</div>
+               <div [hidden]="!mobile.hasError('pattern')">Mobile numberr should be only numbers</div>
+            </div>
+       
+        </div>
+
+        <div class="col-md-3"><label for="altMobileNo">Alt Mobile No.</label>
+            <input [(ngModel)]="ticket.altMobileNo" type="text" class="form-control" id="altMobileNo" placeholder="Alt Mobile No.">
+        </div>
+        <div class="col-md-3"><label for="emailId">Email Id</label>
+        <input [(ngModel)]="ticket.emailId" type="text" class="form-control" id="mobileNo" placeholder="Enter emailId"> 
+           
+        </div>
+
+        <div class="col-md-3"><label for="altEmail">Alt Email</label>
+            <input [(ngModel)]="ticket.altEmailId" type="text" class="form-control" id="altEmail" placeholder="Alt Email">
+        </div>
+
+    </div>
+
+    <!-- Third Row  Field Details Completed Here  -->
+
+    <!-- Fourth  Row  Field Details Start From  Here  -->
+
+    <div class=row style="padding-top: 11px">
+
+        <div class="col-md-3"><label for="exampleInputEmail1">Address Line 1</label>
+            <input [(ngModel)]="ticket.addressLine1" type="text" class="form-control" id="Address Line 1 "  placeholder="Address Line 1 .">
+        </div>
+        <div class="col-md-3"><label for="exampleInputEmail1">Address Line 2</label>
+            <input [(ngModel)]="ticket.addressLine2" type="text" class="form-control" id="Address Line 2"  placeholder="Address Line 2">
+        </div>
+        <div class="col-md-3"><label for="exampleInputEmail1">Address Line 3</label>
+            <input [(ngModel)]="ticket.addressLine3" type="text" class="form-control" id="Address Line 3" placeholder="Address Line 3">
+        </div>
+         <div class="col-md-3"><label for="exampleInputEmail1">Landmark</label>
+            <input [(ngModel)]="ticket.landmark" type="text" class="form-control" id="landmark" placeholder="Enter Landmark" />
+        </div> 
+    </div>
+
+    <!-- Fourth Row  Field Details Completed Here  -->
+
+    <!-- Fifth  Row  Field Details Start From  Here  -->
+
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-3"><label for="selectCity">City</label>
+            <ngx-select-dropdown [config]="config" [options]="availableCity"  [(value)]="ticket.city" [multiple]="false"></ngx-select-dropdown>
+        </div>
+        <div class="col-md-3"><label for="selectBranch">Branch</label>
+            <ngx-select-dropdown [config]="config" [options]="availableBranch" [(value)]="ticket.branch" [multiple]="false"></ngx-select-dropdown>
+        </div>
+
+        <div class="col-md-3"><label for="selectArea">Area</label>
+            <ngx-select-dropdown [config]="config" [options]="availableArea" [(value)]="ticket.area" [multiple]="false"></ngx-select-dropdown>
+        </div>
+
+        <div class="col-md-3"><label for="selectState">Sub Area</label>
+            <ngx-select-dropdown [config]="config" [options]="availableSubArea" [(value)]="ticket.subArea" [multiple]="false"></ngx-select-dropdown>
+        </div>
+    </div>
+
+    <!-- Fifth Row  Field Details Completed Here  -->
+
+    <!-- Sixth  Row  Field Details Start From  Here  -->
+    <div class=row style="padding-top: 11px">
+
+        <div class="col-md-3"><label for="selectState">State</label>
+            <ngx-select-dropdown [config]="config" [options]="availableStates" [(value)]="ticket.state" [multiple]="false"></ngx-select-dropdown>
+        </div>
+
+        <div class="col-md-3"><label for="exampleInputEmail1">Pin Code </label>
+            <input [(ngModel)]="ticket.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pin Code.">
+        </div>
+
+        <div class="col-md-3"><label for="exampleInputEmail1">Configuration</label>
+            <input [(ngModel)]="ticket.configuration" type="text" class="form-control" id="configuration" placeholder="Enter configuration ">
+        </div>
+
+        <div class="col-md-3"><label for="exampleInputEmail1">VOC</label>
+            <input [(ngModel)]="ticket.voc" type="text" class="form-control" id="voc" placeholder="Enter VOC"></div>
+    </div>
+
+    <!-- Sixth Row  Field Details Completed Here  -->
+
+    <!-- Seventh  Row  Field Details Start From  Here  -->
+
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-4"><label for="ticketCategory">Ticket Category </label>
+            <ngx-select-dropdown [config]="config" [options]="availableAssetType" [(value)]="ticket.ticketCategory" [multiple]="false"></ngx-select-dropdown>
+        </div>
+
+        <div class="col-md-4"><label for="ticketSubCategory">Ticket Subcategory</label>
+            <ngx-select-dropdown [config]="config" [options]="availableAssetType" [(value)]="ticket.ticketSubCategory" [multiple]="false"></ngx-select-dropdown>
+        </div>
+
+        <div class="col-md-4"><label for="exampleInputEmail1">Remarks</label>
+            <input [(ngModel)]="ticket.remarks" type="text" class="form-control" id="remarks"  placeholder="Enter Remarks"></div>
+
+    </div>
+
+    <!-- Seventh Row  Field Details Completed Here  -->
+
+    <!-- Button Design Row Details Start From  Here  -->
+
+    <div class="row justify-content-end" style="padding-top: 11px">
+        <div class="col-md-2">
+            <button type=" button " class="btn btn-success " (click)="AddCustomerinfo()"><i>Submit</i></button>
+        </div>
+
+        <div class="col-md-1">
+            <!-- <a class="btn btn-danger " href="/ticket-management">Close</a> -->
+
+            <nav>
+                <a routerLink="/ticket-management" routerLinkActive="active"><i class="fa fa-plus-circle" aria-hidden="true" class="btn btn-danger" style="margin-left: -88px">Close</i></a>
+                <!-- <a routerLink="/heroes" routerLinkActive="active">Heroes</a> -->
+              </nav>
+
+        </div>
+    </div>
+    <!-- Button Design Row Details Completed Here -->
+
+    <div class=row style="padding-top: 40px "></div>
+
+    <style>
+    .form-control{
+        background-image: none;
+    }
+    
+    </style>
