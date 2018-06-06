@@ -2,10 +2,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 //import { DataTableModule } from 'angular5-data-table';
 //import { DataTableModule } from 'angular-4-data-table/src/index';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 
 
@@ -23,13 +24,12 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
-import {
-  AgmCoreModule
-} from '@agm/core';
+import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 //import { CustomerManagementComponent } from './customer-management/customer-management.component';
-import { AddTicektComponent } from './add-ticekt/add-ticekt.component';
 import { LoginComponent } from './login/login.component';
+//import { CreateticketComponent } from './createticket/createticket.component';
+//import { TicketManagementComponent } from './ticket-management/ticket-management.component';
 
 @NgModule({
   imports: [
@@ -41,6 +41,7 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     ReactiveFormsModule,
      AngularFontAwesomeModule,
+     SelectDropDownModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
@@ -49,6 +50,9 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     LoginComponent,
     AdminLayoutComponent,
+    //CreateticketComponent,
+    //TicketManagementComponent,
+   // CustomerManagementComponent
   
   ],
   providers: [],

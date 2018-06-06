@@ -1,0 +1,44 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div style="padding-left: 75%">
+               <!-- <a class="btn btn-success" href="/add-management">  -->
+
+
+                <nav>
+                    <a routerLink="/add-management" routerLinkActive="active"><i class="fa fa-plus-circle" aria-hidden="true" class="btn btn-success" style="margin-left: 75px">Add new Ticket</i></a>
+                    <!-- <a routerLink="/heroes" routerLinkActive="active">Heroes</a> -->
+                  </nav>
+
+                    <!-- <a _ngcontent-c2="" class="nav-link" ng-reflect-router-link="/add-management" href="/add-management">
+                        <i _ngcontent-c2="" class="material-icons">local_laundry_service</i>
+                        <p _ngcontent-c2=""><span> <i class="fa fa-plus-circle" aria-hidden="true">Add new Ticket</i></span></p>
+                    </a> -->
+                    <!-- <i class="fa fa-plus-circle" aria-hidden="true">Add new Ticket</i> -->
+
+            </div>
+        </div>
+        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
+            <data-table id="persons-grid" headerTitle="Ticket Details" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+                <data-table-column property="ticketId" header="TicketId" width="150px"></data-table-column>
+                <data-table-column [property]="'name'" [header]="'Customer Name'" width="150px"[sortable]="true" [resizable]="true">
+                </data-table-column>
+                <data-table-column [property]="'date'" [header]="'Preffered Call Date'" width="150px" [sortable]="true">
+                    <ng-template #dataTableCell let-item="item">
+                        <span>{{item.date | date:'dd/MM/yyyy'}}</span>
+                    </ng-template>
+                </data-table-column>
+                <data-table-column property="phoneNumber" header="Phone number" width="150px" height="50px">
+                </data-table-column>
+                <data-table-column property="name" header="Current AssignedTo" width="150px" height="50px">
+                </data-table-column>
+                <data-table-column property="active" header="Status" width="150px" height="50px">
+                </data-table-column>
+               
+
+
+            </data-table>
+        </div>
+
+    </div>
+</div>
