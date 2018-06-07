@@ -1,13 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTableResource } from '../data-table';
-import persons  from './customer-data'
-@Component({
-  selector: 'app-asset',
-  templateUrl: './asset.component.html',
-  styleUrls: ['./asset.component.scss']
-})
-export class AssetComponent implements OnInit {
+import persons  from '../customer-management/customer-data'
 
+@Component({
+  selector: 'app-ticket-management',
+  templateUrl: './ticket-management.component.html',
+  styleUrls: ['./ticket-management.component.scss']
+})
+export class TicketManagementComponent implements OnInit {
+
+  date: Date = new Date();
+  settings = {
+      bigBanner: true,
+      timePicker: true,
+      format: 'dd-MM-yyyy hh:mm:ss',
+      defaultOpen: false
+}
   ngOnInit() {
   }
 
@@ -25,11 +33,12 @@ export class AssetComponent implements OnInit {
         this.itemResource.query(params).then(items => this.items = items);
     }
     addnewCustomer() {
-    let name =  prompt("Please enter your name:", "");
-    let type =  prompt("Please enter your Email id:", "");
-    let desc =  prompt("Please enter your  Phone no:", "");
+    let customername =  prompt("Please enter your name:", "");
+    let Emailid =  prompt("Please enter your Email id:", "");
+    let Phoneno =  prompt("Please enter your  Phone no:", "");
     let curentDate = new Date() + ' ';
-     const person1 = { 'name':name, 'type': type, 'desc': 'desc'};
+     const person1 = { 'name': customername, 'email': Emailid, 'jobTitle': 'Regional Configuration Producer',
+      'active': true, 'phoneNumber': Phoneno, 'date': curentDate};
       let val = confirm('Do you want to add');
       if(val)
       {

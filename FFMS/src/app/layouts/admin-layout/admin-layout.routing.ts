@@ -14,6 +14,9 @@ import { LocationComponent } from '../../location/location.component';
 import { AssetComponent } from '../../asset/asset.component';
 import { TicketComponent } from '../../ticket/ticket.component';
 import { CustomerManagementComponent } from '../../customer-management/customer-management.component';
+import {AddTicektComponent} from '../../add-ticekt/add-ticekt.component';
+import { TicketManagementComponent } from '../../ticket-management/ticket-management.component';
+import {CreateticketComponent} from '../../createticket/createticket.component'
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -70,6 +73,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-management', component: UserComponent },
     { path: 'location-management', component: LocationComponent },
     { path: 'asset-management', component: AssetComponent },
-    { path: 'ticket-management', component: TicketComponent },
-    { path: 'customer-management', component: CustomerManagementComponent },
+   { path: 'ticket-management', component:TicketManagementComponent },
+   { path: 'customer-management', component: CustomerManagementComponent },
+    { path: 'add-management', component: AddTicektComponent },
 ];
