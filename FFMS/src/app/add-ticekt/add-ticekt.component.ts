@@ -7,9 +7,6 @@ import { TicketModel } from './ticketModel'
   styleUrls: ['./add-ticekt.component.scss']
 })
 export class AddTicektComponent implements OnInit {
-
- // @Output() closeModalEvent = new EventEmitter<boolean>();
-
   date: Date = new Date();
   settings = {
       bigBanner: true,
