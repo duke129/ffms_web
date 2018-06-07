@@ -4,30 +4,16 @@
             <div style="padding-left: 75%">
                 <a class="btn btn-success" href="#" (click)="addnewCustomer()">
                     <i class="fa fa-plus-circle" aria-hidden="true">Add new Customer</i></a>
-                <!-- <button type="button" class="btn btn-info add-new" (click)="addnewCustomer()"><i class="fa fa-plus"></i> Add New Customer</button> -->
             </div>
         </div>
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
-            <data-table id="persons-grid" headerTitle="CUSTOMER MANAGEMENT" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+            <data-table id="customer-grid" headerTitle="CUSTOMER MANAGEMENT" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                 <data-table-column [property]="'firstName'" [header]="'First-Name'" [sortable]="true" [resizable]="true">
                 </data-table-column>
                 <data-table-column [property]="'lastName'" [header]="'Last-Name'" [sortable]="true" [resizable]="true">
                 </data-table-column>
                 <data-table-column [property]="'mobileNumber'" header="Phone-Number" [sortable]="true" [resizable]="true">
                 </data-table-column>
-                <data-table-column [property]="'jobTitle'" [header]="'Job title'" [visible]="false">
-                </data-table-column>
-                <!-- <data-table-column [property]="'active'" [header]="'Active'" [width]="100" [resizable]="true">
-                    <ng-template #dataTableHeader let-item="item">
-                        <span style="color: rgb(232, 0, 0)">Active</span>
-                    </ng-template>
-                    <ng-template #dataTableCell let-item="item">
-                        <span style="color: grey">
-                                <span class="glyphicon glyphicon-ok" *ngIf="item.active"></span>
-                        <span class="glyphicon glyphicon-remove" *ngIf="!item.active"></span>
-                        </span>
-                    </ng-template>
-                </data-table-column> -->
                 <data-table-column header="Actions">
                     <ng-template #dataTableHeader let-item="item">
                         <i>Actions</i>
