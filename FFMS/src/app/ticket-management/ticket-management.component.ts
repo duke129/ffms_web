@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTableResource } from '../data-table';
-import persons  from '../customer-management/customer-data'
+//import persons  from './customer-data'
+//import persons  from './customer-data';
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map'; 
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
+import  {TicketViewModel } from './ticket'
+
 
 @Component({
   selector: 'app-ticket-management',
@@ -9,41 +19,90 @@ import persons  from '../customer-management/customer-data'
 })
 export class TicketManagementComponent implements OnInit {
 
-  date: Date = new Date();
-  settings = {
-      bigBanner: true,
-      timePicker: true,
-      format: 'dd-MM-yyyy hh:mm:ss',
-      defaultOpen: false
-}
-  ngOnInit() {
-  }
+  public tickets : any;
 
-  itemResource = new DataTableResource(persons);
-
+  observableTickets: Observable<TicketViewModel[]>
+  itemResource = new DataTableResource([]); 
+  errorMessage: String;
     items = [];
     itemCount = 0;
     selectedpersonname= '';
 
-    constructor() {
-        this.itemResource.count().then(count => this.itemCount = count);
+    constructor(private http : Http) {
+         this.itemResource.count().then(
+           count => this.itemCount = count);
+       
     }
+    
+    ngOnInit() {
+    this.observableTickets = this.getTicketsWithObservable();
+    this.observableTickets.subscribe(
+              result => { 
+                
+              });
+           
+      }
 
+     
+
+      getTicketsWithObservable(): Observable<TicketViewModel[]> {
+        return this.http.get('http://10.16.35.96:8081/ticket/list-view')
+	        .map(this.extractData)
+	        .catch(this.handleErrorObservable);
+    }
+    getTicketsWithPromise(): Promise<TicketViewModel[]> {
+        return this.http.get('http://10.16.35.96:8081/ticket/list-view').toPromise()
+	    .then(this.extractData)
+	    .catch(this.handleErrorPromise);
+    }
+    private extractData(res: Response) {
+    let ticket = res.json();
+        return ticket;
+    }
+    private handleErrorObservable (error: Response | any) {
+	console.error(error.message || error);
+	return Observable.throw(error.message || error);
+    }
+    private handleErrorPromise (error: Response | any) {
+	console.error(error.message || error);
+	return Promise.reject(error.message || error);
+    }	
+
+   // itemResource = new DataTableResource(this.books);
+    
+    
     reloadItems(params) {
-        this.itemResource.query(params).then(items => this.items = items);
+      // alert(JSON.stringify(params));
+
+      this.observableTickets = this.getTicketsWithObservable();
+      this.observableTickets.subscribe(
+                result => { 
+                
+                  this.tickets = result ;
+                  // this.itemCount = 12;
+
+                  // alert("hi"+this.books);
+                      new DataTableResource(this.tickets).query(params).then(items => this.items = items);
+                });
+
+
+
+      // alert("assets :: "+this.books);
+      
     }
     addnewCustomer() {
-    let customername =  prompt("Please enter your name:", "");
-    let Emailid =  prompt("Please enter your Email id:", "");
-    let Phoneno =  prompt("Please enter your  Phone no:", "");
+    let name =  prompt("Please enter your name:", "");
+    let type =  prompt("Please enter your Email id:", "");
+    let desc =  prompt("Please enter your  Phone no:", "");
     let curentDate = new Date() + ' ';
-     const person1 = { 'name': customername, 'email': Emailid, 'jobTitle': 'Regional Configuration Producer',
-      'active': true, 'phoneNumber': Phoneno, 'date': curentDate};
+     const asset1 = { 'assetName':'assetName', ' assetDescription': 'assetDescription', 'assetTypeDes': 'assetTypeDes'};
+
+     
       let val = confirm('Do you want to add');
       if(val)
       {
-        persons.push(person1);
-        this. itemResource = new DataTableResource(persons);
+        this.tickets.push(this.tickets[0]);
+        //this. itemResource = new DataTableResource(this.books);
      alert('Added Successfully');
       }
 
