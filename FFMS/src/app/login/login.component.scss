@@ -1,4 +1,4 @@
-$topnav-background-color: #222;
+$topnav-background-color: rgb(195, 231, 228);
 :host {
     display: block;
 }
@@ -9,7 +9,7 @@ $topnav-background-color: #222;
     right: 0;
     bottom: 0;
     overflow: auto;
-    background: $topnav-background-color;
+    background: rgb(235, 144, 144);
     text-align: center;
     color: #fff;
     padding: 3em;
