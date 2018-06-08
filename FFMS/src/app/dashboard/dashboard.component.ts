@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [
-              [12, 17, 7, 17, 23, 18, 38]
+              [22, 17, 7, 17, 3, 8, 28]
           ]
       };
 
@@ -87,6 +87,30 @@ export class DashboardComponent implements OnInit {
       var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
 
       this.startAnimationForLineChart(dailySalesChart);
+
+
+       /* ----------==========     Daily Service Request Chart initialization For Documentation    ==========---------- */
+
+       const dataDailyServiceRequest: any = {
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        series: [
+            [12, 17, 7, 17, 23, 18, 38]
+        ]
+    };
+
+   const optionsDailyServiceRequest: any = {
+        lineSmooth: Chartist.Interpolation.cardinal({
+            tension: 0
+        }),
+        low: 0,
+        high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+        chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
+    }
+
+    var DailyServiceRequest = new Chartist.Line('#DailyServiceRequest', dataDailyServiceRequest, optionsDailyServiceRequest);
+
+    this.startAnimationForLineChart(DailyServiceRequest);
+
 
 
       /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
@@ -114,16 +138,16 @@ export class DashboardComponent implements OnInit {
 
 
 
-      /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
+      /* ----------==========     Service Request Subscription Chart initialization    ==========---------- */
 
-      var datawebsiteViewsChart = {
+      var dataserviceRequestViewsChart = {
         labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         series: [
           [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
 
         ]
       };
-      var optionswebsiteViewsChart = {
+      var optionsserviceRequestViewsChart = {
           axisX: {
               showGrid: false
           },
@@ -141,10 +165,44 @@ export class DashboardComponent implements OnInit {
           }
         }]
       ];
-      var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
+      var serviceRequestViewsChart = new Chartist.Bar('#serviceRequestViewsChart', dataserviceRequestViewsChart, optionsserviceRequestViewsChart, responsiveOptions);
 
       //start animation for the Emails Subscription Chart
-      this.startAnimationForBarChart(websiteViewsChart);
+      this.startAnimationForBarChart(serviceRequestViewsChart);
+
+
+/* ----------==========     Emails Subscription Chart initialization    ==========---------- */
+
+var datawebsiteViewsChart = {
+  labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+  series: [
+    [242, 443, 620, 380, 553, 453, 426, 534, 598, 710, 456, 695]
+
+  ]
+};
+var optionswebsiteViewsChart = {
+    axisX: {
+        showGrid: false
+    },
+    low: 0,
+    high: 1000,
+    chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
+};
+var responsiveOptions: any[] = [
+  ['screen and (max-width: 640px)', {
+    seriesBarDistance: 5,
+    axisX: {
+      labelInterpolationFnc: function (value) {
+        return value[0];
+      }
+    }
+  }]
+];
+var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
+
+//start animation for the Emails Subscription Chart
+this.startAnimationForBarChart(websiteViewsChart);
+
   }
 
 }

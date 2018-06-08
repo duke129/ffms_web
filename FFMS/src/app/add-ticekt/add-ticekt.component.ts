@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketModel } from './ticketModel'
+import {ProspectCreationModel, Customer} from './ProspectCreationModel'
+
+import { Http, Response } from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map'; 
+
+
+
 
 @Component({
   selector: 'app-add-ticekt',
@@ -14,8 +22,10 @@ export class AddTicektComponent implements OnInit {
       format: 'dd-MM-yyyy hh:mm:ss',
       defaultOpen: false
 }
-  constructor() { }
+  constructor(private http:Http) { }
   public ticket=new TicketModel();
+  public createTicket = new ProspectCreationModel();
+  public customer = new Customer();
 
   availableStates = ['Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chattisgarh','Goa','Gujarat','Haryana',
 'Himachal Pradesh','Jammu and Kashmir','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur',
@@ -51,7 +61,54 @@ export class AddTicektComponent implements OnInit {
   }
 
    AddCustomerinfo(){
+
+    this.createTicket.ticketDescription = "sales ticket";
+    this.createTicket.ticketTypeId = 1;
+
+
+    this.customer.customerTittle = "Mr.";
+    this.customer.customerFirstName = this.ticket.firstName;
+    this.customer.customerMiddletName = this.ticket.middleName;
+    this.customer.customerLastName = this.ticket.lastName;
+    this.customer.customerMobileNumber = this.ticket.mobileNo;
+    this.customer.customerAternateMobileNumber = this.ticket.altMobileNo;
+    this.customer.customerEmailId = this.ticket.emailId;
+    this.customer.customerAternateEmailId = this.ticket.altEmailId;
+    this.customer.customerCommunicationAddress = this.ticket.addressLine1 +" " + this.ticket.addressLine2 + " "  + this.ticket.addressLine3 + " " + this.ticket.pincode;
+   // this.customer.customerCurrentAddress = this.createTicket.customer.customerCommunicationAddress;
+
+    this.createTicket.customer = this.customer;
+
+
+    console.log(" create prospect request :: "+JSON.stringify(this.createTicket));
+
+    this.createProspect(this.createTicket);
+
+
     alert(JSON.stringify(this.ticket));
+   }
+
+   createProspect(createTicket  : ProspectCreationModel)
+   {
+     //alert("calling create prospect ");
+     this.saveProspect(createTicket).subscribe(result => {
+     //  console.log("Response :: "+result)
+    // this.showNotification('bottom','right');
+
+    alert("Successfully Created Prospect")
+
+     });
+     
+   }
+
+
+   saveProspect(ticekt : ProspectCreationModel) : Observable<Response>{
+
+    return this.http
+      .post(`http://10.16.35.96:8081/ticket/create`,ticekt);
+      // .map(res => res.json() );
+
+
    }
 
    

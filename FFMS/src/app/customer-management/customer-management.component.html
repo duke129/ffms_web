@@ -1,9 +1,8 @@
-<div class="main-content">
+<div class="main-content" style="margin-top:35px">
     <div class="container-fluid">
         <div class="row">
-            <div style="padding-left: 75%">
-                <a class="btn btn-success" href="#" (click)="addnewCustomer()">
-                    <i class="fa fa-plus-circle" aria-hidden="true">Add new Customer</i></a>
+            <div style="padding-left: 94%">
+                <a href="#" (click)="addnewCustomer()" title="Add New Customer"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
             </div>
         </div>
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
@@ -16,13 +15,13 @@
                 </data-table-column>
                 <data-table-column header="Actions">
                     <ng-template #dataTableHeader let-item="item">
-                        <i>Actions</i>
+                        <span style="cursor: pointer; color: #007bff; font-weight: 400;">Actions</span>
                     </ng-template>
                     <ng-template #dataTableCell let-item="item">
                         <a class="btn btn-warning" href="#" (click)="editCustomer(item)">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></a>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                         <a class="btn btn-danger" href="#" (click)="deleteCustomer(item)">
-                            <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+                            <i class="fa fa-trash-o fa-lg"></i> </a>
                     </ng-template>
                 </data-table-column>
 

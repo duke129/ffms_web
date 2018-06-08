@@ -13,8 +13,9 @@ export const ROUTES: RouteInfo[] = [
     { path: '/location-management', title: 'Location Management',  icon:'add_location', class: '' },
     { path: '/asset-management', title: 'Asset Management',  icon:'home', class: '' },
     { path: '/ticket-management', title: 'Ticket Management',  icon:'local_laundry_service', class: '' },
-    { path: '/customer-management', title: 'Customer Management',  icon:'local_laundry_service', class: '' },
+    { path: '/customer-management', title: 'Customer Management',  icon:'people', class: '' },
     { path: '/report-management', title: 'Reports & Analytics',  icon:'show_chart', class: '' },
+    
     // { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
     // { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
     // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },

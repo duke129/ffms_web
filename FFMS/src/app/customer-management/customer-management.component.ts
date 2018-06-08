@@ -23,7 +23,7 @@ export class CustomerManagementComponent implements OnInit {
     items = [];
     itemCount = 0;
     selectedCustomer= '';
-    baseURL = "http://localhost:8081/";
+    baseURL = "http://10.16.35.96:8081/";
 
     constructor(private http : Http) {
          this.itemResource.count().then(
@@ -65,6 +65,7 @@ export class CustomerManagementComponent implements OnInit {
         { 
                 
             this.customers = result ;
+            this.itemCount = result.length;
             new DataTableResource(this.customers).query(customerGridParams).then(items => this.items = items);
             
         });

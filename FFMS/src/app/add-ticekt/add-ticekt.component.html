@@ -1,13 +1,7 @@
-<div style="padding-top:50PX">
-</div>
+<div class="main-content" style="margin-top:35px">
 
+    <div class="container-fluid" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px;">
 
-
-<div class="container-fluid">
-    <div class=row id="Ticketheader" style="border: 0px solid">
-        <h5 p class="text-success">Add Ticket</h5>
-
-    </div>
     <!-- <div class=row id="customerType">
         <h5 style="color:red;">Customer Type
         </h5>
@@ -215,23 +209,23 @@
 
     <div class="row justify-content-end" style="padding-top: 11px">
         <div class="col-md-2">
-            <button type=" button " class="btn btn-success " (click)="AddCustomerinfo()"><i>Submit</i></button>
+            <button type=" button " class="btn btn-sm btn-success " style="margin-left: 59px;" (click)="AddCustomerinfo()">Submit</button>
         </div>
 
-        <div class="col-md-1">
+        <div class="col-md-1" style="margin-bottom: 8px;">
             <!-- <a class="btn btn-danger " href="/ticket-management">Close</a> -->
 
             <nav>
-                <a routerLink="/ticket-management" routerLinkActive="active"><i class="fa fa-plus-circle" aria-hidden="true" class="btn btn-danger" style="margin-left: -88px">Close</i></a>
+                <a routerLink="/ticket-management" routerLinkActive="active" class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -19px">Close</a>
                 <!-- <a routerLink="/heroes" routerLinkActive="active">Heroes</a> -->
               </nav>
 
         </div>
     </div>
-    <!-- Button Design Row Details Completed Here -->
 
-    <div class=row style="padding-top: 40px "></div>
 
+</div>
+ 
     <style>
     .form-control{
         background-image: none;

@@ -1,7 +1,7 @@
-<div class="main-content">
+<div class="main-content" style="margin-top:35px">
     <div class="container-fluid">
         <div class="row">
-            <div style="padding-left: 75%">
+            <div style="padding-left: 94%">
                 <!-- <a class="btn btn-success" href="#" (click)="addnewCustomer()">
                     <i class="fa fa-plus-circle" aria-hidden="true">Add new Customer</i></a> -->
 
@@ -9,7 +9,7 @@
 
 
                 <nav>
-                    <a routerLink="/add-management" routerLinkActive="active"><i class="fa fa-plus-circle" aria-hidden="true" class="btn btn-success" style="margin-left: 75px">Add new Ticket</i></a>
+                    <a routerLink="/add-management" routerLinkActive="active" title="Add New Ticket"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
                     <!-- <a routerLink="/heroes" routerLinkActive="active">Heroes</a> -->
                 </nav>
 
@@ -18,7 +18,7 @@
         </div>
 
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
-            <data-table id="persons-grid" headerTitle="Ticket Management" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+            <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                 <data-table-column [property]="'ticketNumber'" [header]="'Ticket Number'" [sortable]="true" [resizable]="true">
                 </data-table-column>
                 <data-table-column [property]="'customerName'" [header]="'Customer Name'" [sortable]="true" [resizable]="true">

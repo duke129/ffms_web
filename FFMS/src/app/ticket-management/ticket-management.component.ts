@@ -79,7 +79,7 @@ export class TicketManagementComponent implements OnInit {
                 result => { 
                 
                   this.tickets = result ;
-                  // this.itemCount = 12;
+                  this.itemCount = result.length;
 
                   // alert("hi"+this.books);
                       new DataTableResource(this.tickets).query(params).then(items => this.items = items);
@@ -125,7 +125,6 @@ export class TicketManagementComponent implements OnInit {
 
     // special properties:
    public Edit(): void {
-  alert(this.selectedpersonname);
 }
     rowClick(rowEvent) {
       this.selectedpersonname = rowEvent.row.item.name;

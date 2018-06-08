@@ -47,6 +47,8 @@
 }
 .column-header.sortable {
     cursor: pointer;
+    color: #007bff;
+    font-weight: 400;
 }
 .column-header .column-sort-icon {
 	float: right;

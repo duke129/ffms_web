@@ -64,7 +64,7 @@ export class DataTable implements DataTableParams, OnInit {
     private _sortAsc = true;
 
     private _offset = 0;
-    private _limit = 10;
+    private _limit = 5; 
 
     @Input()
     get sortBy() {
