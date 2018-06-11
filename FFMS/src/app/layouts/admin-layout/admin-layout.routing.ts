@@ -17,6 +17,7 @@ import { CustomerManagementComponent } from '../../customer-management/customer-
 import {AddTicektComponent} from '../../add-ticekt/add-ticekt.component';
 import { TicketManagementComponent } from '../../ticket-management/ticket-management.component';
 import {CreateticketComponent} from '../../createticket/createticket.component'
+import { AnalyticsComponent } from '../../analytics/analytics.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -76,4 +77,5 @@ export const AdminLayoutRoutes: Routes = [
    { path: 'ticket-management', component:TicketManagementComponent },
    { path: 'customer-management', component: CustomerManagementComponent },
     { path: 'add-management', component: AddTicektComponent },
+    { path: 'analytics-management', component: AnalyticsComponent },
 ];

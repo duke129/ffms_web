@@ -2,6 +2,11 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
+import { Http } from '@angular/http';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import { DashBoardCount } from './dashboardCounts';
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +14,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+    private timer;
     private listTitles: any[];
     location: Location;
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    dashBoardCounts:DashBoardCount[];
+    observable: Observable<DashBoardCount[]>;
+    newLeadCount : number;
+    serviceCount: number;
+    totalCount : number;
+    inProgressCount : number;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    constructor(location: Location,  private element: ElementRef, private router: Router ,private http : Http) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -32,6 +45,37 @@ export class NavbarComponent implements OnInit {
            this.mobile_menu_visible = 0;
          }
      });
+     this.renderDashBoardCount();
+     
+    Observable.interval(200 * 60).subscribe(x => {
+        this.renderDashBoardCount();
+    });
+
+    }
+
+    renderDashBoardCount() {
+
+     this.getDashBoardCounts().subscribe(result =>
+        {
+            this.dashBoardCounts = result;
+            
+            this.dashBoardCounts.forEach(element => {
+                
+               if(element.statusName == "new-leads")
+                this.newLeadCount = element.totalCounts;
+    
+                if(element.statusName == "service-request")
+                this.serviceCount = element.totalCounts;
+    
+                if(element.statusName == "in-progress")
+                this.inProgressCount = element.totalCounts;
+    
+                if(element.statusName == "total-tickets")
+                this.totalCount = element.totalCounts;
+            });
+    
+        });
+
     }
 
     sidebarOpen() {
@@ -123,5 +167,29 @@ export class NavbarComponent implements OnInit {
           }
       }
       return "Add Ticket";
+    }
+
+    getDashBoardCounts(): Observable<DashBoardCount[]> {
+
+        return this.http.get('http://localhost:8081/ticket/dashboard-count')
+	        .map(res => res.json())
+          .catch(this.handleErrorObservable);
+          
+    }
+
+
+    private extractData(res: Response) {
+
+        let count = res.json();
+        return count;
+
+    }
+
+
+    private handleErrorObservable (error: Response | any) {
+
+       console.error(error.message || error);
+       return Observable.throw(error.message || error);
+       
     }
 }

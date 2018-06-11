@@ -1,44 +1,78 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTableResource } from '../data-table';
-//import persons  from './customer-data'
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map'; 
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
+import { Asset } from './asset';
+
+ 
+
 @Component({
   selector: 'app-asset',
   templateUrl: './asset.component.html',
   styleUrls: ['./asset.component.scss']
 })
+
+
+
+@Injectable()
 export class AssetComponent implements OnInit {
 
-  ngOnInit() {
-  }
 
-  itemResource = new DataTableResource([]);
+ public assets : Asset[];
+ itemResource = new DataTableResource([]); 
+ errorMessage: String;
+ items = [];
+ itemCount : number;
+ selectedpersonname= '';
 
-    items = [];
-    itemCount = 0;
-    selectedpersonname= '';
-
-    constructor() {
-        this.itemResource.count().then(count => this.itemCount = count);
-    }
-
-    reloadItems(params) {
-        this.itemResource.query(params).then(items => this.items = items);
-    }
+ constructor(private http : Http) {
+        
+ }
     
-    // special properties:
-   public Edit(): void {
-  alert(this.selectedpersonname);
+ ngOnInit() {
+             
+           
+ }
+
+     
+
+ getAssets(): Observable<Asset[]> {
+
+        return this.http.get('http://localhost:8081/asset/list')
+	        .map(this.extractData)
+            .catch(this.handleErrorObservable);
+            
+ }
+    
+ private extractData(res: Response) {
+
+  let asset = res.json();
+  return asset;
+
+ }
+
+ private handleErrorObservable (error: Response | any) {
+
+	console.error(error.message || error);
+    return Observable.throw(error.message || error);
+    
+ }
+    
+reloadItems(params) {
+
+      this.getAssets().subscribe(result => { 
+                
+                  this.assets = result ;
+                  this.itemCount = result.length;
+                  new DataTableResource(this.assets).query(params).then(items => this.items = items);
+      });
+      
 }
-    rowClick(rowEvent) {
-      this.selectedpersonname = rowEvent.row.item.name;
-        console.log('Clicked: ' + rowEvent.row.item);
-    }
-
-    rowDoubleClick(rowEvent) {
-
-        alert('Double clicked: ' + rowEvent.row.item.name);
-    }
-
-    rowTooltip(item) { return item.jobTitle; }
+   
 
 }

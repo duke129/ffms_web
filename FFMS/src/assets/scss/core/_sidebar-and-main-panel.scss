@@ -30,17 +30,16 @@
         background-color: #191919;
     }
     .logo-img{
-        width: 35px;
+        width: 35%;
         display: block;
         max-height: 30px;
-        margin-left: 13px;
-        margin-right: 15px;
-
+        padding-right: 40%;
         img{
-            width: 153px;
-            top: 12px;
+            top: -31%;
             position: absolute;
+            width: 100%;
         }
+        
     }
     .sidebar-wrapper{
         position: relative;
@@ -316,7 +315,7 @@
         @include set-background-color-button($brand-warning);
     }
     &[data-color="danger"]{
-        @include set-background-color-button($brand-danger);
+        @include set-background-color-button(#003d79);
     }
     &[data-color="rose"]{
         @include set-background-color-button($brand-rose);

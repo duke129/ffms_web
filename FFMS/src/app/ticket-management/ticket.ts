@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 
 export class TicketViewModel{
 
@@ -6,7 +7,7 @@ export class TicketViewModel{
         "customerName": string
         "customerMobileNumber": string
         "customerAddress": string
-        "ticketCreationDate": string
+        "ticketCreationDate": string;
         "committedETR": string 
 
 

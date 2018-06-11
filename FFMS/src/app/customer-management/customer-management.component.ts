@@ -21,13 +21,11 @@ export class CustomerManagementComponent implements OnInit {
     observable: Observable<Customer[]>
     itemResource = new DataTableResource([]); 
     items = [];
-    itemCount = 0;
+    itemCount : number;
     selectedCustomer= '';
     baseURL = "http://10.16.35.96:8081/";
 
     constructor(private http : Http) {
-         this.itemResource.count().then(
-           count => this.itemCount = count);
     }
     
     ngOnInit() {
@@ -37,7 +35,7 @@ export class CustomerManagementComponent implements OnInit {
     getCustomers(): Observable<Customer[]> {
 
         return this.http.get(this.baseURL + 'customer/getall')
-	        .map(this.extractData)
+	      .map(this.extractData)
           .catch(this.handleErrorObservable);
           
     }

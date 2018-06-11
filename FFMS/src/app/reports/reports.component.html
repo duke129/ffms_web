@@ -1,38 +1,57 @@
 <div class="main-content">
 
-  <div class="container-fluid">
+    <div class="container-fluid">
+            <mat-accordion>
+                    <mat-expansion-panel [expanded]="panelOpenState" >
+                            <mat-expansion-panel-header>
+                                    <mat-panel-title style="color: #003d79;">
+                                        Report Filter
 
-    <div class="row">
-      <div class="col-md-4">
-          <div class="card card-chart">
-              <div class="card-header card-header-success">
-                  <div class="ct-chart" id="dailySalesChart"></div>
-              </div>
-              <div class="card-body">
-                  <h4 class="card-title">Daily Sales</h4>
-              </div>
-          </div>
-      </div>
-      <div class="col-md-4">
-          <div class="card card-chart">
-              <div class="card-header card-header-warning">
-                  <div class="ct-chart" id="websiteViewsChart"></div>
-              </div>
-              <div class="card-body">
-                  <h4 class="card-title">Pending Prospects</h4>
-              </div>
-          </div>
-      </div>
-      <div class="col-md-4">
-          <div class="card card-chart">
-              <div class="card-header card-header-danger">
-                  <div class="ct-chart" id="completedTasksChart"></div>
-              </div>
-              <div class="card-body">
-                  <h4 class="card-title">Completed Prospects</h4>
-              </div>
-          </div>
-      </div>
-  </div>
-  </div>
+                                    </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+
+                            <div class="row">
+                                    <mat-form-field>
+                                            <input matInput [matDatepicker]="dp1" placeholder="From Date" disabled>
+                                            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                            <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+                                          </mat-form-field>
+                                      
+                                          <mat-form-field style="    padding-left: 3%;">
+                                                <input matInput [matDatepicker]="dp2" placeholder="To Date" disabled>
+                                                <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                                                <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+                                              </mat-form-field>
+
+
+
+                            </div>
+
+                            <mat-action-row>
+                                    <button mat-button>Apply</button>
+                                  </mat-action-row>
+
+                                 
+                    </mat-expansion-panel>
+
+            </mat-accordion>
+
+            <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
+                    <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+                        <data-table-column [property]="'ticketNumber'" [header]="'Ticket Number'" [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                        <data-table-column [property]="'customerName'" [header]="'Customer Name'" [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                        <data-table-column [property]="'ticketCreationDate'" header="Ticket Creation Date" [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                        <data-table-column [property]="'customerMobileNumber'" header="Mobile Number" [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                        <data-table-column [property]="'committedETR'" header=" Committed ETR" [sortable]="true" [resizable]="true">
+                        </data-table-column>
+        
+                    </data-table>
+                </div>
+
+    </div>
 </div>

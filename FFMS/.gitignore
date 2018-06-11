@@ -17,6 +17,7 @@ modules/.settings
 .bazelrc
 .vscode
 modules/.vscode
+yarn.lock
 
 # Don't check in secret files
 *secret.js

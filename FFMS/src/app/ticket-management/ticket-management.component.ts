@@ -25,12 +25,9 @@ export class TicketManagementComponent implements OnInit {
   itemResource = new DataTableResource([]); 
   errorMessage: String;
     items = [];
-    itemCount = 0;
     selectedpersonname= '';
 
     constructor(private http : Http) {
-         this.itemResource.count().then(
-           count => this.itemCount = count);
        
     }
     
