@@ -1,5 +1,3 @@
-import { DatePipe } from "@angular/common";
-
 export class TicketViewModel{
 
         "ticketId":string;

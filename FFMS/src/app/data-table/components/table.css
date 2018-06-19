@@ -57,7 +57,8 @@
     margin-right: 8px;
 }
 .column-header .column-sort-icon .column-sortable-icon {
-    color: lightgray;
+    /* color: lightgray; */
+    color: #003d79;
 }
 .column-header .column-resize-handle {
     position: absolute;
@@ -82,4 +83,7 @@
    height: 100%;
    background-color: rgba(255, 255, 255, 0.3);
    top: 0;
+}
+table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 5px 5px  !important;
 }

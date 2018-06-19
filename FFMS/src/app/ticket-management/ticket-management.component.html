@@ -9,7 +9,9 @@
 
 
                 <nav>
-                    <a routerLink="/add-management" routerLinkActive="active" title="Add New Ticket" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
+                    <a routerLink="/add-management" routerLinkActive="active" title="Add New Ticket" style="color: #003d79;">
+                        <i style="font-size: 2.5rem;" class="material-icons">add_box</i>
+                    </a>
                     <!-- <a routerLink="/heroes" routerLinkActive="active">Heroes</a> -->
                 </nav>
 
@@ -18,8 +20,12 @@
         </div>
 
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
-            <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+            <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)"
+                (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
                 <data-table-column [property]="'ticketNumber'" [header]="'Ticket Number'" [sortable]="true" [resizable]="true">
+                    <ng-template #dataTableCell let-item="item">
+                        <a (click)="getTicketSummaryZoom(item.ticketId)" style="color: #003d79;cursor: pointer;text-decoration: underline;" role="button">{{item.ticketId}}</a>
+                    </ng-template>
                 </data-table-column>
                 <data-table-column [property]="'customerName'" [header]="'Customer Name'" [sortable]="true" [resizable]="true">
                 </data-table-column>
@@ -54,6 +60,240 @@
                 </data-table-column> -->
 
             </data-table>
+        </div>
+
+        <div>
+            <mat-card *ngIf="showTicketCard">
+                <mat-card-header>
+                    <mat-card-title class="customLabel">
+                        Ticket Details - {{ticketDetails?.ticketNo}}
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row" >
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Ticket No</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.ticketNo}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Description</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.ticketDescription}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Assigned To</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.currentAssigneeName}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Created On</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.ticketCreatedTime | date }}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Status</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>Assigned</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Name</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.firstName}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Mobile</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.mobileNumber}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Alt Mobile</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.alternateMobileNumber}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Email</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.emailId}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Alt Email</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.alternateEmailId}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Address</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.communicationAddress?.address1}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">City</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.cityName}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Branch</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.branchName}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Area</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{ticketDetails?.areaName}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="mdl-card mdl-shadow--2dp">
+
+                            <div class="mdl-card__supporting-text">
+                          
+                              <div class="mdl-stepper-horizontal-alternative">
+                                <div class="mdl-stepper-step active-step step-done">
+                                  <div class="mdl-stepper-circle"></div>
+                                  <div class="mdl-stepper-title">Demo</div>
+                                  <div class="mdl-stepper-bar-left"></div>
+                                  <div class="mdl-stepper-bar-right"></div>
+                                </div>
+                                <div class="mdl-stepper-step active-step editable-step">
+                                  <div class="mdl-stepper-circle"></div>
+                                  <div class="mdl-stepper-title">Order</div>
+                                  <div class="mdl-stepper-optional"></div>
+                                  <div class="mdl-stepper-bar-left"></div>
+                                  <div class="mdl-stepper-bar-right"></div>
+                                </div>
+                                <div class="mdl-stepper-step ">
+                                  <div class="mdl-stepper-circle"><span>3</span></div>
+                                  <div class="mdl-stepper-title">Done</div>
+                                  <div class="mdl-stepper-optional"></div>
+                                  <div class="mdl-stepper-bar-left"></div>
+                                  <div class="mdl-stepper-bar-right"></div>
+                                </div>
+                                
+                              </div>
+                          
+                            </div>
+                          
+                          </div>
+
+                    <mat-action-row>
+                        <!-- <div class="row">
+
+                                <mat-form-field>
+                                        <mat-select placeholder="Select User">
+                                          <mat-option *ngFor="let food of foods" [value]="food.value">
+                                            {{ food.viewValue }}
+                                          </mat-option>
+                                        </mat-select>
+                                        
+                                      </mat-form-field>
+                                      <button mat-button>Reassign</button>
+                                      
+                        </div>
+                             -->
+                           </mat-action-row>
+                </mat-card-content>
+
+
+
+
+            </mat-card>
+
         </div>
 
     </div>

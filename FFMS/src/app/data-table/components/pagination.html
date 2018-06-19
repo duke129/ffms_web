@@ -10,7 +10,7 @@
     <div class="pagination-controllers">
         <div class="pagination-limit">
             <div class="input-group">
-                <span class="input-group-addon">{{dataTable.translations.paginationLimit}}:</span>
+                <span class="input-group-addon" >{{dataTable.translations.paginationLimit}}:</span>
                 <input #limitInput type="number" class="form-control" min="1" step="1"
                        [ngModel]="limit" (blur)="limit = limitInput.value"
                        (keyup.enter)="limit = limitInput.value" (keyup.esc)="limitInput.value = limit"/>
@@ -24,7 +24,7 @@
                     <input #pageInput type="number" class="form-control" min="1" step="1" max="{{maxPage}}"
                            [ngModel]="page" (blur)="page = pageInput.value"
                            (keyup.enter)="page = pageInput.value" (keyup.esc)="pageInput.value = page"/>
-                    <div class="input-group-addon">
+                    <div class="input-group-addon" style="width: 40%;">
                         <span>/</span>
                         <span [textContent]="dataTable.lastPage"></span>
                     </div>

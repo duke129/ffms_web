@@ -6,11 +6,18 @@
     [class.selected]="selected"
     [class.clickable]="dataTable.selectOnRowClick"
     (dblclick)="dataTable.rowDoubleClicked(_this, $event)"
-    (click)="dataTable.rowClicked(_this, $event)"
+    (click)="dataTable.rowClicked(_this, $event)" style="    font-size: 80%;"
     >
     <td [hide]="!dataTable.expandColumnVisible" (click)="expanded = !expanded; $event.stopPropagation()" class="row-expand-button">
-        <span class="glyphicon glyphicon-triangle-right" [hide]="expanded"></span>
-        <span class="glyphicon glyphicon-triangle-bottom" [hide]="!expanded"></span>
+        <i class="material-icons" [hide]="expanded" style="color: #003d79;">
+            keyboard_arrow_right
+            </i>
+            <i class="material-icons" [hide]="!expanded" style="color: #003d79;">
+                keyboard_arrow_up
+                </i>
+                                            
+        <!-- <span class="glyphicon glyphicon-triangle-right" [hide]="expanded"></span>
+        <span class="glyphicon glyphicon-triangle-bottom" [hide]="!expanded"></span> -->
     </td>
     <td [hide]="!dataTable.indexColumnVisible" class="index-column" [textContent]="displayIndex"></td>
     <td [hide]="!dataTable.selectColumnVisible" class="select-column">

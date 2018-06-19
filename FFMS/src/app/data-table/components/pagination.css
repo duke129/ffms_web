@@ -12,7 +12,7 @@
 }
 .pagination-controllers input {
     min-width: 60px;
-    /*padding: 1px 0px 0px 5px;*/
+    padding: 1px 0px 0px 5px;
     text-align: right;
 }
 

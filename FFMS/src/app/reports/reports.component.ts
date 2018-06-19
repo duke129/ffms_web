@@ -31,7 +31,7 @@ export class ReportsComponent implements OnInit {
  
 
 getReportData(): Observable<TicketViewModel[]> {
-    return this.http.get('http://10.16.35.96:8081/ticket/list-view')
+    return this.http.get('http://localhost:8081/ticket/list-view')
       .map(this.extractData)
       .catch(this.handleError);
 }
