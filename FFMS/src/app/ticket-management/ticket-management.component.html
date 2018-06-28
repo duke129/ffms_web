@@ -65,9 +65,23 @@
         <div>
             <mat-card *ngIf="showTicketCard">
                 <mat-card-header>
-                    <mat-card-title class="customLabel">
-                        Ticket Details - {{ticketDetails?.ticketNo}}
-                    </mat-card-title>
+                        <mat-card-title class="customLabel">
+                                Ticket Details - {{ticketDetails?.ticketNo}}
+                            </mat-card-title>
+                            <div style="right: 0;position: absolute;">
+                                    <i *ngIf="!isEditable" class="material-icons" style="margin-left : 60px; color: #003d79; cursor: pointer" (click)="ticketEdit(ticketDetails)">
+                                            edit
+                                            </i>
+
+                                            <i class="material-icons" style="color: red;cursor: pointer" (click)="closeCard()" >
+                                                    close
+                                                    </i>       
+
+
+
+                            </div>
+                     
+                   
                 </mat-card-header>
                 <mat-card-content>
                     <div class="row" >
@@ -90,7 +104,8 @@
                                 </div>
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
-                                    <span>{{ticketDetails?.ticketDescription}}</span>
+                                    <span *ngIf="!isEditable">{{ticketDetails?.ticketDescription}}</span>
+                                    <input *ngIf="isEditable" type="text"  class="form-control" placeholder="Description" bind-value="ticketDetails?.ticketDescription" required />
                                     <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
                                 </div>
                             </div>
@@ -104,6 +119,7 @@
                                     <span>{{ticketDetails?.currentAssigneeName}}</span>
                                     <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
                                 </div>
+                               
                             </div>
                             <div class="row">
                                 <div class="col-4">
@@ -271,21 +287,22 @@
                           
                           </div>
 
-                    <mat-action-row>
-                        <!-- <div class="row">
+                    <mat-action-row *ngIf="isEditable">
+                         <div class="row" >
 
-                                <mat-form-field>
+                                 <!-- <mat-form-field>
                                         <mat-select placeholder="Select User">
                                           <mat-option *ngFor="let food of foods" [value]="food.value">
                                             {{ food.viewValue }}
                                           </mat-option>
                                         </mat-select>
                                         
-                                      </mat-form-field>
-                                      <button mat-button>Reassign</button>
+                                      </mat-form-field> -->
+                                      <button mat-button  style="color: #003d79;right: 0; ">Submit</button>
+                                      <!-- <button mat-button  style="color: red">Cancel</button> -->
                                       
                         </div>
-                             -->
+                            
                            </mat-action-row>
                 </mat-card-content>
 

@@ -33,6 +33,8 @@ export class TicketManagementComponent implements OnInit {
   itemCount: number;
   selectedpersonname = '';
   showTicketCard: boolean = false;
+  isEditable : boolean = false;
+  copyTicketDetails : TicketDetails;
 
   foods = [
     {value: 1, viewValue: 'Kiran'},
@@ -145,6 +147,8 @@ export class TicketManagementComponent implements OnInit {
 
     this.showTicketCard = true;
 
+    this.isEditable = false;
+
     this.callTicketSummaryZoomService(ticketId).subscribe(result => {
 
       result.forEach(element => {
@@ -176,6 +180,17 @@ export class TicketManagementComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
      value = datePipe.transform(value, 'MM-dd-yyyy');
      return value;
+  }
+
+  closeCard() {
+    this.showTicketCard = false;
+  }
+
+
+  ticketEdit(ticketDetails) {
+    this.isEditable = true;
+    this.copyTicketDetails = ticketDetails;
+    console.log("ticketDetails :: "+JSON.stringify( this.copyTicketDetails))
   }
 
 }
