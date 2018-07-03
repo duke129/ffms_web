@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { DataTableResource } from '../data-table';
 //import persons  from './customer-data'
 //import persons  from './customer-data';
@@ -35,6 +35,9 @@ export class TicketManagementComponent implements OnInit {
   showTicketCard: boolean = false;
   isEditable : boolean = false;
   copyTicketDetails : TicketDetails;
+
+  @ViewChild('focus') focus:ElementRef;
+
 
   foods = [
     {value: 1, viewValue: 'Kiran'},
@@ -159,6 +162,8 @@ export class TicketManagementComponent implements OnInit {
 
       });
 
+      this.focus.nativeElement.focus();
+
 
     });
 
@@ -191,6 +196,21 @@ export class TicketManagementComponent implements OnInit {
     this.isEditable = true;
     this.copyTicketDetails = ticketDetails;
     console.log("ticketDetails :: "+JSON.stringify( this.copyTicketDetails))
+  }
+
+  restTicketEdit() {
+
+    console.log("before ticketDetails :: "+JSON.stringify( this.copyTicketDetails))
+    this.ticketDetails = this.copyTicketDetails;
+    console.log("reset ticketDetails :: "+JSON.stringify( this.ticketDetails))
+    this.isEditable = false;
+  }
+
+  updateTicket( ticketDetails ) {
+
+    console.log("update ticketDetails :: "+JSON.stringify( this.ticketDetails))
+    this.isEditable = false;
+    this.openSnackBar("Successfully updated","");
   }
 
 }

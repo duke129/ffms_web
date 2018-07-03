@@ -36,33 +36,10 @@
                 <data-table-column [property]="'committedETR'" header=" Committed ETR" [sortable]="true" [resizable]="true">
                 </data-table-column>
 
-                <!-- <data-table-column [property]="'active'" [header]="'Active'" [width]="100" [resizable]="true">
-                    <ng-template #dataTableHeader let-item="item">
-                        <span style="color: rgb(232, 0, 0)">Active</span>
-                    </ng-template>
-                    <ng-template #dataTableCell let-item="item">
-                        <span style="color: grey">
-                                <span class="glyphicon glyphicon-ok" *ngIf="item.active"></span>
-                        <span class="glyphicon glyphicon-remove" *ngIf="!item.active"></span>
-                        </span>
-                    </ng-template>
-                </data-table-column> -->
-                <!-- <data-table-column header="Actions">
-                    <ng-template #dataTableHeader let-item="item">
-                        <i>Actions</i>
-                    </ng-template>
-                    <ng-template #dataTableCell let-item="item">
-                        <a class="btn btn-warning" href="#" (click)="editCustomer(item)">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></a>
-                        <a class="btn btn-danger" href="#" (click)="deleteCustomer(item)">
-                            <i class="fa fa-trash-o fa-lg"></i> Delete</a>
-                    </ng-template>
-                </data-table-column> -->
-
             </data-table>
         </div>
 
-        <div>
+        <div #focus>
             <mat-card *ngIf="showTicketCard">
                 <mat-card-header>
                         <mat-card-title class="customLabel">
@@ -105,7 +82,11 @@
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
                                     <span *ngIf="!isEditable">{{ticketDetails?.ticketDescription}}</span>
-                                    <input *ngIf="isEditable" type="text"  class="form-control" placeholder="Description" bind-value="ticketDetails?.ticketDescription" required />
+                                    <mat-form-field *ngIf="isEditable"  appearance="outline">
+                                            <input type="text" matInput [value]="ticketDetails.ticketDescription" (input)="ticketDetails.ticketDescription = $event.target.value"  required />
+
+                                    </mat-form-field>
+                                   
                                     <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
                                 </div>
                             </div>
@@ -153,7 +134,11 @@
                                 </div>
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
-                                    <span>{{ticketDetails?.firstName}}</span>
+                                    <span  *ngIf="!isEditable">{{ticketDetails?.firstName}}</span>
+                                    <mat-form-field *ngIf="isEditable"  appearance="outline">
+                                            <input type="text" matInput [value]="ticketDetails.firstName" (input)="ticketDetails.firstName = $event.target.value"  required />
+
+                                    </mat-form-field>
                                     <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
                                 </div>
                             </div>
@@ -164,7 +149,11 @@
                                 </div>
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
-                                    <span>{{ticketDetails?.mobileNumber}}</span>
+                                    <span  *ngIf="!isEditable">{{ticketDetails?.mobileNumber}}</span>
+                                    <mat-form-field *ngIf="isEditable"  appearance="outline">
+                                            <input type="text" matInput [value]="ticketDetails.mobileNumber" (input)="ticketDetails.mobileNumber = $event.target.value"  required />
+
+                                    </mat-form-field>
                                     <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
                                 </div>
                             </div>
@@ -175,7 +164,11 @@
                                 </div>
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
-                                    <span>{{ticketDetails?.alternateMobileNumber}}</span>
+                                    <span *ngIf="!isEditable">{{ticketDetails?.alternateMobileNumber}}</span>
+                                    <mat-form-field *ngIf="isEditable"  appearance="outline">
+                                            <input type="text" matInput [value]="ticketDetails.alternateMobileNumber" (input)="ticketDetails.alternateMobileNumber = $event.target.value"  required />
+
+                                    </mat-form-field>
                                     <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
                                 </div>
                             </div>
@@ -186,7 +179,11 @@
                                 </div>
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
-                                    <span>{{ticketDetails?.emailId}}</span>
+                                    <span *ngIf="!isEditable">{{ticketDetails?.emailId}}</span>
+                                    <mat-form-field *ngIf="isEditable"  appearance="outline">
+                                            <input type="text" matInput [value]="ticketDetails.emailId" (input)="ticketDetails.emailId = $event.target.value"  required />
+
+                                    </mat-form-field>
                                     <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
                                 </div>
                             </div>
@@ -197,7 +194,11 @@
                                 </div>
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
-                                    <span>{{ticketDetails?.alternateEmailId}}</span>
+                                    <span *ngIf="!isEditable">{{ticketDetails?.alternateEmailId}}</span>
+                                    <mat-form-field *ngIf="isEditable"  appearance="outline">
+                                            <input type="text" matInput [value]="ticketDetails.alternateEmailId" (input)="ticketDetails.alternateEmailId = $event.target.value"  required />
+
+                                    </mat-form-field>
                                     <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
                                 </div>
                             </div>
@@ -213,6 +214,7 @@
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
                                     <span>{{ticketDetails?.communicationAddress?.address1}}</span>
+                                   
                                     <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
                                 </div>
                             </div>
@@ -287,8 +289,8 @@
                           
                           </div>
 
-                    <mat-action-row *ngIf="isEditable">
-                         <div class="row" >
+                    <div *ngIf="isEditable">
+                         <div >
 
                                  <!-- <mat-form-field>
                                         <mat-select placeholder="Select User">
@@ -298,12 +300,13 @@
                                         </mat-select>
                                         
                                       </mat-form-field> -->
-                                      <button mat-button  style="color: #003d79;right: 0; ">Submit</button>
+                                      <button mat-raised-button	  style="color: #003d79 ;     margin-left: 80%;" (click)="updateTicket(ticketDetails)">Submit</button>
+                                      <button mat-raised-button	 color="warn" (click)="restTicketEdit()">Cancel</button>
                                       <!-- <button mat-button  style="color: red">Cancel</button> -->
                                       
                         </div>
                             
-                           </mat-action-row>
+                           </div>
                 </mat-card-content>
 
 

@@ -2,18 +2,24 @@
     <div class="container-fluid">
         <div class="row">
             <div style="padding-left: 94%">
-                <a href="#" (click)="addnewCustomer()" title="Add New Customer" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
+                <a href="#" (click)="addnewCustomer()" title="Add New Customer" style="color: #003d79;">
+                    <i style="font-size: 2.5rem;" class="material-icons">add_box</i>
+                </a>
             </div>
         </div>
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
-            <data-table id="customer-grid" headerTitle="CUSTOMER MANAGEMENT" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+            <data-table id="customer-grid" headerTitle="CUSTOMER MANAGEMENT" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)"
+                (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
                 <data-table-column [property]="'firstName'" [header]="'First-Name'" [sortable]="true" [resizable]="true">
+                    <ng-template #dataTableCell let-item="item">
+                        <a (click)="getCustomerInDetail(item)" style="color: #003d79;cursor: pointer;text-decoration: underline;" role="button">{{item.firstName}}</a>
+                    </ng-template>
                 </data-table-column>
                 <data-table-column [property]="'lastName'" [header]="'Last-Name'" [sortable]="true" [resizable]="true">
                 </data-table-column>
                 <data-table-column [property]="'mobileNumber'" header="Phone-Number" [sortable]="true" [resizable]="true">
                 </data-table-column>
-                <data-table-column header="Actions">
+                <!-- <data-table-column header="Actions">
                     <ng-template #dataTableHeader let-item="item">
                         <span style="cursor: pointer; color:#003d79; font-weight: 400;">Actions</span>
                     </ng-template>
@@ -23,9 +29,221 @@
                         <a class="btn btn-danger" href="#" (click)="deleteCustomer(item)">
                             <i class="fa fa-trash-o fa-lg"></i> </a>
                     </ng-template>
-                </data-table-column>
+                </data-table-column> -->
 
             </data-table>
+        </div>
+
+        <div>
+            <mat-card *ngIf="showCustomerCard">
+                <mat-card-header>
+                    <mat-card-title class="customLabel">
+                        Customer Details - {{customerDetails?.firstName}}
+                    </mat-card-title>
+                    <div style="right: 0;position: absolute;">
+                        <i *ngIf="!isEditable" class="material-icons" style="margin-left : 60px; color: #003d79; cursor: pointer" (click)="customerEdit(customerDetails)">
+                            edit
+                        </i>
+
+                        <i class="material-icons" style="color: red;cursor: pointer" (click)="closeCard()">
+                            close
+                        </i>
+
+
+
+                    </div>
+
+
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Title</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{customerDetails?.title}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">First Name</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span *ngIf="!isEditable">{{customerDetails?.firstName}}</span>
+                                    <mat-form-field *ngIf="isEditable" appearance="outline">
+                                        <input type="text" matInput [value]="customerDetails.firstName" (input)="customerDetails.firstName = $event.target.value"
+                                            required />
+
+                                    </mat-form-field>
+
+                                    <!-- <span ng-if="!customerDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Last Name</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{customerDetails?.lastName}}</span>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Middle Name</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{customerDetails?.middleName }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Mobile</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span *ngIf="!isEditable">{{customerDetails?.mobileNumber}}</span>
+                                    <mat-form-field *ngIf="isEditable" appearance="outline">
+                                        <input type="text" matInput [value]="customerDetails.mobileNumber" (input)="customerDetails.mobileNumber = $event.target.value"
+                                            required />
+
+                                    </mat-form-field>
+                                    <!-- <span ng-if="!customerDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Alt Mobile</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span *ngIf="!isEditable">{{customerDetails?.alternateMobileNumber}}</span>
+                                    <mat-form-field *ngIf="isEditable" appearance="outline">
+                                        <input type="text" matInput [value]="customerDetails.alternateMobileNumber" (input)="customerDetails.alternateMobileNumber = $event.target.value"
+                                            required />
+
+                                    </mat-form-field>
+                                    <!-- <span ng-if="!customerDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Email</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span *ngIf="!isEditable">{{customerDetails?.emailId}}</span>
+                                    <mat-form-field *ngIf="isEditable" appearance="outline">
+                                        <input type="text" matInput [value]="customerDetails.emailId" (input)="customerDetails.emailId = $event.target.value" required
+                                        />
+
+                                    </mat-form-field>
+                                    <!-- <span ng-if="!customerDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Alt Email</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span *ngIf="!isEditable">{{customerDetails?.alternateEmailId}}</span>
+                                    <mat-form-field *ngIf="isEditable" appearance="outline">
+                                        <input type="text" matInput [value]="customerDetails.alternateEmailId" (input)="customerDetails.alternateEmailId = $event.target.value"
+                                            required />
+
+                                    </mat-form-field>
+                                    <!-- <span ng-if="!customerDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Address</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{customerDetails?.communicationAddress?.address1}}</span>
+
+                                    <!-- <span ng-if="!customerDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">City</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{customerDetails?.cityName}}</span>
+                                    <!-- <span ng-if="!customerDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Branch</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{customerDetails?.branchName}}</span>
+                                    <!-- <span ng-if="!customerDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Area</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{customerDetails?.areaName}}</span>
+                                   
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="isEditable">
+                        <div>
+
+                            <button mat-raised-button style="color: #003d79 ;     margin-left: 80%;" (click)="updateCustomer(customerDetails)">Submit</button>
+                            <button mat-raised-button color="warn" (click)="restCustomerEdit()">Cancel</button>
+
+                        </div>
+
+                    </div>
+                </mat-card-content>
+
+
+
+
+            </mat-card>
+
         </div>
 
     </div>
