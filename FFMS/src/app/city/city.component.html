@@ -1,0 +1,66 @@
+<div class="header" style="padding-top: 50px">
+
+</div>
+
+<div class="container-fluid" id="addcityform" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px;">
+
+    <div class=row id="cityheader" style="border: 0px;padding-top: 20px">
+        <h5 style="font-size: 20px; color: white;margin-left: 20px ">Add New City</h5>
+
+    </div>
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-8"><label for="City Name"><b> Name</b></label>
+            <input [(ngModel)]="city.cityName" type="text" class="form-control" id="cityname" placeholder="Enter City Name">
+        </div>
+    </div>
+
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-8"><label for="citycode"><b> Code</b></label>
+            <input [(ngModel)]="city.cityCode" type="text" class="form-control" id="citycode" placeholder="Enter City Code">
+        </div>
+    </div>
+
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-8"><label for="citydescription"><b>Description</b></label>
+            <!-- <input [(ngModel)]="city.cityDescription" type="text" class="form-control" id="citydescription" placeholder="Enter City Description"> -->
+        </div>
+    </div>
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-8"><label style="font-weight: bold" for="cityStatus">Status</label>
+            <ngx-select-dropdown [config]="config" [options]="cityStatus" [(value)]="city.cityStatus" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
+        </div>
+    </div>
+
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-8"><label style="font-weight: bold" for="citystate" Required> State </label>
+            <ngx-select-dropdown [config]="config" (change)="selectionChanged($event)" [(value)]="selectedOptions" [options]="citylistFordropdown" (click)="onclick()" [multiple]="false" (click)="enableSearch()"></ngx-select-dropdown>
+            <!-- <p style="margin: 0;" *ngFor="let user of selectedOptions"><strong>Name:</strong> {{user.idCity}} , <strong>Balance:</strong> {{user.cityName}}</p> -->
+        </div>
+    </div>
+
+    <div class="row justify-content-end" style="padding-top: 11px">
+        <div class="col-md-2">
+            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -14px;" (click)="onsubmitAddNewCity()">Submit</button>
+        </div>
+
+        <div class="col-md-2">
+            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -14px;" (click)="onClickFieldValueOfForm()"> Clear </button>
+        </div>
+
+        <div class="col-md-1" style="margin-bottom: 8px;">
+
+            <nav>
+                <a routerLink="/location-management" routerLinkActive="active" class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -41px">Back</a>
+            </nav>
+
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    .form-control {
+        background-image: none;
+    }
+</style>

@@ -1,0 +1,199 @@
+<div class="main-content" style="margin-top:-20px">
+    <div class="container-fluid">
+        <div class="row">
+            <div style="padding-left: 94%">
+                <!-- <a class="btn btn-success" href="#" (click)="addnewCustomer()">
+                    <i class="fa fa-plus-circle" aria-hidden="true">Add new Customer</i></a> -->
+
+                <!-- <button type="button" id="showaddformvalue" class="btn btn-info add-new" (click)="showAddCityForm()" style="margin-left:-119px"><i class="fa fa-plus"></i> Add New City</button> -->
+
+
+                <nav>
+                    <a routerLink="/add-branchManagement" routerLinkActive="active" title="Add New Branch" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
+                    <!-- <a *ngIf="!isadd" (click)="addclicked(1)" title="Add New City" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a> -->
+                    <!-- <a *ngIf="isadd" (click)="addclicked(0)" title="Add New City" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">keyboard_backspace</i></a> -->
+                </nav>
+
+
+            </div>
+        </div>
+
+        <!-- <div *ngIf="!isadd"> -->
+        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
+            <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" [indexColumn]="false">
+                <!-- <data-table-column [property]="'idBranch'" [header]="'Id'" [sortable]="true" [resizable]="true">
+                </data-table-column> -->
+
+                <data-table-column [property]="'branchName'" [header]="'Name'" [sortable]="true" [resizable]="true">
+                    <!-- <ng-template #dataTableCell let-item="item"> -->
+                    <!-- <a (click)="getBranchDetails(item)" style="color: #003d79;cursor: pointer;text-decoration: underline;" role="button">{{item.branchName}}</a> -->
+                    <!-- <span (click)="getBranchDetails(item)" style="color: #003d79" (rowClick)="onRowClick()">{{item.branchName}} </span> -->
+                    <!-- </ng-template> -->
+                </data-table-column>
+                <data-table-column [property]="'branchCode'" header="Code" [sortable]="true" [resizable]="true">
+                </data-table-column>
+                <data-table-column [property]="'branchCity'" header="City" [sortable]="true" [resizable]="true">
+                </data-table-column>
+
+                <data-table-column [property]="'branchState'" header="State" [sortable]="true" [resizable]="true">
+                </data-table-column>
+
+
+                <data-table-column [property]="'branchStatus'" header="Status" [sortable]="true" [resizable]="true">
+                </data-table-column>
+
+            </data-table>
+        </div>
+
+        <div>
+            <mat-card *ngIf="showBranchCard">
+
+                <mat-card-header>
+                    <mat-card-title class="customLabel">
+                        <div style="right: 0;position: absolute;">
+                            <i *ngIf="!isEditable" class="material-icons" style="margin-left : 60px; color: #003d79; cursor: pointer" (click)="EditClicked() ">
+                                                        edit
+                                                    </i>
+
+                            <i class="material-icons " style="color: red;cursor: pointer " (click)="onClickCloseDetailsForm() ">
+                                                        close
+                                                    </i>
+                        </div>
+                        Branch Information :
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Id</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+
+                                    <div *ngIf="!isEditable">
+                                        <span>{{branchDetails?.idBranch}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <input [(ngModel)]="selectedBranch.idBranch " type="text " class="form-control " id="cityname " placeholder=" " readonly>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Name</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <!-- <span>{{branchDetails?.branchName}}</span> -->
+                                    <div *ngIf="!isEditable">
+                                        <span>{{branchDetails?.branchName}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <input [(ngModel)]="selectedBranch.branchName " type="text " class="form-control " id="cityname " placeholder="Enter City Name ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">City</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+
+                                    <div *ngIf="!isEditable">
+                                        <span>{{selectedBranch?.branchCity}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <!-- <input [(ngModel)]="selectedBranch.branchCity " type="text " class="form-control " id="cityname " placeholder="Enter City Name "> -->
+
+                                        <ngx-select-dropdown [config]="config" [options]="availableCityList" [multiple]="false" (click)="enableSearch()"></ngx-select-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Status</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+
+                                    <div *ngIf="!isEditable">
+                                        <span>{{branchDetails?.branchStatus}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <!-- selectedBranch.branchStatus -->
+                                        <!-- <input [(ngModel)]="selectedBranch.branchStatus " type="text " class="form-control " id="cityname " placeholder="Enter City Name "> -->
+                                        <ngx-select-dropdown [config]="config" [options]="branchstatusforselection" [(value)]="branchDetails.branchStatus" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
+                                    </div>
+                                    <!-- <span>{{branchDetails?.branchStatus}}</span> -->
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">Code</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <!-- <span>{{branchDetails?.branchName}}</span> -->
+
+                                    <div *ngIf="!isEditable">
+                                        <span>{{branchDetails?.branchName}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <input [(ngModel)]="selectedBranch.branchName" type="text " class="form-control " id="cityname " placeholder="Enter Branch code ">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="customLabel">State</label>
+
+                                </div>
+                                <div class="col-1">:</div>
+                                <div class="col-6" style="white-space: wrap; ">
+                                    <span>{{cityDetails?.cityState}}</span>
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row ">
+                        <button type=" button " style="margin-left: 890px" (click)="updateClicked()" class="btn btn-sm btn-success "> Update </button>
+                    </div>
+
+                </mat-card-content>
+
+            </mat-card>
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .form-control {
+        background-image: none;
+    }
+</style>

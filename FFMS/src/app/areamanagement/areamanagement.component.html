@@ -1,0 +1,192 @@
+<div class="main-content" style="margin-top:-20px">
+    <div class="container-fluid">
+        <div class="row">
+            <div style="padding-left: 94%">
+                <nav>
+                    <a routerLink="/add-areaManagement" routerLinkActive="active" title="Add New Branch" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
+                </nav>
+            </div>
+        </div>
+        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
+            <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
+                <!-- <data-table-column [property]="'areaId'" [header]="'Id'" [sortable]="true" [resizable]="true">
+                </data-table-column> -->
+                <data-table-column [property]="'areaName'" [header]="'Name'" [sortable]="true" [resizable]="true">
+                </data-table-column>
+                <data-table-column [property]=" 'areaCode' " header="Code " [sortable]="true " [resizable]="true ">
+                </data-table-column>
+                <data-table-column [property]=" 'branchName' " header="Branch " [sortable]="true " [resizable]="true ">
+                </data-table-column>
+                <data-table-column [property]=" 'areaCity' " header="City " [sortable]="true " [resizable]="true ">
+                </data-table-column>
+                <data-table-column [property]=" 'status' " header="Status " [sortable]="true " [resizable]="true ">
+                </data-table-column>
+            </data-table>
+        </div>
+        <div>
+            <mat-card *ngIf="showAreaCard ">
+                <mat-card-header>
+                    <!-- <a class="btn " style="background-color: #003d79; margin-left: 50%;width: 10%;height: 35px;" (click)="EditClicked()">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn " style="background-color:red;width: 4%;height: 35px;" (click)="onClickCloseDetailsForm()">
+                        <i class=" fa fa-times-circle-o " aria-hidden="true " style="color: white;"></i></a> -->
+
+                    <mat-card-title class="customLabel ">
+                        <div style="right: 0;position: absolute;">
+                            <i *ngIf="!isEditable" class="material-icons" style="margin-left : 60px; color: #003d79; cursor: pointer" (click)="EditClicked() ">
+                                                edit
+                                            </i>
+
+                            <i class="material-icons " style="color: red;cursor: pointer " (click)="onClickCloseDetailsForm() ">
+                                                close
+                                            </i>
+                        </div>
+                        Area Information :
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row ">
+                        <div class="col-4 ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <label class="customLabel ">Id</label>
+                                </div>
+                                <div class="col-1 ">:</div>
+                                <div class="col-6 " style="white-space: wrap; ">
+                                    <!-- <span>{{areaDetails?.areaId}}</span> -->
+
+                                    <div *ngIf="!isEditable">
+                                        <span>{{areaDetails?.areaId}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <input [(ngModel)]="selectedArea.areaId" type="text " class="form-control " id="cityname " placeholder=" " readonly>
+                                    </div>
+
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice ">--</span> -->
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <label class="customLabel ">Name</label>
+
+                                </div>
+                                <div class="col-1 ">:</div>
+                                <div class="col-6 " style="white-space: wrap; ">
+
+                                    <div *ngIf="!isEditable">
+                                        <span>{{areaDetails?.areaName}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <input [(ngModel)]="selectedArea.areaName" type="text " class="form-control " id="cityname " placeholder=" ">
+                                    </div>
+                                    <!-- <span>{{areaDetails?.areaName}}</span> -->
+                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice ">--</span> -->
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <label class="customLabel ">Branch</label>
+                                </div>
+                                <div class="col-1 ">:</div>
+                                <div class="col-6 " style="white-space: wrap; ">
+
+
+                                    <div *ngIf="!isEditable">
+                                        <span>{{areaDetails?.branchName}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <input [(ngModel)]="selectedArea.areaBranch" type="text " class="form-control " id="cityname " placeholder=" ">
+                                    </div>
+                                    <!-- <span>{{areaDetails?.branchName}}</span> -->
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <label class="customLabel ">State</label>
+
+                                </div>
+                                <div class="col-1 ">:</div>
+                                <div class="col-6 " style="white-space: wrap; ">
+                                    <!-- <span>{{cityDetails?.cityState}}</span> -->
+
+                                    <div *ngIf="!isEditable">
+                                        <span>{{cityDetails?.cityState}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <!-- <input [(ngModel)]="selectedCity.cityState " type="text " class="form-control " id="cityname " placeholder=" "> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <label class="customLabel ">Status</label>
+                                </div>
+                                <div class="col-1 ">:</div>
+                                <div class="col-6 " style="white-space: wrap; ">
+                                    <!-- <span>{{areaDetails?.status}}</span> -->
+
+                                    <div *ngIf="!isEditable">
+                                        <span>{{areaDetails?.status}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable">
+                                        <!-- [(value)]="selectedArea.areaStatus" -->
+                                        <!-- <input [(ngModel)]="selectedArea.areaStatus" type="text " class="form-control " id="cityname " placeholder=" "> -->
+                                        <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="selectedArea.areaStatus" [multiple]=" false " (click)="disableSearch() "></ngx-select-dropdown>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <label class="customLabel ">Code</label>
+
+                                </div>
+                                <div class="col-1 ">:</div>
+                                <div class="col-6 " style="white-space: wrap; ">
+
+                                    <div *ngIf="!isEditable ">
+                                        <span>{{areaDetails?.areaName}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable ">
+                                        <input [(ngModel)]="selectedArea.areaName " type="text " class="form-control " id="cityname " placeholder=" ">
+                                    </div>
+
+
+                                    <!-- <span>{{areaDetails?.areaName}}</span> -->
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <label class="customLabel ">City</label>
+
+                                </div>
+                                <div class="col-1 ">:</div>
+                                <div class="col-6 " style="white-space: wrap; ">
+                                    <!-- <span>{{branchDetails?.branchCity}}</span> -->
+
+                                    <div *ngIf="!isEditable ">
+                                        <span>{{branchDetails?.branchCity}}</span>
+                                    </div>
+                                    <div *ngIf="isEditable ">
+                                        <input [(ngModel)]="selectedArea.areaCity " type="text " class="form-control " id="cityname " placeholder=" ">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <button type=" button " style="margin-left: 890px " (click)="updateClicked() " class="btn btn-sm btn-success "> Update </button>
+                    </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

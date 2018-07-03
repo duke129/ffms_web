@@ -1,0 +1,29 @@
+<div style="padding-top: 60px">
+</div>
+
+<mat-tab-group>
+    <div class="row">
+        <div class="col-lg-6">
+            <mat-tab label="City">
+                <app-citymanagement></app-citymanagement>
+                <router-outlet></router-outlet>
+            </mat-tab>
+        </div>
+        <div class="col-lg-6">
+            <mat-tab label="Branch">
+                <app-branchmanagement></app-branchmanagement>
+            </mat-tab>
+        </div>
+        <div class="col-lg-6">
+            <mat-tab label="Area">
+                <app-areamanagement></app-areamanagement>
+            </mat-tab>
+        </div>
+        <!-- <div class="col-lg-6">
+            <mat-tab label="SubArea(coming soon)">
+                <app-ticket-management></app-ticket-management>
+            </mat-tab> -->
+        <!-- </div> -->
+    </div>
+</mat-tab-group>
+<router-outlet></router-outlet>
