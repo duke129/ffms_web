@@ -1,53 +1,43 @@
-<div class="header" style="padding-top: 50px">
-
-</div>
-
-<div class="container-fluid" id="addcityform" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px;">
+<!-- <div class="container-fluid" id="addcityform" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px;"> -->
+<div class="container-fluid" id="addcityform" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px; margin-left: 65px;">
 
     <div class=row id="cityheader" style="border: 0px;padding-top: 20px">
-        <h5 style="font-size: 20px; color: white;margin-left: 20px ">Add New Branch</h5>
-
+        <h5 style="font-size: 20px;margin-left: 20px ">Add New Branch</h5>
     </div>
+
     <div class=row style="padding-top: 11px">
-        <div class="col-md-8"><label for="branchName"><b> Name</b></label>
+        <div class="col-md-6"><label for="branchName"><b> Name</b></label>
             <input [(ngModel)]="branchModel.branchName" type="text" class="form-control" id="branchname" placeholder="Enter Branch Name">
         </div>
+        <div class="col-md-6"><label for="branchCode"><b> Code</b></label>
+            <input [(ngModel)]="branchModel.code" type="text" class="form-control" id="branchcode" placeholder="Enter Branch Code">
+        </div>
+
     </div>
 
     <div class=row style="padding-top: 11px">
-        <div class="col-md-8"><label for="branchCode"><b> Code</b></label>
-            <input [(ngModel)]="branchModel.branchCode" type="text" class="form-control" id="branchcode" placeholder="Enter Branch Code">
+        <div class="col-md-6"><label for="branchDescription"><b> Description</b></label>
+            <input [(ngModel)]="branchModel.description" type="text" class="form-control" id="branchdescription" placeholder="Enter Branch Description">
+        </div>
+        <div class="col-md-6"><label style="font-weight: bold" for="cityStatus"> Status</label>
+            <ngx-select-dropdown [config]="config" [options]="branchStatus" [(value)]="branchModel.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
         </div>
     </div>
-
-    <div class=row style="padding-top: 11px">
-        <div class="col-md-8"><label for="branchDescription"><b> Description</b></label>
-            <input [(ngModel)]="branchModel.branchDescription" type="text" class="form-control" id="branchdescription" placeholder="Enter Branch Description">
-        </div>
-    </div>
-    <div class=row style="padding-top: 11px">
-        <div class="col-md-8"><label style="font-weight: bold" for="cityStatus"> Status</label>
-            <ngx-select-dropdown [config]="config" [options]="branchStatus" [(value)]="branchModel.branchStatus" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
-        </div>
-    </div>
-
     <div class=row style=" padding-top: 11px ">
-        <div class="col-md-8 "><label style="font-weight: bold " for="citystate ">City</label>
-            <ngx-select-dropdown [config]="config " [options]="availableCityList " [(value)]="branchModel.branchCity " (click)="enableSearch()"></ngx-select-dropdown>
+        <div class="col-md-6"><label style="font-weight: bold " for="citystate ">City</label>
+            <ngx-select-dropdown [config]="config " [options]="availableCityList " [(value)]="branchModel.cityName " (click)="enableSearch()"></ngx-select-dropdown>
         </div>
     </div>
 
     <div class="row justify-content-end " style="padding-top: 11px ">
         <div class="col-md-2 ">
-            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -14px; " (click)="onsubmitAddNewBranch() ">Submit</button>
+            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -15px; " (click)="onsubmitAddNewBranch() ">Submit</button>
         </div>
 
         <div class="col-md-1 " style="margin-bottom: 8px; ">
-
-            <nav>
-                <a routerLink="/location-management " routerLinkActive="active " class="fa fa-plus-circle " class="btn btn-sm btn-danger " style="margin-left: -41px ">Back</a>
-            </nav>
-
+            <div class="col-md-1" style="margin-bottom: 8px;">
+                <button type=" button " class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -60px" (click)="closeAddBranchForm()">Close</button>
+            </div>
         </div>
     </div>
 

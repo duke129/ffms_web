@@ -21,8 +21,15 @@ import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
 export class CityComponent implements OnInit {
+ 
+  _ref: any;
 
- // public city=new CityModel();
+  closeAddCityForm() {
+    this._ref.destroy();
+    this.citymanagementComponent.showHideCityAddButton();
+}
+
+
   public cityDto=new CityDto();
 
   showId:boolean;
@@ -107,5 +114,5 @@ export class CityComponent implements OnInit {
         console.log("Outside the result block citylist in array for dropllist ::"+this.citymanagementComponent.citiesList);
       }
 
-      onClickFieldValueOfForm(){}
+     
 }

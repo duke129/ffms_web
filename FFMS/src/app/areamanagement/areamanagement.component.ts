@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ComponentFactoryResolver,ViewContainerRef  } from '@angular/core';
 import { DataTableResource } from '../data-table';
-//import persons  from './customer-data'
-//import persons  from './customer-data';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map'; 
 import { Injectable } from '@angular/core';
@@ -11,6 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import  { TicketViewModel } from '../ticket-management/ticket';
 import { AreaDto } from '../area/areaDto';
+import { AreaComponent } from '../area/area.component'
 
 
 @Component({
@@ -19,7 +18,6 @@ import { AreaDto } from '../area/areaDto';
   styleUrls: ['./areamanagement.component.scss']
 })
 export class AreamanagementComponent implements OnInit {
-  public tickets : any;
   public areaDto: AreaDto[];
   observableArea: Observable<AreaDto[]>
   itemResource = new DataTableResource([]); 
@@ -34,7 +32,9 @@ export class AreamanagementComponent implements OnInit {
 
     areaDetails:AreaDto;
 
-    constructor(private http: Http) {
+    @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
+   
+    constructor(private http: Http,private _cfr: ComponentFactoryResolver) {
       
     }
 
@@ -188,5 +188,23 @@ public selectedArea=new AreaDto();
        .post(`http://localhost:8081/location/area/save`,areaModel);
       }
     
+
+
+      showHideAddButtonForArea()
+    {
+       if (document.getElementById("addButtonForArea").style.display == "none" ) {
+           document.getElementById("addButtonForArea").style.display="";
+    
+       } else {
+          document.getElementById("addButtonForArea").style.display="none";
+     }
+         
+    }
+
+    addComponent(){
+      var comp = this._cfr.resolveComponentFactory(AreaComponent);
+      var cityComponent = this.container.createComponent(comp);
+      cityComponent.instance._ref = cityComponent;
+  }
 
 }

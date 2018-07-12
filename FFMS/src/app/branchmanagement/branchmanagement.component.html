@@ -2,22 +2,17 @@
     <div class="container-fluid">
         <div class="row">
             <div style="padding-left: 94%">
-                <!-- <a class="btn btn-success" href="#" (click)="addnewCustomer()">
-                    <i class="fa fa-plus-circle" aria-hidden="true">Add new Customer</i></a> -->
-
-                <!-- <button type="button" id="showaddformvalue" class="btn btn-info add-new" (click)="showAddCityForm()" style="margin-left:-119px"><i class="fa fa-plus"></i> Add New City</button> -->
-
-
-                <nav>
-                    <a routerLink="/add-branchManagement" routerLinkActive="active" title="Add New Branch" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
-
-                </nav>
-
-
+                <div>
+                    <a id="addButtonForBranch" (click)="addComponent()" title=" Add New Branch " style="color: #003d79; "><i style="font-size: 2.5rem; " class="material-icons" (click)="showHideAddButton()"><span style="cursor:pointer" >add_box</span></i></a>
+                </div>
             </div>
         </div>
 
-        <!-- <div *ngIf="!isadd"> -->
+        <div class="row">
+            <div #parent></div>
+        </div>
+        <div style="padding-bottom: 20px"></div>
+
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
             <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" [indexColumn]="false">
                 <!-- <data-table-column [property]="'idBranch'" [header]="'Id'" [sortable]="true" [resizable]="true">

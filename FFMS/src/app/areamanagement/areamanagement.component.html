@@ -2,11 +2,18 @@
     <div class="container-fluid">
         <div class="row">
             <div style="padding-left: 94%">
-                <nav>
-                    <a routerLink="/add-areaManagement" routerLinkActive="active" title="Add New Branch" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
-                </nav>
+                <div>
+                    <a id="addButtonForArea" (click)="addComponent()" title=" Add New Area " style="color: #003d79; "><i style="font-size: 2.5rem; " class="material-icons" (click)="showHideAddButtonForArea()"><span style="cursor:pointer" >add_box</span></i></a>
+                </div>
             </div>
         </div>
+
+
+        <div class="row">
+            <div #parent></div>
+        </div>
+        <div style="padding-bottom: 20px"></div>
+
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
             <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
                 <!-- <data-table-column [property]="'areaId'" [header]="'Id'" [sortable]="true" [resizable]="true">

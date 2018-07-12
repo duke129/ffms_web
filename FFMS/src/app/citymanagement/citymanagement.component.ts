@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,ComponentFactoryResolver,ViewContainerRef } from '@angular/core';
 import { DataTableResource } from '../data-table';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map'; 
@@ -11,13 +11,12 @@ import  { TicketViewModel } from '../ticket-management/ticket';
 import { CityDto } from '../city/CityDTO';
 import 'rxjs/add/operator/map'; 
 import { Subscription } from 'rxjs/Subscription';
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CityComponent } from '../city/city.component'
 
-//import {ConfigService} from '../locationtabmanagement/config.service';
 
 @Component({
   selector: 'app-citymanagement',
@@ -33,7 +32,7 @@ export class CitymanagementComponent implements OnInit {
   itemResource = new DataTableResource([]); 
   errorMessage: String;
   showCityCard=false;
-  
+ showAddButton=true;
     items = [];
     itemCount : number;
     selectedpersonname= '';
@@ -48,12 +47,18 @@ export class CitymanagementComponent implements OnInit {
     cityStatus=["Enable","Disable"];
     selectedstatus = ['select stautus'];
 
-    constructor(private http: Http) {
+    @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
+
+    constructor(private http: Http,private _cfr: ComponentFactoryResolver) {
       
     }
+
     isEdit=0;
     EditClicked(){
       this.isEdit=1;
+    }
+    disableButton(){
+      this.showAddButton=false;
     }
     
     ngOnInit() {
@@ -218,6 +223,22 @@ updateCity=new CityDto();
        
       }
      
+      addComponent(){
+        var comp = this._cfr.resolveComponentFactory(CityComponent);
+        var cityComponent = this.container.createComponent(comp);
+        cityComponent.instance._ref = cityComponent;
+    }
 
+
+    showHideCityAddButton()
+{
+   if (document.getElementById("cityAddButton").style.display == "none" ) {
+       document.getElementById("cityAddButton").style.display="";
+
+   } else {
+      document.getElementById("cityAddButton").style.display="none";
+
+}
      
+}
 }

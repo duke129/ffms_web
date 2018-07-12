@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Injectable } from '@angular/core';
 import { AreaDto } from "./areaDto";
 import {FormControl, Validators} from '@angular/forms';
 
 import { Http, Response } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'; 
+import { AreamanagementComponent } from '../areamanagement/areamanagement.component';
 
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html',
   styleUrls: ['./area.component.scss']
 })
+
+@Injectable()
 export class AreaComponent implements OnInit {
 
+  _ref: any;
   public areaModel=new AreaDto();
 
-  constructor(private http:Http) { }
+  constructor(private http:Http,public areamanagementComponent:AreamanagementComponent) { }
 
   ngOnInit() {
     this.areaModel;
@@ -81,7 +85,10 @@ export class AreaComponent implements OnInit {
        .post(`http://localhost:8081/location/area/save`,areaModel);
       }
     
-    
+      closeAddAreaForm(){
+        this._ref.destroy();
+        this.areamanagementComponent.showHideAddButtonForArea();
+      }
 
 
 }

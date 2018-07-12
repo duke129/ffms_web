@@ -5,4 +5,5 @@ export class CityDto {
 	code:string;
     state:string;
     status:string;
+    description:string;
 }

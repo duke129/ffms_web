@@ -2,36 +2,28 @@
     <div class="container-fluid">
         <div class="row">
             <div style="padding-left: 94%">
-                <!-- <a class="btn btn-success" href="#" (click)="addnewCustomer()">
-                    <i class="fa fa-plus-circle" aria-hidden="true">Add new Customer</i></a> -->
-
-                <!-- <button type="button" id="showaddformvalue" class="btn btn-info add-new" (click)="showAddCityForm()" style="margin-left:-119px"><i class="fa fa-plus"></i> Add New City</button> -->
-
-
-                <nav>
-                    <a routerLink="/add-citymanagement" routerLinkActive="active" title="Add New City" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
-                    <!-- <a *ngIf="!isadd" (click)="addclicked(1)" title="Add New City" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a> -->
-                    <!-- <a *ngIf="isadd" (click)="addclicked(0)" title="Add New City" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">keyboard_backspace</i></a> -->
-                </nav>
-
-
+                <div>
+                    <a id="cityAddButton" (click)="addComponent()" title=" Add New City " style="color: #003d79; "><i style="font-size: 2.5rem; " class="material-icons" (click)="showHideCityAddButton()"><span style="cursor:pointer">add_box</span></i></a>
+                </div>
             </div>
         </div>
+        <div class="row">
+            <div #parent></div>
+        </div>
+        <div style="padding-bottom: 20px"></div>
 
+        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px; ">
+            <data-table id="persons-grid " headerTitle=" " [items]="items " [itemCount]="itemCount " (reload)="reloadItems($event) " (rowClick)="rowClick($event) " (rowDoubleClick)="rowDoubleClick($event) " [rowTooltip]="rowTooltip " [indexColumn]="false ">
 
-        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
-            <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
-                <!-- <data-table-column [property]="'idCity'" [header]="'Id'" [sortable]="true" [resizable]="true">
-                </data-table-column> -->
-                <data-table-column [property]="'cityName'" [header]="'Name'" [sortable]="true" [resizable]="true">
+                <data-table-column [property]=" 'cityName' " [header]=" 'Name' " [sortable]="true " [resizable]="true ">
 
                 </data-table-column>
 
-                <data-table-column [property]="'code'" header="Code" [sortable]="true" [resizable]="true">
+                <data-table-column [property]=" 'code' " header="Code " [sortable]="true " [resizable]="true ">
                 </data-table-column>
-                <data-table-column [property]="'state'" header="State" [sortable]="true" [resizable]="true">
+                <data-table-column [property]=" 'state' " header="State " [sortable]="true " [resizable]="true ">
                 </data-table-column>
-                <data-table-column [property]="'status'" header="Status" [sortable]="true" [resizable]="true">
+                <data-table-column [property]=" 'status' " header="Status " [sortable]="true " [resizable]="true ">
                 </data-table-column>
 
 
@@ -41,14 +33,14 @@
 
 
         <div>
-            <mat-card *ngIf="showCityCard">
+            <mat-card *ngIf="showCityCard ">
 
                 <mat-card-header>
 
                     <mat-card-title class="customLabel ">
 
-                        <div style="right: 0;position: absolute;">
-                            <i *ngIf="!isEditable" class="material-icons" style="margin-left : 60px; color: #003d79; cursor: pointer" (click)="EditClicked() ">
+                        <div style="right: 0;position: absolute; ">
+                            <i *ngIf="!isEditable " class="material-icons " style="margin-left : 60px; color: #003d79; cursor: pointer " (click)="EditClicked() ">
                                                                 edit
                                                             </i>
 
@@ -80,16 +72,16 @@
                             </div>
                             <div class="row ">
                                 <div class="col-4 ">
-                                    <label class="customLabel " style="padding-top:8px">Code</label>
+                                    <label class="customLabel " style="padding-top:8px ">Code</label>
 
                                 </div>
-                                <div class="col-1 " style="padding-top:8px">:</div>
-                                <div class="col-6 " style="white-space:wrap;padding-bottom:5px">
+                                <div class="col-1 " style="padding-top:8px ">:</div>
+                                <div class="col-6 " style="white-space:wrap;padding-bottom:5px ">
                                     <div *ngIf="isEdit==0 ">
                                         <span>{{cityDetails?.code}}</span>
                                     </div>
                                     <div *ngIf="isEdit==1 ">
-                                        <input [(ngModel)]="selectedcity.code " type="text " class="form-control " id="citycode " placeholder="Enter City Code " style="margin-bottom: 7px;">
+                                        <input [(ngModel)]="selectedcity.code " type="text " class="form-control " id="citycode " placeholder="Enter City Code " style="margin-bottom: 7px; ">
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +99,7 @@
                                         <span>{{cityDetails?.status}}</span>
                                     </div>
                                     <div *ngIf="isEdit==1 ">
-                                        <ngx-select-dropdown [config]="config " [options]="cityStatus " [(value)]="selectedcity.status " [multiple]="false"></ngx-select-dropdown>
+                                        <ngx-select-dropdown [config]="config " [options]="cityStatus " [(value)]="selectedcity.status " [multiple]="false "></ngx-select-dropdown>
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +115,7 @@
                         </div>
                     </div>
                     <div class="row ">
-                        <button type=" button " style="margin-left: 890px" (click)="updateClicked() " class="btn btn-sm btn-success "> Update </button>
+                        <button type=" button " style="margin-left: 890px " (click)="updateClicked() " class="btn btn-sm btn-success "> Update </button>
                     </div>
                 </mat-card-content>
             </mat-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,ComponentFactoryResolver,ViewContainerRef } from '@angular/core';
 import { DataTableResource } from '../data-table';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map'; 
@@ -9,6 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import  { TicketViewModel } from '../ticket-management/ticket';
 import { BranchDto } from '../branch/branchDto';
+import { BranchComponent } from '../branch/branch.component'
 
 
 @Component({
@@ -17,6 +18,8 @@ import { BranchDto } from '../branch/branchDto';
   styleUrls: ['./branchmanagement.component.scss']
 })
 export class BranchmanagementComponent implements OnInit {
+
+  @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
   isEditable=false;
   showBranchCard=false;
   public index:number;
@@ -29,7 +32,7 @@ export class BranchmanagementComponent implements OnInit {
     selectedpersonname= '';
     branchDetails:BranchDto;
 
- constructor(private http: Http) {
+ constructor(private http: Http,private _cfr: ComponentFactoryResolver) {
       
     }
 
@@ -163,4 +166,23 @@ export class BranchmanagementComponent implements OnInit {
     enableSearch(){
       this.config.search=true;
     }
+
+
+    showHideAddButton()
+    {
+       if (document.getElementById("addButtonForBranch").style.display == "none" ) {
+           document.getElementById("addButtonForBranch").style.display="";
+    
+       } else {
+          document.getElementById("addButtonForBranch").style.display="none";
+     }
+         
+    }
+
+    addComponent(){
+      var comp = this._cfr.resolveComponentFactory(BranchComponent);
+      var cityComponent = this.container.createComponent(comp);
+      cityComponent.instance._ref = cityComponent;
+  }
+
 }

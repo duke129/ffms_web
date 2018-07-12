@@ -32,6 +32,7 @@ import { CitymanagementComponent } from '../../citymanagement/citymanagement.com
 import { BranchmanagementComponent } from '../../branchmanagement/branchmanagement.component';
 import { AreamanagementComponent } from '../../areamanagement/areamanagement.component';
 
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -136,7 +137,8 @@ import {
   CitymanagementComponent,
   BranchmanagementComponent,
   AreamanagementComponent
-  ]
+  ],
+  entryComponents: [CityComponent,BranchComponent,AreaComponent]
 })
 
 export class AdminLayoutModule {}

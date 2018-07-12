@@ -1,18 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Injectable } from '@angular/core';
 import { BranchDto } from "./branchDto";
 import { Http, Response } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'; 
+import { BranchmanagementComponent } from '../branchmanagement/branchmanagement.component';
 
 @Component({
   selector: 'app-branch',
   templateUrl: './branch.component.html',
-  styleUrls: ['./branch.component.scss']
+  styleUrls: ['./branch.component.scss'],
+  providers: [ BranchmanagementComponent ],
 })
+
+@Injectable()
 export class BranchComponent implements OnInit {
 
+  _ref: any;
+  
   public branchModel=new BranchDto();
-  constructor(private http:Http) { }
+  constructor(private http:Http,public branchmanagementComponent:BranchmanagementComponent) { }
 
   ngOnInit() {
     this.branchModel;
@@ -64,5 +70,9 @@ export class BranchComponent implements OnInit {
        .post(`http://localhost:8081/location/branch/save`,branchModel);
       }
     
-      
+     
+      closeAddBranchForm(){
+        this._ref.destroy();
+        this.branchmanagementComponent.showHideAddButton();
+      }
 }
