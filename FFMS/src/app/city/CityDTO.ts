@@ -1,5 +1,8 @@
-export class CityDTO {
+export class CityDto {
+    cityId:string;
     cityName:string;
-    statusBean:string;
-    cityState:string;
+    statusId:string;
+	code:string;
+    state:string;
+    status:string;
 }

@@ -10,8 +10,7 @@
 
                 <nav>
                     <a routerLink="/add-branchManagement" routerLinkActive="active" title="Add New Branch" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
-                    <!-- <a *ngIf="!isadd" (click)="addclicked(1)" title="Add New City" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a> -->
-                    <!-- <a *ngIf="isadd" (click)="addclicked(0)" title="Add New City" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">keyboard_backspace</i></a> -->
+
                 </nav>
 
 
@@ -25,21 +24,15 @@
                 </data-table-column> -->
 
                 <data-table-column [property]="'branchName'" [header]="'Name'" [sortable]="true" [resizable]="true">
-                    <!-- <ng-template #dataTableCell let-item="item"> -->
-                    <!-- <a (click)="getBranchDetails(item)" style="color: #003d79;cursor: pointer;text-decoration: underline;" role="button">{{item.branchName}}</a> -->
-                    <!-- <span (click)="getBranchDetails(item)" style="color: #003d79" (rowClick)="onRowClick()">{{item.branchName}} </span> -->
-                    <!-- </ng-template> -->
                 </data-table-column>
-                <data-table-column [property]="'branchCode'" header="Code" [sortable]="true" [resizable]="true">
+                <data-table-column [property]="'code'" header="Code" [sortable]="true" [resizable]="true">
                 </data-table-column>
-                <data-table-column [property]="'branchCity'" header="City" [sortable]="true" [resizable]="true">
+                <data-table-column [property]="'cityName'" header="City" [sortable]="true" [resizable]="true">
                 </data-table-column>
 
-                <data-table-column [property]="'branchState'" header="State" [sortable]="true" [resizable]="true">
+                <data-table-column [property]="'state'" header="State" [sortable]="true" [resizable]="true">
                 </data-table-column>
-
-
-                <data-table-column [property]="'branchStatus'" header="Status" [sortable]="true" [resizable]="true">
+                <data-table-column [property]="'status'" header="Status" [sortable]="true" [resizable]="true">
                 </data-table-column>
 
             </data-table>
@@ -67,34 +60,35 @@
                         <div class="col-4">
                             <div class="row">
                                 <div class="col-4">
-                                    <label class="customLabel">Id</label>
+                                    <label class="customLabel">BranchName</label>
 
                                 </div>
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
 
                                     <div *ngIf="!isEditable">
-                                        <span>{{branchDetails?.idBranch}}</span>
+                                        <span>{{branchDetails?.branchName}}</span>
                                     </div>
                                     <div *ngIf="isEditable">
-                                        <input [(ngModel)]="selectedBranch.idBranch " type="text " class="form-control " id="cityname " placeholder=" " readonly>
+                                        <input [(ngModel)]="selectedBranch.branchName " type="text " class="form-control " id="branchname " placeholder=" Enter Branch Name">
                                     </div>
 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-4">
-                                    <label class="customLabel">Name</label>
+                                    <label class="customLabel">Code</label>
 
                                 </div>
                                 <div class="col-1">:</div>
                                 <div class="col-6" style="white-space: wrap; ">
                                     <!-- <span>{{branchDetails?.branchName}}</span> -->
                                     <div *ngIf="!isEditable">
-                                        <span>{{branchDetails?.branchName}}</span>
+                                        <span>{{branchDetails?.code}}</span>
                                     </div>
                                     <div *ngIf="isEditable">
-                                        <input [(ngModel)]="selectedBranch.branchName " type="text " class="form-control " id="cityname " placeholder="Enter City Name ">
+                                        <input [(ngModel)]="selectedBranch.code " type="text " class="form-control " id="code
+                                         " placeholder="Enter Branch Code">
                                     </div>
                                 </div>
 
@@ -109,7 +103,7 @@
                                 <div class="col-6" style="white-space: wrap; ">
 
                                     <div *ngIf="!isEditable">
-                                        <span>{{selectedBranch?.branchCity}}</span>
+                                        <span>{{selectedBranch?.cityName}}</span>
                                     </div>
                                     <div *ngIf="isEditable">
                                         <!-- <input [(ngModel)]="selectedBranch.branchCity " type="text " class="form-control " id="cityname " placeholder="Enter City Name "> -->
@@ -131,12 +125,12 @@
                                 <div class="col-6" style="white-space: wrap; ">
 
                                     <div *ngIf="!isEditable">
-                                        <span>{{branchDetails?.branchStatus}}</span>
+                                        <span>{{branchDetails?.status}}</span>
                                     </div>
                                     <div *ngIf="isEditable">
                                         <!-- selectedBranch.branchStatus -->
                                         <!-- <input [(ngModel)]="selectedBranch.branchStatus " type="text " class="form-control " id="cityname " placeholder="Enter City Name "> -->
-                                        <ngx-select-dropdown [config]="config" [options]="branchstatusforselection" [(value)]="branchDetails.branchStatus" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
+                                        <ngx-select-dropdown [config]="config" [options]="branchstatusforselection" [(value)]="branchDetails.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
                                     </div>
                                     <!-- <span>{{branchDetails?.branchStatus}}</span> -->
 

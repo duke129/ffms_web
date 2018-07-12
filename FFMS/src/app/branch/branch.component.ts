@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Branch } from "./branchModel";
-
+import { BranchDto } from "./branchDto";
 import { Http, Response } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'; 
-import { City } from '../branchmanagement/city'
 
 @Component({
   selector: 'app-branch',
@@ -13,7 +11,7 @@ import { City } from '../branchmanagement/city'
 })
 export class BranchComponent implements OnInit {
 
-  public branchModel=new Branch();
+  public branchModel=new BranchDto();
   constructor(private http:Http) { }
 
   ngOnInit() {
@@ -44,15 +42,15 @@ export class BranchComponent implements OnInit {
       console.log("Branch Json value taken from UI::"+JSON.stringify(this.branchModel))
 
       this.branchModel.branchName;
-      this.branchModel.branchCity
-      this.branchModel.branchDescription
-      this.branchModel.branchStatus
+      this.branchModel.cityId
+      this.branchModel.description
+      this.branchModel.status
       console.log("Branch value is :::"+JSON.stringify(this.branchModel));
       this.createBranch(this.branchModel);
 
     }
 
-    createBranch(branchModel:Branch)
+    createBranch(branchModel:BranchDto)
     {
       alert("create branch method called"+this.branchModel);
       this.saveBranch(branchModel).subscribe(result => {
@@ -61,7 +59,7 @@ export class BranchComponent implements OnInit {
     }
  
  
-    saveBranch(branchModel:Branch) : Observable<Response>{
+    saveBranch(branchModel:BranchDto) : Observable<Response>{
         return this.http
        .post(`http://localhost:8081/location/branch/save`,branchModel);
       }

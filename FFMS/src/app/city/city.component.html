@@ -10,13 +10,13 @@
     </div>
     <div class=row style="padding-top: 11px">
         <div class="col-md-8"><label for="City Name"><b> Name</b></label>
-            <input [(ngModel)]="city.cityName" type="text" class="form-control" id="cityname" placeholder="Enter City Name">
+            <input [(ngModel)]="cityDto.cityName" type="text" class="form-control" id="cityname" placeholder="Enter City Name">
         </div>
     </div>
 
     <div class=row style="padding-top: 11px">
         <div class="col-md-8"><label for="citycode"><b> Code</b></label>
-            <input [(ngModel)]="city.cityCode" type="text" class="form-control" id="citycode" placeholder="Enter City Code">
+            <input [(ngModel)]="cityDto.code" type="text" class="form-control" id="citycode" placeholder="Enter City Code">
         </div>
     </div>
 
@@ -27,7 +27,7 @@
     </div>
     <div class=row style="padding-top: 11px">
         <div class="col-md-8"><label style="font-weight: bold" for="cityStatus">Status</label>
-            <ngx-select-dropdown [config]="config" [options]="cityStatus" [(value)]="city.cityStatus" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
+            <ngx-select-dropdown [config]="config" [options]="cityStatus" [(value)]="cityDto.statusId" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
         </div>
     </div>
 

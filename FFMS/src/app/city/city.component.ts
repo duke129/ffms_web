@@ -1,7 +1,6 @@
 import { Component, OnInit, InjectionToken, Inject } from '@angular/core';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
-import { cityModel } from './cityModel'
-import { CityDTO } from './CityDTO'
+import { CityDto } from './CityDTO'
 import { CityModel } from '../citymanagement/cityModel';
 import { CitymanagementComponent } from '../citymanagement/citymanagement.component';
 import { Injectable } from '@angular/core';
@@ -23,8 +22,8 @@ import { Subscription } from 'rxjs/Subscription';
 @Injectable()
 export class CityComponent implements OnInit {
 
-  public city=new CityModel();
-  public cityDto=new CityDTO();
+ // public city=new CityModel();
+  public cityDto=new CityDto();
 
   showId:boolean;
 
@@ -39,7 +38,7 @@ export class CityComponent implements OnInit {
    }
 
   ngOnInit() {
-  this.city;
+  this.cityDto    ;
   }
 
   config = {
@@ -67,7 +66,7 @@ export class CityComponent implements OnInit {
     selectedstatus = ['select stautus'];
 
     selectionChanged(e){
-console.log(this.selectedOptions[0].idCity);
+    console.log(this.selectedOptions[0].idCity);
     }
 
      onclick(){
@@ -80,25 +79,24 @@ console.log(this.selectedOptions[0].idCity);
     onsubmitAddNewCity(){
       
       console.log("Outside the result block citylist in array for dropllist ::"+this.citymanagementComponent.citiesList);
-      this.city.cityName;
-      //this.city.cityDescription;
-      this.city.cityState;
-      this.city.cityStatus;
-      alert("city value is :::"+JSON.stringify(this.city));
-      this.createCity(this.city);
+      this.cityDto.cityName;
+      this.cityDto.state;
+      this.cityDto.statusId;
+      alert("city value is :::"+JSON.stringify(this.cityDto));
+      this.createCity(this.cityDto);
 
     }
 
-    createCity(city : CityModel)
+    createCity(city : CityDto)
     {
-      alert("create city method called"+this.city);
+      alert("create city method called"+city);
       this.saveCity(city).subscribe(result => {
       });
       
     }
  
  
-    saveCity(city : CityModel) : Observable<Response>{
+    saveCity(city : CityDto) : Observable<Response>{
         return this.http
        .post(`http://localhost:8081/location/city/save`,city);
       }
@@ -109,13 +107,5 @@ console.log(this.selectedOptions[0].idCity);
         console.log("Outside the result block citylist in array for dropllist ::"+this.citymanagementComponent.citiesList);
       }
 
-      onClickFieldValueOfForm(){
-       // alert("clear field value **")
-        this.city.cityName=null;
-        this.city.cityCode=null;
-        this.city.cityId=null;
-        this.city.cityState=null;
-       // this.city.cityStatus='';
-      }
-    
+      onClickFieldValueOfForm(){}
 }

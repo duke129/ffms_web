@@ -13,11 +13,11 @@
                 </data-table-column> -->
                 <data-table-column [property]="'areaName'" [header]="'Name'" [sortable]="true" [resizable]="true">
                 </data-table-column>
-                <data-table-column [property]=" 'areaCode' " header="Code " [sortable]="true " [resizable]="true ">
+                <data-table-column [property]=" 'code' " header="Code " [sortable]="true " [resizable]="true ">
                 </data-table-column>
                 <data-table-column [property]=" 'branchName' " header="Branch " [sortable]="true " [resizable]="true ">
                 </data-table-column>
-                <data-table-column [property]=" 'areaCity' " header="City " [sortable]="true " [resizable]="true ">
+                <data-table-column [property]=" 'cityName' " header="City " [sortable]="true " [resizable]="true ">
                 </data-table-column>
                 <data-table-column [property]=" 'status' " header="Status " [sortable]="true " [resizable]="true ">
                 </data-table-column>
@@ -48,24 +48,7 @@
                 <mat-card-content>
                     <div class="row ">
                         <div class="col-4 ">
-                            <div class="row ">
-                                <div class="col-4 ">
-                                    <label class="customLabel ">Id</label>
-                                </div>
-                                <div class="col-1 ">:</div>
-                                <div class="col-6 " style="white-space: wrap; ">
-                                    <!-- <span>{{areaDetails?.areaId}}</span> -->
 
-                                    <div *ngIf="!isEditable">
-                                        <span>{{areaDetails?.areaId}}</span>
-                                    </div>
-                                    <div *ngIf="isEditable">
-                                        <input [(ngModel)]="selectedArea.areaId" type="text " class="form-control " id="cityname " placeholder=" " readonly>
-                                    </div>
-
-                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice ">--</span> -->
-                                </div>
-                            </div>
                             <div class="row ">
                                 <div class="col-4 ">
                                     <label class="customLabel ">Name</label>
@@ -97,7 +80,7 @@
                                         <span>{{areaDetails?.branchName}}</span>
                                     </div>
                                     <div *ngIf="isEditable">
-                                        <input [(ngModel)]="selectedArea.areaBranch" type="text " class="form-control " id="cityname " placeholder=" ">
+                                        <input [(ngModel)]="selectedArea.branchName" type="text " class="form-control " id="cityname " placeholder=" ">
                                     </div>
                                     <!-- <span>{{areaDetails?.branchName}}</span> -->
                                 </div>
@@ -136,7 +119,7 @@
                                     <div *ngIf="isEditable">
                                         <!-- [(value)]="selectedArea.areaStatus" -->
                                         <!-- <input [(ngModel)]="selectedArea.areaStatus" type="text " class="form-control " id="cityname " placeholder=" "> -->
-                                        <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="selectedArea.areaStatus" [multiple]=" false " (click)="disableSearch() "></ngx-select-dropdown>
+                                        <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="selectedArea.status" [multiple]=" false " (click)="disableSearch() "></ngx-select-dropdown>
                                     </div>
 
                                 </div>
@@ -150,10 +133,10 @@
                                 <div class="col-6 " style="white-space: wrap; ">
 
                                     <div *ngIf="!isEditable ">
-                                        <span>{{areaDetails?.areaName}}</span>
+                                        <span>{{areaDetails?.code}}</span>
                                     </div>
                                     <div *ngIf="isEditable ">
-                                        <input [(ngModel)]="selectedArea.areaName " type="text " class="form-control " id="cityname " placeholder=" ">
+                                        <input [(ngModel)]="selectedArea.code " type="text " class="form-control " id="cityname " placeholder=" ">
                                     </div>
 
 
@@ -170,10 +153,10 @@
                                     <!-- <span>{{branchDetails?.branchCity}}</span> -->
 
                                     <div *ngIf="!isEditable ">
-                                        <span>{{branchDetails?.branchCity}}</span>
+                                        <span>{{areaDetails?.cityName}}</span>
                                     </div>
                                     <div *ngIf="isEditable ">
-                                        <input [(ngModel)]="selectedArea.areaCity " type="text " class="form-control " id="cityname " placeholder=" ">
+                                        <input [(ngModel)]="selectedArea.cityName " type="text " class="form-control " id="cityname " placeholder=" ">
                                     </div>
 
                                 </div>

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTableResource } from '../data-table';
-//import persons  from './customer-data'
-//import persons  from './customer-data';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map'; 
 import { Injectable } from '@angular/core';
@@ -10,10 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import  { TicketViewModel } from '../ticket-management/ticket';
-import { Branch } from '../branch/branchModel';
-import { cityModel } from '../city/cityModel';
-import {City} from './city';
-import { StatusBean } from "../branchmanagement/statusBean";
+import { BranchDto } from '../branch/branchDto';
 
 
 @Component({
@@ -24,23 +19,17 @@ import { StatusBean } from "../branchmanagement/statusBean";
 export class BranchmanagementComponent implements OnInit {
   isEditable=false;
   showBranchCard=false;
-  public tickets : any;
   public index:number;
-  public city=new City();
-  public statusBean=new StatusBean();
-  public branch:any;
-  observableBranch: Observable<Branch[]>
+  public branchDto: BranchDto[];
+  observableBranch: Observable<BranchDto[]>
   itemResource = new DataTableResource([]); 
   errorMessage: String;
     items = [];
     itemCount : number;
     selectedpersonname= '';
-    branchDetails=Branch;
-     public citymodel=new cityModel();
+    branchDetails:BranchDto;
 
-
-
-    constructor(private http: Http) {
+ constructor(private http: Http) {
       
     }
 
@@ -69,7 +58,7 @@ export class BranchmanagementComponent implements OnInit {
 
 
 
-      getBranchWithObservable(): Observable<Branch[]> {
+      getBranchWithObservable(): Observable<BranchDto[]> {
         return this.http.get('http://localhost:8081/location/branch/all')
 	        .map(this.extractData)
 	        .catch(this.handleErrorObservable);
@@ -100,16 +89,19 @@ export class BranchmanagementComponent implements OnInit {
     
     reloadItems(params) {
       let i;
-      let cityname=this.citymodel.cityName;
       this.observableBranch.subscribe(
                 result => { 
-                  this.branch = result ;
+                  this.branchDto = result ;
                   this.itemCount = result.length;
                   for(i=0;i<result.length;i++){
-                    this.branch[i].branchCity=result[i].city.cityName;
-                    this.branch[i].branchStatus=result[i].statusBean.statusDescription;
+                    if(result[i].statusId=='1'){
+                      this.branchDto[i].status="Enable";
+                    }else{
+                      this.branchDto[i].status="Disable";
+                    }
+                   
                   }
-                      new DataTableResource(this.branch).query(params).then(items => this.items = items);
+                      new DataTableResource(this.branchDto).query(params).then(items => this.items = items);
                 });
     }
    
@@ -119,11 +111,11 @@ export class BranchmanagementComponent implements OnInit {
       this.showBranchCard=true;
       this.selectedpersonname = rowEvent.row.item.name;
       this.branchDetails=rowEvent.row.item;
-      this.selectedBranch=new Branch();
-      this.selectedBranch.idBranch=this.branchDetails.idBranch ;
+      this.selectedBranch=new BranchDto();
+      this.selectedBranch.idBranch=this.branchDetails.branchId ;
        this.selectedBranch.branchName=this.branchDetails.branchName;
-       this.selectedBranch.branchStatus=this.branchDetails.statusBean.statusDescription;
-       this.selectedBranch.branchCity=this.branchDetails.city.cityName;
+       this.selectedBranch.status=this.branchDetails.status;
+       this.selectedBranch.cityName=this.branchDetails.cityName;
         console.log('Clicked: ' + rowEvent.row.item);
     }
 
@@ -143,24 +135,24 @@ export class BranchmanagementComponent implements OnInit {
   }
   
   updateClicked(){
-      var updateBranch:Branch=new Branch();
-      updateBranch.idBranch=this.selectedBranch.idBranch;
+      var updateBranch=new BranchDto();
+      updateBranch.branchId=this.selectedBranch.branchId;
       updateBranch.branchName=this.selectedBranch.branchName;
-      updateBranch.city={"cityName":this.selectedBranch.branchCity};
-      updateBranch.statusBean={"statusDescription":this.selectedBranch.branchStatus};
-      updateBranch.branchCode=this.selectedBranch.branchCode;
+      updateBranch.cityName=this.selectedBranch.cityName;
+      updateBranch.status=this.selectedBranch.status;
+      updateBranch.code=this.selectedBranch.code;
       alert("Branch updation details is ::"+JSON.stringify(updateBranch));
       this.createBranch(updateBranch);
   }
 
-    createBranch(updateBranch:Branch)
+    createBranch(updateBranch:BranchDto)
     {
     this.saveBranch(updateBranch).subscribe(result => {
 
     });
     alert("Branch details update successfully");
   }
-  saveBranch(updateBranch:Branch) : Observable<Response>{
+  saveBranch(updateBranch:BranchDto) : Observable<Response>{
       return this.http
      .post(`http://localhost:8081/location/branch/save`,updateBranch);
     }

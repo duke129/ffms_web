@@ -3,19 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-//import { DataTableModule } from 'angular5-data-table';
-//import { DataTableModule } from 'angular-4-data-table/src/index';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
-
-
-
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-
 import { AppComponent } from './app.component';
-
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';
@@ -26,10 +18,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-//import { CustomerManagementComponent } from './customer-management/customer-management.component';
 import { LoginComponent } from './login/login.component';
-//import { CreateticketComponent } from './createticket/createticket.component';
-//import { TicketManagementComponent } from './ticket-management/ticket-management.component';
+
 
 @NgModule({
   imports: [
@@ -50,9 +40,6 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     LoginComponent,
     AdminLayoutComponent,
-    //CreateticketComponent,
-    //TicketManagementComponent,
-   // CustomerManagementComponent
   
   ],
   providers: [],

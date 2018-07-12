@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Area } from "./areaModel";
+import { AreaDto } from "./areaDto";
 import {FormControl, Validators} from '@angular/forms';
 
 import { Http, Response } from '@angular/http';
@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 })
 export class AreaComponent implements OnInit {
 
-  public areaModel=new Area();
+  public areaModel=new AreaDto();
 
   constructor(private http:Http) { }
 
@@ -37,13 +37,6 @@ export class AreaComponent implements OnInit {
 
     areaControl = new FormControl('', [Validators.required]);
 
-    // branches = [
-    //   {value: 'RajaJi Nagar-1', viewValue: 'RajaJi Nagar'},
-    //   {value: 'Kormangla-2', viewValue: 'Kormangla'},
-    //   {value: 'Jaya nagar-3', viewValue: 'Jaya nagar'}
-    // ];
-
-
     branches=[{name: 'RajaJi Nagar', sound: 'RajaJi Nagar'},
     {name: 'Kormangla', sound: 'Kormangla'},
     {name: 'Jaya nagar', sound: 'Jaya nagar'}
@@ -63,20 +56,18 @@ export class AreaComponent implements OnInit {
 
     onsubmitAddNewArea(){
       alert("Branch Json value taken from UI::"+JSON.stringify(this.areaModel));
-
-
       alert("Branch Json value taken from UI::"+JSON.stringify(this.areaModel));
       this.areaModel.areaName;
-      this.areaModel.areaCode;
-      this.areaModel.areaDescription;
-      this.areaModel.areaBranch;
-      this.areaModel.areaStatus;
+      this.areaModel.code;
+      this.areaModel.description;
+      this.areaModel.branchId;
+      this.areaModel.statusId;
       alert("city value is :::"+JSON.stringify(this.areaModel));
       this.createCity(this.areaModel);
 
     }
 
-    createCity(areaModel:Area)
+    createCity(areaModel:AreaDto)
     {
       alert("create city method called"+this.areaModel);
       this.saveCity(areaModel).subscribe(result => {
@@ -85,7 +76,7 @@ export class AreaComponent implements OnInit {
     }
  
  
-    saveCity(areaModel:Area) : Observable<Response>{
+    saveCity(areaModel:AreaDto) : Observable<Response>{
         return this.http
        .post(`http://localhost:8081/location/area/save`,areaModel);
       }

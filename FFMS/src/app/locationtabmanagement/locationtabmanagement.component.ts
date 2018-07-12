@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {ConfigService} from './config.service';
+import { CitymanagementComponent } from '../citymanagement/citymanagement.component';
+import { BranchmanagementComponent }  from '../branchmanagement/branchmanagement.component';
+import { AreamanagementComponent } from '../areamanagement/areamanagement.component'
 
 @Component({
   selector: 'app-locationtabmanagement',
@@ -15,7 +18,6 @@ export class LocationtabmanagementComponent implements OnInit {
    }
 
   ngOnInit() {
-   // this.showCityView = true;
   }
 
   getView() {

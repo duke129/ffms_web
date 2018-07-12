@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import  { TicketViewModel } from '../ticket-management/ticket';
-import { Area } from '../area/areaModel';
+import { AreaDto } from '../area/areaDto';
 
 
 @Component({
@@ -20,8 +20,8 @@ import { Area } from '../area/areaModel';
 })
 export class AreamanagementComponent implements OnInit {
   public tickets : any;
-  public area:any;
-  observableArea: Observable<Area[]>
+  public areaDto: AreaDto[];
+  observableArea: Observable<AreaDto[]>
   itemResource = new DataTableResource([]); 
   errorMessage: String;
     items = [];
@@ -32,7 +32,7 @@ export class AreamanagementComponent implements OnInit {
     
     showAreaCard=false;
 
-    areaDetails:Area;
+    areaDetails:AreaDto;
 
     constructor(private http: Http) {
       
@@ -64,16 +64,11 @@ export class AreamanagementComponent implements OnInit {
 
 
 
-      getAreaWithObservable(): Observable<Area[]> {
+      getAreaWithObservable(): Observable<AreaDto[]> {
         return this.http.get('http://localhost:8081/location/area/all')
 	        .map(this.extractData)
 	        .catch(this.handleErrorObservable);
     }
-    // getTicketsWithPromise(): Promise<TicketViewModel[]> {
-    //     return this.http.get('http://10.16.35.96:8081/ticket/list-view').toPromise()
-	  //   .then(this.extractData)
-	  //   .catch(this.handleErrorPromise);
-    // }
     private extractData(res: Response) {
     let area = res.json();
     console.log("Area deatails comes from server is :::"+JSON.stringify(area));
@@ -87,43 +82,42 @@ export class AreamanagementComponent implements OnInit {
 	console.error(error.message || error);
 	return Promise.reject(error.message || error);
     }	
-
-   // itemResource = new DataTableResource(this.books);
-    
-    
+     
     reloadItems(params) {
-      // alert(JSON.stringify(params));
       this.observableArea.subscribe(
+        
                 result => { 
-                
-                  this.area = result ;
+                  let num;
+                this.areaDto = result ;
                   this.itemCount = result.length;
-
-                  // alert("hi"+this.books);
-                      new DataTableResource(this.area).query(params).then(items => this.items = items);
+                  for(num=0;num<result.length;num++){
+                    console.log("city status in city dto ::"+result[num].status);
+                    if(result[num].statusId=='1'){
+                      this.areaDto[num].status="Enable";
+                    }else{
+                     this. areaDto[num].status="Disable";
+                    }
+                    console.log("city status in city dsting::"+this.areaDto[num].status);
+                   }
+                      new DataTableResource(this.areaDto).query(params).then(items => this.items = items);
                 });
-
-
-
-      // alert("assets :: "+this.books);
       
     }
 
-public selectedArea=new Area();
+public selectedArea=new AreaDto();
     rowClick(rowEvent) {
       this.isEditable=false;
       this.showAreaCard=true;
       this.selectedpersonname = rowEvent.row.item.name;
       this.areaDetails=rowEvent.row.item;
-     // alert("selected row details for area is ::::::::"+JSON.stringify(this.areaDetails));
-      this.selectedArea=new Area();
+      this.selectedArea=new AreaDto();
       this.selectedArea.areaId=this.areaDetails.areaId;
       this.selectedArea.areaName=this.areaDetails.areaName;
-      this.selectedArea.areaCode=this.areaDetails.areaCode;
-      this.selectedArea.areaBranch=this.areaDetails.branchName;
-      this.selectedArea.areaCity=this.areaDetails.areaCity;
-      this.selectedArea.areaStatus=this.areaDetails.status;
-      alert("selected area details is :::"+JSON.stringify(this.selectedArea));
+      this.selectedArea.code=this.areaDetails.code;
+      this.selectedArea.branchName=this.areaDetails.branchName;
+      this.selectedArea.cityName=this.areaDetails.cityName;
+      this.selectedArea.status=this.areaDetails.status;
+     // alert("selected area details is :::"+JSON.stringify(this.selectedArea));
       
         console.log('Clicked: ' + rowEvent.row.item);
     }
@@ -166,12 +160,12 @@ public selectedArea=new Area();
     }
 
     updateClicked(){
-      let updateArea=new Area();
+      let updateArea=new AreaDto();
       updateArea.areaId=this.selectedArea.areaId;
       updateArea.areaName=this.selectedArea.areaName;
-      updateArea.areaCode=this.selectedArea.areaCode;
-      updateArea.areaBranch=this.selectedArea.areaBranch;
-     updateArea.areaStatus=this.selectedArea.areaStatus;
+      updateArea.code=this.selectedArea.code;
+      updateArea.branchName=this.selectedArea.branchName;
+     updateArea.status=this.selectedArea.status;
      alert("Area details that going to be save into databases:::"+JSON.stringify(updateArea));
 
      this.createArea(updateArea);
@@ -180,7 +174,7 @@ public selectedArea=new Area();
 
 
 
-    createArea(areaModel:Area)
+    createArea(areaModel:AreaDto)
     {
       
       this.saveArea(areaModel).subscribe(result => {
@@ -189,7 +183,7 @@ public selectedArea=new Area();
     }
  
  
-    saveArea(areaModel:Area) : Observable<Response>{
+    saveArea(areaModel:AreaDto) : Observable<Response>{
         return this.http
        .post(`http://localhost:8081/location/area/save`,areaModel);
       }

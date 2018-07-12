@@ -10,7 +10,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { ReportsComponent } from '../../reports/reports.component';
 import { UserComponent } from '../../user/user.component';
-import { LocationComponent } from '../../location/location.component';
+import { LocationtabmanagementComponent } from '../../locationtabmanagement/locationtabmanagement.component';
 import { AssetComponent } from '../../asset/asset.component';
 import { TicketComponent } from '../../ticket/ticket.component';
 import { CustomerManagementComponent } from '../../customer-management/customer-management.component';
@@ -72,7 +72,7 @@ export const AdminLayoutRoutes: Routes = [
 //     { path: 'upgrade',        component: UpgradeComponent },
     { path: 'report-management', component: ReportsComponent },
     { path: 'user-management', component: UserComponent },
-    { path: 'location-management', component: LocationComponent },
+    { path: 'location-management', component: LocationtabmanagementComponent },
     { path: 'asset-management', component: AssetComponent },
    { path: 'ticket-management', component:TicketManagementComponent },
    { path: 'customer-management', component: CustomerManagementComponent },

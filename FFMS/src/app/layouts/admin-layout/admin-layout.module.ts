@@ -6,8 +6,6 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { DataTableModule } from '../../data-table';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
-
-
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
@@ -19,7 +17,6 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import {AddTicektComponent} from '../../add-ticekt/add-ticekt.component';
 import { ReportsComponent } from '../../reports/reports.component';
-import { LocationComponent } from '../../location/location.component';
 import { AssetComponent } from '../../asset/asset.component';
 import { UserComponent } from '../../user/user.component';
 import { TicketComponent } from '../../ticket/ticket.component';
@@ -27,6 +24,13 @@ import { CustomerManagementComponent } from '../../customer-management/customer-
 import { TicketManagementComponent } from '../../ticket-management/ticket-management.component';
 import {CreateticketComponent} from '../../createticket/createticket.component';
 import { AnalyticsComponent } from '../../analytics/analytics.component';
+import { LocationtabmanagementComponent } from '../../locationtabmanagement/locationtabmanagement.component'
+import { AreaComponent } from '../../area/area.component';
+import { BranchComponent } from '../../branch/branch.component';
+import { CityComponent } from '../../city/city.component';
+import { CitymanagementComponent } from '../../citymanagement/citymanagement.component';
+import { BranchmanagementComponent } from '../../branchmanagement/branchmanagement.component';
+import { AreamanagementComponent } from '../../areamanagement/areamanagement.component';
 
 import {
   MatAutocompleteModule,
@@ -117,7 +121,7 @@ import {
     NotificationsComponent,
     UpgradeComponent,
     ReportsComponent,
-    LocationComponent,
+    LocationtabmanagementComponent,
     AssetComponent,
     UserComponent,
     TicketComponent,
@@ -125,7 +129,13 @@ import {
    AddTicektComponent,
    AnalyticsComponent,
   TicketManagementComponent,
-  CreateticketComponent
+  CreateticketComponent,
+  AreaComponent,
+  BranchComponent,
+  CityComponent,
+  CitymanagementComponent,
+  BranchmanagementComponent,
+  AreamanagementComponent
   ]
 })
 

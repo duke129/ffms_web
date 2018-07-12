@@ -27,11 +27,11 @@
 
                 </data-table-column>
 
-                <data-table-column [property]="'cityCode'" header="Code" [sortable]="true" [resizable]="true">
+                <data-table-column [property]="'code'" header="Code" [sortable]="true" [resizable]="true">
                 </data-table-column>
-                <data-table-column [property]="'cityState'" header="State" [sortable]="true" [resizable]="true">
+                <data-table-column [property]="'state'" header="State" [sortable]="true" [resizable]="true">
                 </data-table-column>
-                <data-table-column [property]="'statusBean'" header="Status" [sortable]="true" [resizable]="true">
+                <data-table-column [property]="'status'" header="Status" [sortable]="true" [resizable]="true">
                 </data-table-column>
 
 
@@ -64,37 +64,33 @@
                         <div class="col-4 ">
                             <div class="row ">
                                 <div class="col-4 ">
-                                    <label class="customLabel ">Id</label>
+                                    <label class="customLabel ">Name</label>
 
                                 </div>
                                 <div class="col-1 ">:</div>
                                 <div class="col-6 " style="white-space: wrap; ">
                                     <div *ngIf="isEdit==0 ">
-                                        <span>{{cityDetails?.idCity}}</span>
+                                        <span>{{cityDetails?.cityName}}</span>
                                     </div>
                                     <div *ngIf="isEdit==1 ">
-                                        <input [(ngModel)]="selectedcity.idCity " type="text " class="form-control " id="cityname " placeholder="Enter City Name " readonly>
+                                        <input [(ngModel)]="selectedcity.cityName " type="text " class="form-control " id="cityname " placeholder="Enter City Name ">
                                     </div>
-                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice ">--</span> -->
+
                                 </div>
                             </div>
                             <div class="row ">
                                 <div class="col-4 ">
-                                    <label class="customLabel " style="padding-top:8px">Name</label>
+                                    <label class="customLabel " style="padding-top:8px">Code</label>
 
                                 </div>
                                 <div class="col-1 " style="padding-top:8px">:</div>
                                 <div class="col-6 " style="white-space:wrap;padding-bottom:5px">
                                     <div *ngIf="isEdit==0 ">
-                                        <span>{{cityDetails?.cityName}}</span>
+                                        <span>{{cityDetails?.code}}</span>
                                     </div>
                                     <div *ngIf="isEdit==1 ">
-                                        <input [(ngModel)]="selectedcity.cityName " type="text " class="form-control " id="cityname " placeholder="Enter City Name " style="margin-bottom: 7px;">
+                                        <input [(ngModel)]="selectedcity.code " type="text " class="form-control " id="citycode " placeholder="Enter City Code " style="margin-bottom: 7px;">
                                     </div>
-
-                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice ">--</span>  -->
-
-
                                 </div>
                             </div>
 
@@ -103,64 +99,36 @@
                             <div class="row ">
                                 <div class="col-4 ">
                                     <label class="customLabel ">Status</label>
-
                                 </div>
                                 <div class="col-1 ">:</div>
                                 <div class="col-6 " style="white-space: wrap; ">
 
                                     <div *ngIf="isEdit==0 ">
-                                        <span>{{cityDetails?.statusBean}}</span>
+                                        <span>{{cityDetails?.status}}</span>
                                     </div>
                                     <div *ngIf="isEdit==1 ">
-                                        <!-- <input [(ngModel)]="cityDetails.statusBean " type="text " class="form-control " id="cityname " placeholder="Enter City Name "> -->
-                                        <ngx-select-dropdown [config]="config " [options]="cityStatus " [(value)]="selectedcity.cityStatus " [multiple]="false"></ngx-select-dropdown>
+                                        <ngx-select-dropdown [config]="config " [options]="cityStatus " [(value)]="selectedcity.status " [multiple]="false"></ngx-select-dropdown>
                                     </div>
                                 </div>
                             </div>
                             <div class="row ">
                                 <div class="col-4 ">
                                     <label class="customLabel ">State</label>
-
                                 </div>
                                 <div class="col-1 ">:</div>
                                 <div class="col-6 " style="white-space: wrap; ">
-                                    <span>{{cityDetails?.cityState}}</span>
-                                    <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice ">--</span> -->
+                                    <span>{{cityDetails?.state}}</span>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
-                    <!-- <div class="row ">
-                        <button type=" button " (click)="EditClicked() " class="btn btn-sm btn-success "> Edit </button>
-                    </div> -->
-
-
                     <div class="row ">
                         <button type=" button " style="margin-left: 890px" (click)="updateClicked() " class="btn btn-sm btn-success "> Update </button>
                     </div>
-
-
                 </mat-card-content>
-
-
-
-
             </mat-card>
-
         </div>
-
-
-
-
-
     </div>
-
-
-
-
 </div>
 
 <style>

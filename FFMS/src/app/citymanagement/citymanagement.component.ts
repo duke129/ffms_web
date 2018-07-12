@@ -8,8 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import  { TicketViewModel } from '../ticket-management/ticket';
-import { CityModel } from './cityModel'
-import { CityDTO } from '../city/CityDTO';
+import { CityDto } from '../city/CityDTO';
 import 'rxjs/add/operator/map'; 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -28,11 +27,9 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class CitymanagementComponent implements OnInit {
 
- // public isCollapsed = false;
 
-  public tickets : any;
-  public cityModel: CityModel[];
-  observableCities: Observable<CityModel[]>
+  public cityDto: CityDto[];
+  observableCities: Observable<CityDto[]>
   itemResource = new DataTableResource([]); 
   errorMessage: String;
   showCityCard=false;
@@ -40,11 +37,8 @@ export class CitymanagementComponent implements OnInit {
     items = [];
     itemCount : number;
     selectedpersonname= '';
-
-   public  citiesList= [];
-
-   cityDetails : CityModel;
-
+    public  citiesList= [];
+   cityDetails:CityDto;
    config = {
     displayKey:"cityName", //if objects array passed which key to be displayed defaults to cityName,
     //search:true, //enables the search plugin to search in the list
@@ -69,15 +63,15 @@ export class CitymanagementComponent implements OnInit {
     this.observableCities = this.getCitiesWithObservable();
     this.observableCities.subscribe(
               result => { 
-                this.cityModel=result;
+                this.cityDto=result;
                 for(num=0;num<result.length;num++){
-                  console.log("city status in city dto ::"+result[num].statusBean);
-                  if(result[num].statusBean=='1'){
-                    this.cityModel[num].cityStatus="Enable";
+                  console.log("city status in city dto ::"+result[num].statusId);
+                  if(result[num].statusId=='1'){
+                    this.cityDto[num].status="Enable";
                   }else{
-                   this. cityModel[num].cityStatus="Disable";
+                   this. cityDto[num].status="Disable";
                   }
-                  console.log("city status in city dsting::"+this.cityModel[num].cityStatus);
+                  console.log("city status in city dsting::"+this.cityDto[num].status);
                  }
               
               }
@@ -90,7 +84,7 @@ export class CitymanagementComponent implements OnInit {
 
      
 
-      getCitiesWithObservable(): Observable<CityModel[]> {
+      getCitiesWithObservable(): Observable<CityDto[]> {
         return this.http.get('http://localhost:8081/location/city/all')
 	        .map(this.extractData)
 	        .catch(this.handleErrorObservable);
@@ -99,12 +93,11 @@ export class CitymanagementComponent implements OnInit {
 
     private extractData(res: Response) {
     let cityModel = res.json();
-    
     console.log("City details is :::"+JSON.stringify(cityModel))
         return cityModel;
     }
 
-     convertServerCityModelIntoUICityModel(cityModel:CityModel):any {
+     convertServerCityModelIntoUICityModel(cityModel:CityDto):any {
 
       console.log("***************city model from server is ::: "+cityModel)
      
@@ -127,19 +120,19 @@ export class CitymanagementComponent implements OnInit {
       this.observableCities.subscribe(
                 result => { 
                 let num;
-                  this.cityModel = result ;
+                  this.cityDto = result ;
                   console.log("result is :::"+result);
                   this.itemCount = result.length;
                   for(num=0;num<result.length;num++){
-                    console.log("city status in city dto ::"+result[num].statusBean);
-                    if(result[num].statusBean=='1'){
-                      this.cityModel[num].statusBean="Enable";
+                    console.log("city status in city dto ::"+result[num].status);
+                    if(result[num].statusId=='1'){
+                      this.cityDto[num].status="Enable";
                     }else{
-                     this. cityModel[num].statusBean="Disable";
+                     this. cityDto[num].status="Disable";
                     }
-                    console.log("city status in city dsting::"+this.cityModel[num].cityStatus);
+                    console.log("city status in city dsting::"+this.cityDto[num].status);
                    }
-                      new DataTableResource(this.cityModel).query(params).then(items => this.items = items);
+                      new DataTableResource(this.cityDto).query(params).then(items => this.items = items);
                 });
       
     }
@@ -149,10 +142,10 @@ export class CitymanagementComponent implements OnInit {
       this.isEdit=0;
       this.showCityCard =  true;
       this.cityDetails = rowEvent.row.item;
-      this.selectedcity=new CityModel();
-      this.selectedcity.idCity=this.cityDetails.idCity ;
+      this.selectedcity=new CityDto();
+      this.selectedcity.idCity=this.cityDetails.cityId ;
        this.selectedcity.cityName=this.cityDetails.cityName;
-       this.selectedcity.statusBean=this.cityDetails.statusBean;
+       this.selectedcity.statusBean=this.cityDetails.status;
       
       this.selectedpersonname = rowEvent.row.item.name;
         console.log('Clicked: ' + rowEvent.row.item);
@@ -196,21 +189,21 @@ export class CitymanagementComponent implements OnInit {
   }
 
 selectedcity:any;
-updateCity=new CityModel();
+updateCity=new CityDto();
 
  updateClicked(){
   
-   let updateCity=new CityModel();
+   let updateCity=new CityDto();
    alert("cityid is selected"+this.selectedcity.idCity);
-   updateCity.idCity=this.selectedcity.idCity;
+   updateCity.cityId=this.selectedcity.idCity;
    updateCity.cityName=this.selectedcity.cityName;
-   updateCity.statusBean=this.selectedcity.statusBean;
+   updateCity.status=this.selectedcity.statusBean;
    alert("Updating data that going to be update is ::"+JSON.stringify(updateCity));
    this.createCity(updateCity);
   }
     
 
-    createCity(city : CityModel)
+    createCity(city :CityDto)
     {
       this.saveCity(city).subscribe(result => {
        
@@ -219,7 +212,7 @@ updateCity=new CityModel();
     }
  
  
-    saveCity(city : CityModel) : Observable<Response>{
+    saveCity(city : CityDto) : Observable<Response>{
         return this.http
        .post(`http://localhost:8081/location/city/save`,city);
        
