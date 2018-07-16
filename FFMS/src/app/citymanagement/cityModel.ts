@@ -4,6 +4,8 @@ export class CityModel{
     cityCode:string;
     statusBean:string;
     cityState:string;
+    cityStatus:string;
+    cityId:string;
     
 
 }

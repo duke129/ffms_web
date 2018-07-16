@@ -61,7 +61,7 @@ export class TicketManagementComponent implements OnInit {
 
 
   getTicketsWithObservable(): Observable<TicketViewModel[]> {
-    return this.http.get('http://localhost:8081/ticket/list-view')
+    return this.http.get('http://localhost:8081/ticket/list-view/-1')
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -157,8 +157,19 @@ export class TicketManagementComponent implements OnInit {
       result.forEach(element => {
 
         this.ticketDetails = element;
-        console.log("Ticketdetails result :: "+ JSON.stringify(this.ticketDetails));
-        this.openSnackBar("Success","");
+        
+        this.ticketDetails.activities.forEach(activity => {
+          console.log("activity css :: "+ JSON.stringify(activity));
+
+          if(activity.status != null && activity.status == 101)
+          {
+            activity.css = "active-step"
+            console.log("activity css :: "+ JSON.stringify(activity));
+          }
+
+        });
+        console.log("Ticketdetails result :: "+ JSON.stringify(this.ticketDetails.activities));
+        //this.openSnackBar("Success","");
 
       });
 

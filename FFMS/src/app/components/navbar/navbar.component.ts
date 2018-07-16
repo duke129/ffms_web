@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     dashBoardCounts:DashBoardCount[];
     observable: Observable<DashBoardCount[]>;
     newLeadCount : number;
-    serviceCount: number;
+    serviceCount: number = 0;
     totalCount : number;
     inProgressCount : number;
 
@@ -57,7 +57,7 @@ export class NavbarComponent implements OnInit {
 
      this.getDashBoardCounts().subscribe(result =>
         {
-            this.dashBoardCounts = result;
+            this.dashBoardCounts = result.data;
             
             this.dashBoardCounts.forEach(element => {
                 
@@ -69,9 +69,6 @@ export class NavbarComponent implements OnInit {
     
                 if(element.statusName == "in-progress")
                 this.inProgressCount = element.totalCounts;
-    
-                if(element.statusName == "total-tickets")
-                this.totalCount = element.totalCounts;
             });
     
         });
@@ -169,7 +166,7 @@ export class NavbarComponent implements OnInit {
       return "Add Ticket";
     }
 
-    getDashBoardCounts(): Observable<DashBoardCount[]> {
+    getDashBoardCounts(){
 
         return this.http.get('http://localhost:8081/ticket/dashboard-count')
 	        .map(res => res.json())
