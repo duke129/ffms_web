@@ -14,7 +14,7 @@
         </div>
         <div style="padding-bottom: 20px"></div>
 
-        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
+        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;" *ngIf="isshowTableView">
             <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
                 <!-- <data-table-column [property]="'areaId'" [header]="'Id'" [sortable]="true" [resizable]="true">
                 </data-table-column> -->
@@ -33,11 +33,6 @@
         <div>
             <mat-card *ngIf="showAreaCard ">
                 <mat-card-header>
-                    <!-- <a class="btn " style="background-color: #003d79; margin-left: 50%;width: 10%;height: 35px;" (click)="EditClicked()">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    </a>
-                    <a class="btn " style="background-color:red;width: 4%;height: 35px;" (click)="onClickCloseDetailsForm()">
-                        <i class=" fa fa-times-circle-o " aria-hidden="true " style="color: white;"></i></a> -->
 
                     <mat-card-title class="customLabel ">
                         <div style="right: 0;position: absolute;">

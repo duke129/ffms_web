@@ -17,6 +17,7 @@ import { BranchComponent } from '../branch/branch.component'
   templateUrl: './branchmanagement.component.html',
   styleUrls: ['./branchmanagement.component.scss']
 })
+
 export class BranchmanagementComponent implements OnInit {
 
   @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
@@ -31,6 +32,7 @@ export class BranchmanagementComponent implements OnInit {
     itemCount : number;
     selectedpersonname= '';
     branchDetails:BranchDto;
+    isShowBranchTableView=true;
 
  constructor(private http: Http,private _cfr: ComponentFactoryResolver) {
       
@@ -180,9 +182,11 @@ export class BranchmanagementComponent implements OnInit {
     }
 
     addComponent(){
+      this.isShowBranchTableView=false;
       var comp = this._cfr.resolveComponentFactory(BranchComponent);
       var cityComponent = this.container.createComponent(comp);
       cityComponent.instance._ref = cityComponent;
+     
   }
 
 }

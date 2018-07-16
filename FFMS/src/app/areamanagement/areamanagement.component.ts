@@ -25,12 +25,10 @@ export class AreamanagementComponent implements OnInit {
     items = [];
     itemCount : number;
     selectedpersonname= '';
-    
     isEditable=false;
-    
     showAreaCard=false;
-
     areaDetails:AreaDto;
+    isshowTableView=true;
 
     @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
    
@@ -202,6 +200,7 @@ public selectedArea=new AreaDto();
     }
 
     addComponent(){
+      this.isshowTableView=false;
       var comp = this._cfr.resolveComponentFactory(AreaComponent);
       var cityComponent = this.container.createComponent(comp);
       cityComponent.instance._ref = cityComponent;

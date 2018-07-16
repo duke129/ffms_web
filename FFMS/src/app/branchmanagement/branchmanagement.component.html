@@ -12,8 +12,7 @@
             <div #parent></div>
         </div>
         <div style="padding-bottom: 20px"></div>
-
-        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
+        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;" *ngIf="isShowBranchTableView">
             <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" [indexColumn]="false">
                 <!-- <data-table-column [property]="'idBranch'" [header]="'Id'" [sortable]="true" [resizable]="true">
                 </data-table-column> -->

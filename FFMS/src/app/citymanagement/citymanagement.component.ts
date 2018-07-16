@@ -49,6 +49,8 @@ export class CitymanagementComponent implements OnInit {
 
     @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
 
+    isShowCityTableView=true;
+
     constructor(private http: Http,private _cfr: ComponentFactoryResolver) {
       
     }
@@ -224,6 +226,7 @@ updateCity=new CityDto();
       }
      
       addComponent(){
+        this.isShowCityTableView=false;
         var comp = this._cfr.resolveComponentFactory(CityComponent);
         var cityComponent = this.container.createComponent(comp);
         cityComponent.instance._ref = cityComponent;

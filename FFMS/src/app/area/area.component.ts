@@ -88,6 +88,8 @@ export class AreaComponent implements OnInit {
       closeAddAreaForm(){
         this._ref.destroy();
         this.areamanagementComponent.showHideAddButtonForArea();
+        this.areamanagementComponent.isshowTableView=true;
+        
       }
 
 

@@ -9,7 +9,7 @@ import { BranchmanagementComponent } from '../branchmanagement/branchmanagement.
   selector: 'app-branch',
   templateUrl: './branch.component.html',
   styleUrls: ['./branch.component.scss'],
-  providers: [ BranchmanagementComponent ],
+ 
 })
 
 @Injectable()
@@ -74,5 +74,7 @@ export class BranchComponent implements OnInit {
       closeAddBranchForm(){
         this._ref.destroy();
         this.branchmanagementComponent.showHideAddButton();
+        this.branchmanagementComponent.isShowBranchTableView=true;
+
       }
 }

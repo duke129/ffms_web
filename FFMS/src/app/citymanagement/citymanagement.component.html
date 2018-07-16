@@ -12,7 +12,7 @@
         </div>
         <div style="padding-bottom: 20px"></div>
 
-        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px; ">
+        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px; " *ngIf="isShowCityTableView">
             <data-table id="persons-grid " headerTitle=" " [items]="items " [itemCount]="itemCount " (reload)="reloadItems($event) " (rowClick)="rowClick($event) " (rowDoubleClick)="rowDoubleClick($event) " [rowTooltip]="rowTooltip " [indexColumn]="false ">
 
                 <data-table-column [property]=" 'cityName' " [header]=" 'Name' " [sortable]="true " [resizable]="true ">

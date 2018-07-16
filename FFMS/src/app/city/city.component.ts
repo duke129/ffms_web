@@ -16,7 +16,6 @@ import { Subscription } from 'rxjs/Subscription';
   selector: 'app-city',
   templateUrl: './city.component.html',
   styleUrls: ['./city.component.scss'],
-  providers: [ CitymanagementComponent ],
 })
 
 @Injectable()
@@ -24,10 +23,7 @@ export class CityComponent implements OnInit {
  
   _ref: any;
 
-  closeAddCityForm() {
-    this._ref.destroy();
-    this.citymanagementComponent.showHideCityAddButton();
-}
+
 
 
   public cityDto=new CityDto();
@@ -114,5 +110,9 @@ export class CityComponent implements OnInit {
         console.log("Outside the result block citylist in array for dropllist ::"+this.citymanagementComponent.citiesList);
       }
 
-     
+      closeAddCityForm() {
+        this._ref.destroy();
+        this.citymanagementComponent.showHideCityAddButton();
+        this.citymanagementComponent.isShowCityTableView=true;
+    }
 }
