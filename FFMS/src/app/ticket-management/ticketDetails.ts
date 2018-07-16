@@ -1,3 +1,5 @@
+import { Activity } from "./activity";
+
 export class TicketDetails {
 
     ticketId: string;
@@ -30,5 +32,6 @@ export class TicketDetails {
     officeNumber: string;
     emailId: string;
     alternateEmailId: string;
-    communicationAddress: string
+    communicationAddress: string;
+    activities: Activity[];
 }

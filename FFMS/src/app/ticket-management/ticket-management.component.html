@@ -261,15 +261,22 @@
 
                             <div class="mdl-card__supporting-text">
                           
-                              <div class="mdl-stepper-horizontal-alternative">
-                                <div class="mdl-stepper-step active-step step-done">
-                                  <div class="mdl-stepper-circle"></div>
+                              <div class="mdl-stepper-horizontal-alternative" >
+                              
+                               <div class="mdl-stepper-step {{activity.css}}" *ngFor="let activity of ticketDetails.activities ; let i = index"  >
+                                <div class="mdl-stepper-circle"><span>{{i+1}}</span></div>
+                                <div class="mdl-stepper-title"> {{activity.activityName}}</div>
+                                <div class="mdl-stepper-bar-left"></div>
+                                <div class="mdl-stepper-bar-right"></div>
+                              </div>
+                                <!-- <div class="mdl-stepper-step active-step ">
+                                  <div class="mdl-stepper-circle"><span>1</span></div>
                                   <div class="mdl-stepper-title">Demo</div>
                                   <div class="mdl-stepper-bar-left"></div>
                                   <div class="mdl-stepper-bar-right"></div>
                                 </div>
-                                <div class="mdl-stepper-step active-step editable-step">
-                                  <div class="mdl-stepper-circle"></div>
+                                <div class="mdl-stepper-step">
+                                  <div class="mdl-stepper-circle"><span>2</span></div>
                                   <div class="mdl-stepper-title">Order</div>
                                   <div class="mdl-stepper-optional"></div>
                                   <div class="mdl-stepper-bar-left"></div>
@@ -282,7 +289,7 @@
                                   <div class="mdl-stepper-bar-left"></div>
                                   <div class="mdl-stepper-bar-right"></div>
                                 </div>
-                                
+                                 -->
                               </div>
                           
                             </div>
