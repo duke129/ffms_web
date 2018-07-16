@@ -31,7 +31,8 @@ import { CityComponent } from '../../city/city.component';
 import { CitymanagementComponent } from '../../citymanagement/citymanagement.component';
 import { BranchmanagementComponent } from '../../branchmanagement/branchmanagement.component';
 import { AreamanagementComponent } from '../../areamanagement/areamanagement.component';
-
+import { UserManagementComponent } from '../../user-management/user-management.component';
+import { UserGroupComponent } from '../../user-group/user-group.component';
 
 import {
   MatAutocompleteModule,
@@ -136,7 +137,9 @@ import {
   CityComponent,
   CitymanagementComponent,
   BranchmanagementComponent,
-  AreamanagementComponent
+  AreamanagementComponent,
+  UserManagementComponent,
+  UserGroupComponent
   ],
   entryComponents: [CityComponent,BranchComponent,AreaComponent]
 })

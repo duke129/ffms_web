@@ -18,6 +18,11 @@ import {AddTicektComponent} from '../../add-ticekt/add-ticekt.component';
 import { TicketManagementComponent } from '../../ticket-management/ticket-management.component';
 import {CreateticketComponent} from '../../createticket/createticket.component'
 import { AnalyticsComponent } from '../../analytics/analytics.component';
+import { UserManagementComponent } from '../../user-management/user-management.component';
+import { UserGroupComponent } from '../../user-group/user-group.component';
+
+
+
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -71,7 +76,7 @@ export const AdminLayoutRoutes: Routes = [
 //     { path: 'notifications',  component: NotificationsComponent },
 //     { path: 'upgrade',        component: UpgradeComponent },
     { path: 'report-management', component: ReportsComponent },
-    { path: 'user-management', component: UserComponent },
+    { path: 'user-management', component: UserManagementComponent },
     { path: 'location-management', component: LocationtabmanagementComponent },
     { path: 'asset-management', component: AssetComponent },
    { path: 'ticket-management', component:TicketManagementComponent },

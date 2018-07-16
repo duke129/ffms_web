@@ -1,132 +1,52 @@
-<div class="main-content"  style="margin-top:35px">
-    <div class="container-fluid">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead class=" text-primary" >
-                        <th style="color:#003d79;" >
-                            ID
-                        </th >
-                        <th style="color:#003d79;">
-                            Name
-                        </th>
-                        <th style="color:#003d79;">
-                            Country
-                        </th >
-                        <th style="color:#003d79;">
-                            City
-                        </th>
-                        <th style="color:#003d79;">
-                            Salary
-                        </th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                Dakota Rice
-                            </td>
-                            <td>
-                                Niger
-                            </td>
-                            <td>
-                                Oud-Turnhout
-                            </td>
-                            <td >
-                                $36,738
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                Minerva Hooper
-                            </td>
-                            <td>
-                                Curaçao
-                            </td>
-                            <td>
-                                Sinaai-Waas
-                            </td>
-                            <td >
-                                $23,789
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                Sage Rodriguez
-                            </td>
-                            <td>
-                                Netherlands
-                            </td>
-                            <td>
-                                Baileux
-                            </td>
-                            <td>
-                                $56,142
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                Philip Chaney
-                            </td>
-                            <td>
-                                Korea, South
-                            </td>
-                            <td>
-                                Overland Park
-                            </td>
-                            <td >
-                                $38,735
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                Doris Greene
-                            </td>
-                            <td>
-                                Malawi
-                            </td>
-                            <td>
-                                Feldkirchen in Kärnten
-                            </td>
-                            <td >
-                                $63,542
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                6
-                            </td>
-                            <td>
-                                Mason Porter
-                            </td>
-                            <td>
-                                Chile
-                            </td>
-                            <td>
-                                Gloucester
-                            </td>
-                            <td >
-                                $78,615
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<div class="container-fluid" id="addcityform" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px; margin-left: 65px;">
+
+    <div class=row id="cityheader" style="border: 0px;padding-top: 20px">
+        <h5 style="font-size: 20px;margin-left: 20px ">Add New Area</h5>
+    </div>
+
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-6"><label for="branchName"><b> Name</b></label>
+            <input [(ngModel)]="areaModel.areaName" type="text" class="form-control" id="areaname" placeholder="Enter Area Name">
+        </div>
+        <div class="col-md-6"><label for="branchCode"><b> Code</b></label>
+            <input [(ngModel)]="areaModel.code" type="text" class="form-control" id="areacode" placeholder="Enter Area Code">
+        </div>
+    </div>
+
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-6"><label for="branchDescription"><b> Description</b></label>
+            <input [(ngModel)]="areaModel.description" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description">
+        </div>
+        <div class="col-md-6"><label style="font-weight: bold" for="cityStatus"> Status</label>
+            <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="areaModel.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
         </div>
 
     </div>
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-6"><label style="font-weight: bold" for="citystate">Branch</label>
+            <ngx-select-dropdown [config]="config" [options]="availableCityList" [(value)]="areaModel.branchName" [multiple]="false" (click)="enableSearch()"></ngx-select-dropdown>
+        </div>
+    </div>
+
+    <div class="row justify-content-end" style="padding-top: 11px">
+        <div class="col-md-2">
+            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -14px;" (click)="onsubmitAddNewArea()">Submit</button>
+        </div>
+
+        <div class="col-md-1" style="margin-bottom: 8px;">
+
+            <div class="col-md-1" style="margin-bottom: 8px;">
+                <button type=" button " class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -60px" (click)="closeAddAreaForm()">Close</button>
+            </div>
+
+        </div>
+    </div>
+
 </div>
+
+
+<style>
+    .form-control {
+        background-image: none;
+    }
+</style>
