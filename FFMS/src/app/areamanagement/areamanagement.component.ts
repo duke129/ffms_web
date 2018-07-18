@@ -186,7 +186,7 @@ public selectedArea=new AreaDto();
        .post(`http://localhost:8081/location/area/save`,areaModel);
       }
     
-
+      
 
       showHideAddButtonForArea()
     {

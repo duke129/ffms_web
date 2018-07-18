@@ -10,7 +10,7 @@ import { AreamanagementComponent } from '../areamanagement/areamanagement.compon
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html',
-  styleUrls: ['./area.component.scss']
+  styleUrls: ['./area.component.scss'],
 })
 
 @Injectable()
@@ -19,7 +19,7 @@ export class AreaComponent implements OnInit {
   _ref: any;
   public areaModel=new AreaDto();
 
-  constructor(private http:Http,public areamanagementComponent:AreamanagementComponent) { }
+  constructor(public http:Http,public areamanagementComponent:AreamanagementComponent) { }
 
   ngOnInit() {
     this.areaModel;
@@ -50,30 +50,32 @@ export class AreaComponent implements OnInit {
     areaStatus=["Enable","Disable"];
     selectedAreaStatus = ['select status'];
 
-    availableBranchList=["Bangalore","Hyderabad","Chennai"];
+    availableBranchList=["Indira Nagar","Kormangla","Rajaji Nagar","Marathalli","Yashwantpur"];
     selectedBranch = ['select branchName'];
 
-    availableCityList=["Bangalore","Hyderabad","Chennai"];
-    selectedCity = ['select cityName'];
+    //availableCityList=["Bangalore","Hyderabad","Chennai"];
+    //selectedCity = ['select cityName'];
 
 
 
     onsubmitAddNewArea(){
-      alert("Branch Json value taken from UI::"+JSON.stringify(this.areaModel));
-      alert("Branch Json value taken from UI::"+JSON.stringify(this.areaModel));
+      //alert("Branch Json value taken from UI::"+JSON.stringify(this.areaModel));
+      //alert("Branch Json value taken from UI::"+JSON.stringify(this.areaModel));
       this.areaModel.areaName;
       this.areaModel.code;
       this.areaModel.description;
-      this.areaModel.branchId;
-      this.areaModel.statusId;
-      alert("city value is :::"+JSON.stringify(this.areaModel));
+      let areaBranchName=this.areaModel.branchName[0];
+      let areaStatusName=this.areaModel.status[0];
+      this.areaModel.branchName=areaBranchName;
+      this.areaModel.status=areaStatusName;
+      alert("Area value is :::"+JSON.stringify(this.areaModel));
       this.createCity(this.areaModel);
 
     }
 
     createCity(areaModel:AreaDto)
     {
-      alert("create city method called"+this.areaModel);
+      //alert("create Area method called"+this.areaModel);
       this.saveCity(areaModel).subscribe(result => {
       });
       

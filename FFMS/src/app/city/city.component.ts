@@ -84,8 +84,11 @@ export class CityComponent implements OnInit {
       console.log("Outside the result block citylist in array for dropllist ::"+this.citymanagementComponent.citiesList);
       this.cityDto.cityName;
       this.cityDto.state;
-      this.cityDto.statusId;
-      alert("city value is :::"+JSON.stringify(this.cityDto));
+      //this.cityDto.statusId;
+      let statusName=this.cityDto.status[0];
+      //alert("status name is"+statusName);
+      this.cityDto.status=statusName;
+      //alert("city value is :::"+JSON.stringify(this.cityDto));
       this.createCity(this.cityDto);
 
     }

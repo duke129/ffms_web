@@ -18,12 +18,12 @@
             <input [(ngModel)]="cityDto.description" type="text" class="form-control" id="citydescription" placeholder="Enter City Description">
         </div>
         <div class="col-md-6"><label style="font-weight: bold" for="cityStatus">Status</label>
-            <ngx-select-dropdown [config]="config" [options]="cityStatus" [(value)]="cityDto.statusId" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
+            <ngx-select-dropdown [config]="config" [options]="cityStatus" [(value)]="cityDto.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
         </div>
     </div>
     <div class=row style="padding-top: 11px">
         <div class="col-md-6"><label style="font-weight: bold" for="citystate" Required> State </label>
-            <ngx-select-dropdown [config]="config" (change)="selectionChanged($event)" [(value)]="selectedOptions" [options]="citylistFordropdown" (click)="onclick()" [multiple]="false" (click)="enableSearch()"></ngx-select-dropdown>
+            <ngx-select-dropdown [config]="config" (change)="selectionChanged($event)" [(value)]="selectedOptions" [options]="availableStates" (click)="onclick()" [multiple]="false" (click)="enableSearch()"></ngx-select-dropdown>
 
         </div>
     </div>

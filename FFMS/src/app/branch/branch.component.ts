@@ -49,8 +49,12 @@ export class BranchComponent implements OnInit {
 
       this.branchModel.branchName;
       this.branchModel.cityId
+      let branchCityName=this.branchModel.cityName[0];
       this.branchModel.description
-      this.branchModel.status
+      let branchStatusName=this.branchModel.status[0];
+      this.branchModel.cityName=branchCityName;
+      this.branchModel.status=branchStatusName;
+      //alert("Branch value is :::"+JSON.stringify(this.branchModel));
       console.log("Branch value is :::"+JSON.stringify(this.branchModel));
       this.createBranch(this.branchModel);
 
