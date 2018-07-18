@@ -18,7 +18,6 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import {AddTicektComponent} from '../../add-ticekt/add-ticekt.component';
 import { ReportsComponent } from '../../reports/reports.component';
 import { AssetComponent } from '../../asset/asset.component';
-import { UserComponent } from '../../user/user.component';
 import { TicketComponent } from '../../ticket/ticket.component';
 import { CustomerManagementComponent } from '../../customer-management/customer-management.component';
 import { TicketManagementComponent } from '../../ticket-management/ticket-management.component';
@@ -33,6 +32,7 @@ import { BranchmanagementComponent } from '../../branchmanagement/branchmanageme
 import { AreamanagementComponent } from '../../areamanagement/areamanagement.component';
 import { UserManagementComponent } from '../../user-management/user-management.component';
 import { UserGroupComponent } from '../../user-group/user-group.component';
+import { UserComponent } from '../../user/user.component'
 
 import {
   MatAutocompleteModule,
@@ -125,7 +125,6 @@ import {
     ReportsComponent,
     LocationtabmanagementComponent,
     AssetComponent,
-    UserComponent,
     TicketComponent,
     CustomerManagementComponent,
    AddTicektComponent,
@@ -139,9 +138,10 @@ import {
   BranchmanagementComponent,
   AreamanagementComponent,
   UserManagementComponent,
-  UserGroupComponent
+  UserGroupComponent,
+  UserComponent
   ],
-  entryComponents: [CityComponent,BranchComponent,AreaComponent]
+  entryComponents: [CityComponent,BranchComponent,AreaComponent,UserComponent]
 })
 
 export class AdminLayoutModule {}

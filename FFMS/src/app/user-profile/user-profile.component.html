@@ -3,34 +3,30 @@
         <div class="row">
             <div style="padding-left: 94%">
                 <div>
-                    <a id="ButtonForAddNewUser" (click)="addComponent()" title=" Add New User " style="color: #003d79; "><i style="font-size: 2.5rem; " class="material-icons" (click)="showHideAddButtonOfUser()"><span style="cursor:pointer" >add_box</span></i></a>
+                    <a id="ButtonForAddNewUser" (click)="addComponent()" title=" Add New User " style="color: #003d79; "><i style="font-size: 2.5rem; " class="material-icons" (click)="showHideAddButtonOfUser()"><span style="cursor:pointer"  >add_box</span></i></a>
                 </div>
             </div>
         </div>
 
 
         <div class="row">
-            <div #parent></div>
+            <div #userparent></div>
         </div>
         <div style="padding-bottom: 20px"></div>
 
-        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;" *ngIf="isshowTableView">
+        <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
             <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
-                <!-- <data-table-column [property]="'areaId'" [header]="'Id'" [sortable]="true" [resizable]="true">
-                </data-table-column> -->
-                <data-table-column [property]="'areaName'" [header]="'Name'" [sortable]="true" [resizable]="true">
+                <data-table-column [property]="'firstName'" [header]="'First Name'" [sortable]="true" [resizable]="true">
                 </data-table-column>
-                <data-table-column [property]=" 'code' " header="Code " [sortable]="true " [resizable]="true ">
+                <data-table-column [property]=" 'lastName' " header="Last Name " [sortable]="true " [resizable]="true ">
                 </data-table-column>
-                <data-table-column [property]=" 'branchName' " header="Branch " [sortable]="true " [resizable]="true ">
-                </data-table-column>
-                <data-table-column [property]=" 'cityName' " header="City " [sortable]="true " [resizable]="true ">
+                <data-table-column [property]=" 'userGroup' " header="User Group " [sortable]="true " [resizable]="true ">
                 </data-table-column>
                 <data-table-column [property]=" 'status' " header="Status " [sortable]="true " [resizable]="true ">
                 </data-table-column>
+                
             </data-table>
         </div>
     </div>
-    </div>
-            
+</div>
             

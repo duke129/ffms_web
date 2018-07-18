@@ -1,30 +1,30 @@
 <div class="container-fluid" id="addcityform" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px; margin-left: 65px;">
 
     <div class=row id="cityheader" style="border: 0px;padding-top: 20px">
-        <h5 style="font-size: 20px;margin-left: 20px ">Add New Area</h5>
+        <h5 style="font-size: 20px;margin-left: 20px ">Add New User</h5>
     </div>
 
     <div class=row style="padding-top: 11px">
         <div class="col-md-6"><label for="branchName"><b> Name</b></label>
-            <input [(ngModel)]="areaModel.areaName" type="text" class="form-control" id="areaname" placeholder="Enter Area Name">
+            <!-- <input [(ngModel)]="areaModel.areaName" type="text" class="form-control" id="areaname" placeholder="Enter Area Name"> -->
         </div>
         <div class="col-md-6"><label for="branchCode"><b> Code</b></label>
-            <input [(ngModel)]="areaModel.code" type="text" class="form-control" id="areacode" placeholder="Enter Area Code">
+            <!-- <input [(ngModel)]="areaModel.code" type="text" class="form-control" id="areacode" placeholder="Enter Area Code"> -->
         </div>
     </div>
 
     <div class=row style="padding-top: 11px">
         <div class="col-md-6"><label for="branchDescription"><b> Description</b></label>
-            <input [(ngModel)]="areaModel.description" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description">
+            <!-- <input [(ngModel)]="areaModel.description" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description"> -->
         </div>
         <div class="col-md-6"><label style="font-weight: bold" for="cityStatus"> Status</label>
-            <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="areaModel.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
+            <!-- <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="areaModel.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown> -->
         </div>
 
     </div>
     <div class=row style="padding-top: 11px">
         <div class="col-md-6"><label style="font-weight: bold" for="citystate">Branch</label>
-            <ngx-select-dropdown [config]="config" [options]="availableCityList" [(value)]="areaModel.branchName" [multiple]="false" (click)="enableSearch()"></ngx-select-dropdown>
+            <!-- <ngx-select-dropdown [config]="config" [options]="availableCityList" [(value)]="areaModel.branchName" [multiple]="false" (click)="enableSearch()"></ngx-select-dropdown> -->
         </div>
     </div>
 
@@ -36,7 +36,7 @@
         <div class="col-md-1" style="margin-bottom: 8px;">
 
             <div class="col-md-1" style="margin-bottom: 8px;">
-                <button type=" button " class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -60px" (click)="closeAddAreaForm()">Close</button>
+                <button type=" button " class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -60px" (click)="closeUserForm()">Close</button>
             </div>
 
         </div>
