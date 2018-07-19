@@ -32,7 +32,8 @@ import { BranchmanagementComponent } from '../../branchmanagement/branchmanageme
 import { AreamanagementComponent } from '../../areamanagement/areamanagement.component';
 import { UserManagementComponent } from '../../user-management/user-management.component';
 import { UserGroupComponent } from '../../user-group/user-group.component';
-import { UserComponent } from '../../user/user.component'
+import { UserComponent } from '../../user/user.component';
+import { UserGroupProfileComponent } from '../../user-group-profile/user-group-profile.component';
 
 import {
   MatAutocompleteModule,
@@ -139,9 +140,10 @@ import {
   AreamanagementComponent,
   UserManagementComponent,
   UserGroupComponent,
-  UserComponent
+  UserComponent,
+  UserGroupProfileComponent
   ],
-  entryComponents: [CityComponent,BranchComponent,AreaComponent,UserComponent]
+  entryComponents: [CityComponent,BranchComponent,AreaComponent,UserComponent,UserGroupComponent]
 })
 
 export class AdminLayoutModule {}

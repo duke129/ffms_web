@@ -20,6 +20,8 @@ import {CreateticketComponent} from '../../createticket/createticket.component'
 import { AnalyticsComponent } from '../../analytics/analytics.component';
 import { UserManagementComponent } from '../../user-management/user-management.component';
 import { UserGroupComponent } from '../../user-group/user-group.component';
+import { UserGroupProfileComponent } from '../../user-group-profile/user-group-profile.component';
+
 
 
 

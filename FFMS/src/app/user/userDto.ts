@@ -5,4 +5,5 @@ export class UserDto{
     statusBean:number;
     userGroup:number;
     status:string;
+    phone:string;
 }

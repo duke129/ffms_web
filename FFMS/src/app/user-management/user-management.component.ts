@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfileComponent  } from '../user-profile/user-profile.component'
+import { UserProfileComponent  } from '../user-profile/user-profile.component';
+import { UserGroupProfileComponent } from '../user-group-profile/user-group-profile.component';
 
 @Component({
   selector: 'app-user-management',

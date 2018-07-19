@@ -1,3 +1,52 @@
-<p>
-  user-group works!
-</p>
+<div class="container-fluid" id="addcityform" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px; margin-left: 65px;">
+
+    <div class=row id="cityheader" style="border: 0px;padding-top: 20px">
+        <h5 style="font-size: 20px;margin-left: 20px ">Add Group For User</h5>
+    </div>
+
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-6"><label for="branchName"><b> Group Name</b></label>
+            <input [(ngModel)]="areaModel.usergroup" type="text" class="form-control" id="areaname" placeholder="Enter Area Name">
+        </div>
+        <div class="col-md-6"><label for="branchCode"><b> Description</b></label>
+            <input [(ngModel)]="areaModel.userGroupDescription" type="text" class="form-control" id="areacode" placeholder="Enter Area Code">
+        </div>
+    </div>
+
+    <div class=row style="padding-top: 11px">
+        <div class="col-md-6"><label for="branchDescription"><b> Role </b></label>
+            <input [(ngModel)]="areaModel.role" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description">
+        </div>
+        <div class="col-md-6"><label style="font-weight: bold" for="cityStatus"> Status</label>
+            <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="areaModel.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
+        </div>
+
+    </div>
+    <!-- <div class=row style="padding-top: 11px">
+        <div class="col-md-6"><label style="font-weight: bold" for="citystate">Phone Number</label>
+            <input [(ngModel)]="areaModel.phone" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description">
+        </div>
+    </div> -->
+
+    <div class="row justify-content-end" style="padding-top: 11px">
+        <div class="col-md-2">
+            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -14px;" (click)="onsubmitAddNewUser()">Submit</button>
+        </div>
+
+        <div class="col-md-1" style="margin-bottom: 8px;">
+
+            <div class="col-md-1" style="margin-bottom: 8px;">
+                <button type=" button " class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -60px" (click)="closeUserForm()">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    .form-control {
+        background-image: none;
+    }
+</style>

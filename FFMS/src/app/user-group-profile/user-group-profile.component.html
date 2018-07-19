@@ -10,18 +10,18 @@
 
 
         <div class="row">
-            <div #userparent></div>
+            <div #usergroupparent></div>
         </div>
         <div style="padding-bottom: 20px"></div>
 
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
             <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
-                <data-table-column [property]="'firstName'" [header]="'First Name'" [sortable]="true" [resizable]="true">
+                <data-table-column [property]="'userGroup'" [header]="'Group Name'" [sortable]="true" [resizable]="true">
                 </data-table-column>
-                <data-table-column [property]=" 'lastName' " header="Last Name " [sortable]="true " [resizable]="true ">
+                <data-table-column [property]=" 'role' " header="Role " [sortable]="true " [resizable]="true ">
                 </data-table-column>
-                <!-- <data-table-column [property]=" 'userGroup' " header="User Group " [sortable]="true " [resizable]="true ">
-                </data-table-column> -->
+                <data-table-column [property]=" 'userGroupDescription' " header="Description" [sortable]="true " [resizable]="true ">
+                </data-table-column>
                 <data-table-column [property]=" 'status' " header="Status " [sortable]="true " [resizable]="true ">
                 </data-table-column>
 

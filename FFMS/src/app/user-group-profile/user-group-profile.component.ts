@@ -1,23 +1,24 @@
-import { Component, OnInit,ViewChild,ComponentFactoryResolver,ViewContainerRef  } from '@angular/core';
+import { Component, OnInit,ViewChild,ComponentFactoryResolver,ViewContainerRef,forwardRef } from '@angular/core';
 import { DataTableResource } from '../data-table';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { UserDto } from '../user/userDto';
-import { UserComponent } from '../user/user.component'
+import { UserGroupDto } from '../user-group/userGroupDto';
+import { UserGroupComponent } from '../user-group/user-group.component';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: 'app-user-group-profile',
+  templateUrl: './user-group-profile.component.html',
+  styleUrls: ['./user-group-profile.component.scss'],
+  providers: [forwardRef(() => UserGroupProfileComponent)]
+  
 })
+export class UserGroupProfileComponent implements OnInit {
 
-export class UserProfileComponent implements OnInit {
-
-  public areaDto: UserDto[];
-  observableArea: Observable<UserDto[]>
+  public areaDto: UserGroupDto[];
+  observableArea: Observable<UserGroupDto[]>
   itemResource = new DataTableResource([]); 
   errorMessage: String;
     items = [];
@@ -25,10 +26,10 @@ export class UserProfileComponent implements OnInit {
     selectedpersonname= '';
     isEditable=false;
     showAreaCard=false;
-    areaDetails:UserDto;
+    areaDetails:UserGroupDto;
     isshowTableView=true;
 
-    @ViewChild('userparent', { read: ViewContainerRef }) container: ViewContainerRef;
+    @ViewChild('usergroupparent', { read: ViewContainerRef }) container: ViewContainerRef;
    
     constructor(private http: Http,private _cfr: ComponentFactoryResolver) {
       
@@ -44,7 +45,7 @@ export class UserProfileComponent implements OnInit {
         }
 
 
-        getAreaWithObservable(): Observable<UserDto[]> {
+        getAreaWithObservable(): Observable<UserGroupDto[]> {
           return this.http.get('http://localhost:8081/user/getall')
             .map(this.extractData)
             .catch(this.handleErrorObservable);
@@ -68,7 +69,7 @@ export class UserProfileComponent implements OnInit {
                   this.areaDto = result ;
                     this.itemCount = result.length;
                     for(num=0;num<result.length;num++){
-                      if(result[num].statusBean==1){
+                      if(result[num].status=='1'){
                         this.areaDto[num].status="Enable";
                       }else{
                        this. areaDto[num].status="Disable";
@@ -84,7 +85,7 @@ export class UserProfileComponent implements OnInit {
       addComponent(){
         alert("dynamic component called!")
        this.isshowTableView=false;
-        var comp = this._cfr.resolveComponentFactory(UserComponent);
+        var comp = this._cfr.resolveComponentFactory(UserGroupComponent);
         var cityComponent = this.container.createComponent(comp);
         cityComponent.instance._ref = cityComponent;
     }
@@ -100,5 +101,6 @@ export class UserProfileComponent implements OnInit {
        document.getElementById("ButtonForAddNewUser").style.display="none";
   }
     }
+
 
 }

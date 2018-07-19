@@ -5,32 +5,32 @@
     </div>
 
     <div class=row style="padding-top: 11px">
-        <div class="col-md-6"><label for="branchName"><b> Name</b></label>
-            <!-- <input [(ngModel)]="areaModel.areaName" type="text" class="form-control" id="areaname" placeholder="Enter Area Name"> -->
+        <div class="col-md-6"><label for="branchName"><b> First Name</b></label>
+            <input [(ngModel)]="areaModel.firstName" type="text" class="form-control" id="areaname" placeholder="Enter Area Name">
         </div>
-        <div class="col-md-6"><label for="branchCode"><b> Code</b></label>
-            <!-- <input [(ngModel)]="areaModel.code" type="text" class="form-control" id="areacode" placeholder="Enter Area Code"> -->
+        <div class="col-md-6"><label for="branchCode"><b> Last Name</b></label>
+            <input [(ngModel)]="areaModel.lastName" type="text" class="form-control" id="areacode" placeholder="Enter Area Code">
         </div>
     </div>
 
     <div class=row style="padding-top: 11px">
-        <div class="col-md-6"><label for="branchDescription"><b> Description</b></label>
-            <!-- <input [(ngModel)]="areaModel.description" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description"> -->
+        <div class="col-md-6"><label for="branchDescription"><b> Password </b></label>
+            <input [(ngModel)]="areaModel.password" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description">
         </div>
         <div class="col-md-6"><label style="font-weight: bold" for="cityStatus"> Status</label>
-            <!-- <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="areaModel.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown> -->
+            <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="areaModel.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
         </div>
 
     </div>
     <div class=row style="padding-top: 11px">
-        <div class="col-md-6"><label style="font-weight: bold" for="citystate">Branch</label>
-            <!-- <ngx-select-dropdown [config]="config" [options]="availableCityList" [(value)]="areaModel.branchName" [multiple]="false" (click)="enableSearch()"></ngx-select-dropdown> -->
+        <div class="col-md-6"><label style="font-weight: bold" for="citystate">Phone Number</label>
+            <input [(ngModel)]="areaModel.phone" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description">
         </div>
     </div>
 
     <div class="row justify-content-end" style="padding-top: 11px">
         <div class="col-md-2">
-            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -14px;" (click)="onsubmitAddNewArea()">Submit</button>
+            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -14px;" (click)="onsubmitAddNewUser()">Submit</button>
         </div>
 
         <div class="col-md-1" style="margin-bottom: 8px;">
