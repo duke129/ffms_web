@@ -1,0 +1,63 @@
+<div class="main-content" style="margin-top:35px">
+
+  <div class="container-fluid" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px;">
+
+  <div class=row style="padding-top: 11px">
+
+      <div class="col-md-4"><label for="assetName">Asset Name</label>
+          <!-- <input [(ngModel)]="customer_creation.firstName" type="text" class="form-control" id="firstname" placeholder="Enter First Name"> -->
+          <input type="text" [(ngModel)]="asset.assetName" class="form-control" id="name" placeholder="Enter Asset Name" >
+
+          </div>
+
+      <div class="col-md-4"><label for="assetDescription">AssetDescription</label>
+          <input type="text" [(ngModel)]="asset.assetDescription" class="form-control" id="assetDescription" placeholder="Enter AssetDesc">
+        </div>
+ 
+          <div class="col-md-4"><label for="selectAssetType">AssetType</label>
+            <ngx-select-dropdown [config]="config" (change)="selectionChanged($event)" (click)="onclick()" [(value)]="selectedOptions"  [options]="availableCity"   [multiple]="false"></ngx-select-dropdown>
+        </div>
+</div>
+  <div class=row style="padding-top: 11px">
+
+      <div class="col-md-4"><label for="installationLat">InstallationLat</label>
+          <input [(ngModel)]="asset.installationLat" type="text" class="form-control" id="installationLat" placeholder="Enter Lat">
+      </div>
+      
+  <div class="col-md-4"><label for="installationLong">InstallationLong</label>
+          <input [(ngModel)]="asset.installationLong" type="text" class="form-control" id="installationLong" placeholder="Enter Lon">
+      </div>
+
+      <div class="col-md-4"><label for="selectStatus">Status</label>
+        <ngx-select-dropdown [config]="config" [options]="availablestatus"  (change)="selectionChanged($event)" (click)="onclick()" [(value)]="selectedStatus"  [multiple]="false"></ngx-select-dropdown>
+    </div>
+
+  </div>
+
+  
+
+  <div class="row justify-content-end" style="padding-top: 11px">
+      <div class="col-md-2">
+          <button type=" button " class="btn btn-sm btn-success " style="margin-left: 59px;" (click)="addAssetinfo()">Submit</button>
+      </div>
+
+      <div class="col-md-1" style="margin-bottom: 8px;">
+          <!-- <a class="btn btn-danger " href="/ticket-management">Close</a> -->
+
+          <nav>
+              <a routerLink="/ticket-management" routerLinkActive="active" class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -19px">Close</a>
+              <!-- <a routerLink="/heroes" routerLinkActive="active">Heroes</a> -->
+            </nav>
+
+      </div>
+  </div>
+
+
+</div>
+
+  <style>
+  .form-control{
+      background-image: none;
+  }
+  
+  </style>

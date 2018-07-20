@@ -1,19 +1,71 @@
 <div class="main-content">
+
     <div class="container-fluid">
-        <div class="row">
-            <div style="padding-left: 94%">
-                <a href="#"  title="Add New Asset" style="color: #003d79;"><i style="font-size: 2.5rem;" class="material-icons">add_box</i></a>
-            </div>
-        </div>
+            <mat-accordion>
+                    <mat-expansion-panel [expanded]="panelOpenState" >
+                            <mat-expansion-panel-header>
+                                    <mat-panel-title style="color: #003d79;">
+                                        Asset Filter
+
+                                    </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+
+                            <div class="row">
+                                    <div class="col-md-3"><label for="serialNo">SerialNo</label>
+                                        <!-- <input [(ngModel)]="customer_creation.firstName" type="text" class="form-control" id="firstname" placeholder="Enter First Name"> -->
+                                        <input type="text" [(ngModel)]="assetFilter.serialNo" class="form-control" id="name" placeholder="Enter SerialNo" >
+                              
+                                        </div>
+                                        <div class="col-md-4"><label for="customerName">CustomerName</label>
+                                            <!-- <input [(ngModel)]="customer_creation.firstName" type="text" class="form-control" id="firstname" placeholder="Enter First Name"> -->
+                                            <input type="text" [(ngModel)]="assetFilter.name" class="form-control" id="name" placeholder="Enter CustomerName" >
+                                  
+                                            </div>
+                                    <!-- <mat-form-field>
+                                            <input matInput [matDatepicker]="dp1" placeholder="From Date" disabled>
+                                            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                            <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+                                          </mat-form-field>
+                                      
+                                          <mat-form-field style="    padding-left: 3%;">
+                                                <input matInput [matDatepicker]="dp2" placeholder="To Date" disabled>
+                                                <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                                                <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+                                              </mat-form-field> -->
+
+
+
+                            </div>
+
+                       
+
+                            <mat-action-row>
+                                    <button mat-button (click)="getFilter(assetFilter)">Apply</button>
+                                  </mat-action-row>
+
+                                 
+                    </mat-expansion-panel>
+
+            </mat-accordion>
+           
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
-            <data-table id="persons-grid" headerTitle="Asset" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+            <data-table id="persons-grid" headerTitle="Asset" [items]="assets" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                 <data-table-column [property]="'assetName'" [header]="'Name'" [sortable]="true" [resizable]="true">
+                    <!-- <ng-template #dataTableCell let-item="item"> -->
+                        <!-- <a (click)="getBranchDetails(item)" style="color: #003d79;cursor: pointer;text-decoration: underline;" role="button">{{item.assetName}}</a> -->
+                    <!-- </ng-template>  -->
                 </data-table-column>
                 <data-table-column [property]="'assetTypeDes'" [header]="'Type'" [sortable]="true">
                 </data-table-column>
   
                 <data-table-column [property]="'assetDescription'" [header]="'AssetDescription'" [sortable]="true">
               </data-table-column>
+
+              <data-table-column [property]="'serialNo'" [header]="'SerialNo'" [sortable]="true">
+            </data-table-column>
+            <data-table-column [property]="'customerName'" [header]="'CustomerName'" [sortable]="true">
+            </data-table-column>
           
             <data-table-column [property]="'jobTitle'" [header]="'Job title'" [visible]="false">
                 </data-table-column>
@@ -28,7 +80,7 @@
                         </span>
                     </ng-template>
                 </data-table-column> -->
-                <data-table-column header="Actions">
+                <!-- <data-table-column header="Actions">
                     <ng-template #dataTableHeader let-item="item">
                         <span style="cursor: pointer; color:#003d79; font-weight: 400;">Actions</span>
                     </ng-template>
@@ -38,10 +90,193 @@
                         <a class="btn btn-danger" href="#" (click)="deleteCustomer(item)">
                             <i class="fa fa-trash-o fa-lg"></i> </a>
                     </ng-template>
-                </data-table-column>
+                </data-table-column> -->
   
             </data-table>
         </div>
   
     </div>
+
+
+    <div>
+        <mat-card *ngIf="showBranchCard">
+
+            <mat-card-header>
+                <!-- <a class="btn " style="background-color: #003d79; margin-left: 78%;width: 4%;height: 35px;" (click)="editCustomer(item)">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a> -->
+                <a class="btn " style="background-color: #003d79; margin-left: 78%;width: 4%;height: 35px;" (click)="EditClicked()">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+
+                <a class="btn " style="background-color:red;width: 4%;height: 35px;" (click)="onClickCloseDetailsForm()">
+                    <i class=" fa fa-times-circle-o " aria-hidden="true " style="color: white;"></i></a>
+                <mat-card-title class="assetLabel">
+               AssetDetails:
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="assetLabel">Name</label>
+
+                            </div>
+                            <div class="col-1">:</div>
+                            <div class="col-6" style="white-space: wrap; ">
+                                <div *ngIf="isEditable==0">
+                                <span>{{assetDetails?.assetName}}</span>
+                            </div>
+                            <div *ngIf="isEditable==1">
+                                    <input type="text" [(ngModel)]="assetDetails.assetName" class="form-control" id="name" placeholder="Enter Asset Name" >
+                            </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="assetLabel">AssetDescription</label>
+
+                            </div>
+                            <div class="col-1">:</div>
+                            <div class="col-6" style="white-space: wrap; ">
+                                    <div *ngIf="isEditable==0">
+                                            <span>{{assetDetails?.assetDescription}}</span>
+                                        </div>
+                                        <div *ngIf="isEditable==1">
+                                                <input type="text" [(ngModel)]="assetDetails.assetDescription" class="form-control" id="name" placeholder="Enter Asset Name" >
+                                        </div>
+                                <!-- <span>{{assetDetails?.assetDescription}}</span> -->
+                                <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="assetLabel">AssetTypeDes</label>
+
+                            </div>
+                            <div class="col-1">:</div>
+                            <div class="col-6" style="white-space: wrap; ">
+
+                                    <div *ngIf="isEditable==0">
+                                            <span>{{assetDetails?.assetTypeDes}}</span>
+                                        </div>
+                                        <div *ngIf="isEditable==1">
+                                                <input type="text" [(ngModel)]="assetDetails.assetTypeDes" class="form-control" id="name" placeholder="Enter Asset Name" readonly >
+                                                <!-- <ngx-select-dropdown [config]="config" (change)="selectionChanged($event)" (click)="onclick()" [(value)]="selectedOptions"  [options]="availableCity"   [multiple]="false"></ngx-select-dropdown> -->
+                                            </div>
+                                <!-- <span>{{assetDetails?.assetTypeDes}}</span> -->
+                                <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="assetLabel">CustomerName</label>
+
+                            </div>
+                            <div class="col-1">:</div>
+                            <div class="col-6" style="white-space: wrap; ">
+
+                                    <div *ngIf="isEditable==0">
+                                            <span>{{assetDetails?.customerName}}</span>
+                                        </div>
+                                        <div *ngIf="isEditable==1">
+                                                <input type="text" [(ngModel)]="assetDetails.customerName" class="form-control" id="customerName" placeholder="Enter Customer Name" >
+                                                <!-- <ngx-select-dropdown [config]="config" (change)="selectionChanged($event)" (click)="onclick()" [(value)]="selectedOptions"  [options]="availableCity"   [multiple]="false"></ngx-select-dropdown> -->
+                                            </div>
+                                <!-- <span>{{assetDetails?.installationLat}}</span> -->
+                                <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="assetLabel">InstallationLat</label>
+
+                            </div>
+                            <div class="col-1">:</div>
+                            <div class="col-6" style="white-space: wrap; ">
+
+                                    <div *ngIf="isEditable==0">
+                                            <span>{{assetDetails?.installationLat}}</span>
+                                        </div>
+                                        <div *ngIf="isEditable==1">
+                                                <input type="text" [(ngModel)]="assetDetails.installationLat" class="form-control" id="name" placeholder="Enter Asset Name" >
+                                                <!-- <ngx-select-dropdown [config]="config" (change)="selectionChanged($event)" (click)="onclick()" [(value)]="selectedOptions"  [options]="availableCity"   [multiple]="false"></ngx-select-dropdown> -->
+                                            </div>
+                                <!-- <span>{{assetDetails?.installationLat}}</span> -->
+                                <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="assetLabel">InstallationLong</label>
+
+                            </div>
+                            <div class="col-1">:</div>
+                            <div class="col-6" style="white-space: wrap; ">
+
+                                    <div *ngIf="isEditable==0">
+                                            <span>{{assetDetails?.installationLong}}</span>
+                                        </div>
+                                        <div *ngIf="isEditable==1">
+                                                <input type="text" [(ngModel)]="assetDetails.installationLong" class="form-control" id="name" placeholder="Enter Asset Name" >
+                                                <!-- <ngx-select-dropdown [config]="config" (change)="selectionChanged($event)" (click)="onclick()" [(value)]="selectedOptions"  [options]="availableCity"   [multiple]="false"></ngx-select-dropdown> -->
+                                            </div>
+                                <!-- <span>{{assetDetails?.installationLong}}</span> -->
+                                <!-- <span ng-if="!ticketDetails.adhaarDetails.postoffice">--</span> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="assetLabel">Status</label>
+
+                                
+                            </div>
+                            <div class="col-1">:</div>
+                            <div class="col-6" style="white-space: wrap; ">
+                                
+                                    <div *ngIf="isEditable==0">
+                                            <span>{{assetDetails?.status}}</span>
+                                        </div>
+                                        <div *ngIf="isEditable==1">
+                                                <!-- <input type="text" [(ngModel)]="assetDetails.status" class="form-control" id="name" placeholder="Enter Asset Name" > -->
+                                                <ngx-select-dropdown [config]="config" [(value)]="selectedOptions"  [options]="availableStatus" [multiple]="false"></ngx-select-dropdown>
+                                            </div>
+                                <!-- <span>{{assetDetails?.status}}</span> -->
+
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+                <div class="row ">
+                        <button type=" button " style="margin-left: 890px" (click)="addAssetinfo() " class="btn btn-sm btn-success "> Update </button>
+                    </div>
+
+            </mat-card-content>
+
+
+
+
+        </mat-card>
+
+    </div>
   </div>
+
+  <style>
+        .form-control{
+            background-image: none;
+        }
+        
+        </style>

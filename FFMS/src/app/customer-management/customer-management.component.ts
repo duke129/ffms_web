@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Customer } from './customer';
+import { CustomerFilter } from './customerfilter';
 
 @Component({
     selector: 'app-customer-management',
@@ -17,7 +18,7 @@ import { Customer } from './customer';
 @Injectable()
 export class CustomerManagementComponent implements OnInit {
 
-    public customers: any;
+    public customers: Customer[];
     observable: Observable<Customer[]>
     itemResource = new DataTableResource([]);
     items = [];
@@ -28,6 +29,7 @@ export class CustomerManagementComponent implements OnInit {
     isEditable: boolean = false;
     copyCustomerDetails: Customer;
     baseURL = "http://localhost:8081/";
+    public customerFilter= new  CustomerFilter();
 
     constructor(private http: Http) {
     }
@@ -61,16 +63,45 @@ export class CustomerManagementComponent implements OnInit {
     }
 
 
-    reloadItems(customerGridParams) {
+    // reloadItems(customerGridParams) {
 
-        this.getCustomers().subscribe(result => {
+    //     this.getCustomers().subscribe(result => {
 
-            this.customers = result;
-            this.itemCount = result.length;
-            new DataTableResource(this.customers).query(customerGridParams).then(items => this.items = items);
+    //         this.customers = result;
+    //         this.itemCount = result.length;
+    //         new DataTableResource(this.customers).query(customerGridParams).then(items => this.items = items);
 
+    //     });
+
+    // }
+
+    getFilter(filter:CustomerFilter)
+    {
+   alert(JSON.stringify(filter))
+   this.reloadItems(filter); 
+    }
+
+
+    reloadItems(params) {
+        console.log("result"+JSON.stringify(params));
+        this.customerFilter.offset=params.offset;
+        this.customerFilter.pageSize=params.limit;
+        this.getGridView(this.customerFilter).subscribe(result => { 
+                  let i;
+                  
+                    this.customers = result ;
+                   // this.customers=this.customer;
+                console.log("result"+JSON.stringify(this.customers));
+
+                if (this.customers !=[] && this.customers.length > 0) {
+                    this.itemCount = this.customers[0].count;
+                  }
+                  else
+                  {this.itemCount =0;     } 
+        
+                    new DataTableResource(this.customers).query(params);
+                  //  .then(items => this.items = items);
         });
-
     }
 
     getCustomerInDetail(customer) {
@@ -118,6 +149,11 @@ export class CustomerManagementComponent implements OnInit {
 
     }
 
-
+    getGridView(filter:CustomerFilter): Observable<Customer[]>{
+        return this.http
+        .post(`http://localhost:8081/customer/filter`,filter).map(this.extractData)
+        .catch(this.handleErrorObservable);
+        
+       }
 
 }
