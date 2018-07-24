@@ -1,0 +1,164 @@
+<div class="main-content" style="margin-top:35px">
+
+  <div class="container-fluid" style="border: 2px solid lightgray;box-shadow: -2px -3px 5px lightgray;border-radius: 7px;">
+
+  <div class=row style="padding-top: 11px">
+
+      <div class="col-md-3"><label for="selecttitle">Title</label>
+          <ngx-select-dropdown [config]="config" [options]="availableTitle" [(value)]="customermodel.title" [multiple]="false"></ngx-select-dropdown>
+      </div>
+
+      <div class="col-md-3"><label for="exampleInputEmail1">First Name</label>
+          <!-- <input [(ngModel)]="customer_creation.firstName" type="text" class="form-control" id="firstname" placeholder="Enter First Name"> -->
+          <input type="text" class="form-control" id="name" placeholder="Enter First Name"
+          required
+          pattern="[a-zA-Z][a-zA-Z ]+"
+          [(ngModel)]="customermodel.firstName" name="name"
+          #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+             class="alert alert-danger">
+             <div [hidden]="!name.hasError('required')">Name is required</div>
+             <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
+          </div>
+      
+      </div>
+      <!-- <div class="col-md-3"><label for="exampleInputEmail1">Middle Name</label>
+          <input [(ngModel)]="customer_creation.middleName" type="text" class="form-control" id="middleName" placeholder="Enter Middle Name"></div> -->
+
+      <div class="col-md-3"><label for="exampleInputEmail1">Last Name</label>
+          <input type="text" [(ngModel)]="customermodel.lastName" class="form-control" id="lastName" placeholder="Enter Last Name"></div>
+ 
+ 
+ 
+          <div class="col-md-3"><label for="mobileNo">Mobile No <span style=''>*</span></label>
+            <!-- <input [(ngModel)]="customer_creation.mobileNo" type="text" class="form-control" id="mobileNo" placeholder="Enter Mobile No."> -->
+       
+            <input type="text" class="form-control" id="mobilenumber"
+            required
+            [(ngModel)]="customermodel.mobileNumber" name="mobilenumber"
+            pattern="[0-9]*"
+            minlength="10"
+            maxlength="10" 
+            #mobile="ngModel">
+            <div [hidden]="mobile.valid || mobile.pristine"
+               class="alert alert-danger">
+               <div [hidden]="!mobile.hasError('minlength')">Mobile should be 10digit</div>
+               <div [hidden]="!mobile.hasError('required')">Mobile is required</div>
+               <div [hidden]="!mobile.hasError('pattern')">Mobile numberr should be only numbers</div>
+            </div>
+       
+        </div>
+ 
+ 
+ 
+        </div>
+
+  <!-- Second Row  Field Details Completed Here  -->
+
+  <!-- Third  Row  Field Details Start From  Here  -->
+
+  <div class=row style="padding-top: 11px">
+
+     
+
+      <div class="col-md-3"><label for="altMobileNo">Alt Mobile No.</label>
+          <input [(ngModel)]="customermodel.altMobileNo" type="text" class="form-control" id="altMobileNo" placeholder="Alt Mobile No.">
+      </div>
+      <div class="col-md-3"><label for="emailId">Email Id</label>
+      <input [(ngModel)]="customermodel.emailId" type="text" class="form-control" id="mobileNo" placeholder="Enter emailId"> 
+         
+      </div>
+
+      <div class="col-md-3"><label for="altEmail">Alt Email</label>
+          <input [(ngModel)]="customermodel.altEmailId" type="text" class="form-control" id="altEmail" placeholder="Alt Email">
+      </div>
+
+      <div class="col-md-3"><label for="selectCity">City</label>
+        <ngx-select-dropdown [config]="config" [options]="availableCity"  [(value)]="customermodel.city" [multiple]="false"></ngx-select-dropdown>
+    </div>
+
+  </div>
+
+  <!-- Third Row  Field Details Completed Here  -->
+
+  <!-- Fifth  Row  Field Details Start From  Here  -->
+
+  <div class=row style="padding-top: 11px">
+     
+      <div class="col-md-3"><label for="selectBranch">Branch</label>
+          <ngx-select-dropdown [config]="config" [options]="availableBranch" [(value)]="customermodel.branch" [multiple]="false"></ngx-select-dropdown>
+      </div>
+
+      <div class="col-md-3"><label for="selectArea">Area</label>
+          <ngx-select-dropdown [config]="config" [options]="availableArea" [(value)]="customermodel.area" [multiple]="false"></ngx-select-dropdown>
+      </div>
+      <div class="col-md-3"><label for="selectState">State</label>
+        <ngx-select-dropdown [config]="config" [options]="availableStates" [(value)]="customermodel.state" [multiple]="false"></ngx-select-dropdown>
+    </div>
+
+
+    <div class="col-md-3"><label for="exampleInputEmail1">Pin Code </label>
+        <input [(ngModel)]="customermodel.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pin Code.">
+    </div>
+
+      <!-- <div class="col-md-3"><label for="selectState">Sub Area</label>
+          <ngx-select-dropdown [config]="config" [options]="availableSubArea" [(value)]="customer_creation.subArea" [multiple]="false"></ngx-select-dropdown>
+      </div> -->
+  </div>
+
+  <!-- Fifth Row  Field Details Completed Here  -->
+
+  <!-- Sixth  Row  Field Details Start From  Here  -->
+  <!-- <div class=row style="padding-top: 11px"> -->
+
+     
+
+     
+
+  <!-- Sixth Row  Field Details Completed Here  -->
+
+  <!-- Seventh  Row  Field Details Start From  Here  -->
+
+  <!-- <div class=row style="padding-top: 11px">
+      <div class="col-md-4"><label for="ticketCategory">Ticket Category </label>
+          <ngx-select-dropdown [config]="config" [options]="availableAssetType" [(value)]="customer_creation.ticketCategory" [multiple]="false"></ngx-select-dropdown>
+      </div>
+
+      <div class="col-md-4"><label for="ticketSubCategory">Customer Subcategory</label>
+          <ngx-select-dropdown [config]="config" [options]="availableAssetType" [(value)]="customer_creation.ticketSubCategory" [multiple]="false"></ngx-select-dropdown>
+      </div>
+
+      <div class="col-md-4"><label for="exampleInputEmail1">Remarks</label>
+          <input [(ngModel)]="customer_creation.remarks" type="text" class="form-control" id="remarks"  placeholder="Enter Remarks"></div>
+
+  </div> -->
+
+  <!-- Seventh Row  Field Details Completed Here  -->
+
+  <!-- Button Design Row Details Start From  Here  -->
+
+  <div class="row justify-content-end" style="padding-top: 11px">
+      <div class="col-md-2">
+          <button type=" button " class="btn btn-sm btn-success " style="margin-left: 59px;" (click)="AddCustomerinfo()">Submit</button>
+      </div>
+
+      <div class="col-md-1" style="margin-bottom: 8px;">
+          <!-- <a class="btn btn-danger " href="/ticket-management">Close</a> -->
+
+          <nav>
+              <a routerLink="/ticket-management" routerLinkActive="active" class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -19px">Close</a>
+              <!-- <a routerLink="/heroes" routerLinkActive="active">Heroes</a> -->
+            </nav>
+
+      </div>
+  </div>
+
+
+</div>
+
+  <style>
+  .form-control{
+      background-image: none;
+  }
+  
+  </style>

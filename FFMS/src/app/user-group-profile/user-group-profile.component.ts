@@ -17,7 +17,7 @@ import { UserGroupComponent } from '../user-group/user-group.component';
 })
 export class UserGroupProfileComponent implements OnInit {
 
-  public areaDto: UserGroupDto[];
+  public userDto: UserGroupDto[];
   observableArea: Observable<UserGroupDto[]>
   itemResource = new DataTableResource([]); 
   errorMessage: String;
@@ -25,7 +25,7 @@ export class UserGroupProfileComponent implements OnInit {
     itemCount : number;
     selectedpersonname= '';
     isEditable=false;
-    showAreaCard=false;
+    showUserCard=false;
     areaDetails:UserGroupDto;
     isshowTableView=true;
 
@@ -66,16 +66,16 @@ export class UserGroupProfileComponent implements OnInit {
         this.observableArea.subscribe(
           result => { 
                   let num:number;
-                  this.areaDto = result ;
+                  this.userDto = result ;
                     this.itemCount = result.length;
                     for(num=0;num<result.length;num++){
                       if(result[num].status=='1'){
-                        this.areaDto[num].status="Enable";
+                       // this.userDto[num].status="Enable";
                       }else{
-                       this. areaDto[num].status="Disable";
+                      // this. userDto[num].status="Disable";
                       }
                      }
-                        new DataTableResource(this.areaDto).query(params).then(items => this.items = items);
+                        new DataTableResource(this.userDto).query(params).then(items => this.items = items);
                   });
         
       }
@@ -83,7 +83,7 @@ export class UserGroupProfileComponent implements OnInit {
 
 
       addComponent(){
-        alert("dynamic component called!")
+        //alert("dynamic component called!")
        this.isshowTableView=false;
         var comp = this._cfr.resolveComponentFactory(UserGroupComponent);
         var cityComponent = this.container.createComponent(comp);
@@ -93,7 +93,7 @@ export class UserGroupProfileComponent implements OnInit {
     
 
     showHideAddButtonOfUser(){
-      alert("show/Hide function called")
+      //alert("show/Hide function called")
       if (document.getElementById("ButtonForAddNewUser").style.display == "none" ) {
         document.getElementById("ButtonForAddNewUser").style.display="";
  

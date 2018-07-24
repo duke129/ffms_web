@@ -34,6 +34,8 @@ import { UserManagementComponent } from '../../user-management/user-management.c
 import { UserGroupComponent } from '../../user-group/user-group.component';
 import { UserComponent } from '../../user/user.component';
 import { UserGroupProfileComponent } from '../../user-group-profile/user-group-profile.component';
+import { CreateCustomerComponent } from '../../create-customer/create-customer.component';
+
 
 import {
   MatAutocompleteModule,
@@ -141,7 +143,8 @@ import {
   UserManagementComponent,
   UserGroupComponent,
   UserComponent,
-  UserGroupProfileComponent
+  UserGroupProfileComponent,
+  CreateCustomerComponent
   ],
   entryComponents: [CityComponent,BranchComponent,AreaComponent,UserComponent,UserGroupComponent]
 })

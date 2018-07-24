@@ -6,37 +6,38 @@
 
     <div class=row style="padding-top: 11px">
         <div class="col-md-6"><label for="branchName"><b> Group Name</b></label>
-            <input [(ngModel)]="areaModel.usergroup" type="text" class="form-control" id="areaname" placeholder="Enter Area Name">
+            <input [(ngModel)]="userModel.usergroup" type="text" class="form-control" id="areaname" placeholder="Enter Group Name">
         </div>
         <div class="col-md-6"><label for="branchCode"><b> Description</b></label>
-            <input [(ngModel)]="areaModel.userGroupDescription" type="text" class="form-control" id="areacode" placeholder="Enter Area Code">
+            <input [(ngModel)]="userModel.userGroupDescription" type="text" class="form-control" id="areacode" placeholder="Enter Group Description">
         </div>
     </div>
 
     <div class=row style="padding-top: 11px">
         <div class="col-md-6"><label for="branchDescription"><b> Role </b></label>
-            <input [(ngModel)]="areaModel.role" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description">
+            <!-- <input [(ngModel)]="userModel.role" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description"> -->
+            <ngx-select-dropdown [config]="config" [options]="availableRole" [(value)]="userModel.role" [multiple]="true" (click)="disableSearch()"></ngx-select-dropdown>
         </div>
         <div class="col-md-6"><label style="font-weight: bold" for="cityStatus"> Status</label>
-            <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="areaModel.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
+            <ngx-select-dropdown [config]="config" [options]="areaStatus" [(value)]="userModel.status" [multiple]="false" (click)="disableSearch()"></ngx-select-dropdown>
         </div>
 
     </div>
     <!-- <div class=row style="padding-top: 11px">
         <div class="col-md-6"><label style="font-weight: bold" for="citystate">Phone Number</label>
-            <input [(ngModel)]="areaModel.phone" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description">
+            <input [(ngModel)]="userModel.phone" type="text" class="form-control" id="areadescription" placeholder="Enter Area Description">
         </div>
     </div> -->
 
     <div class="row justify-content-end" style="padding-top: 11px">
         <div class="col-md-2">
-            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -14px;" (click)="onsubmitAddNewUser()">Submit</button>
+            <button type=" button " class="btn btn-sm btn-success " style="margin-left: -70px;" (click)="onsubmitAddNewUser()">Submit</button>
         </div>
 
         <div class="col-md-1" style="margin-bottom: 8px;">
 
             <div class="col-md-1" style="margin-bottom: 8px;">
-                <button type=" button " class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -60px" (click)="closeUserForm()">Close</button>
+                <button type=" button " class="fa fa-plus-circle" class="btn btn-sm btn-danger" style="margin-left: -85px" (click)="closeUserForm()">Close</button>
             </div>
 
         </div>

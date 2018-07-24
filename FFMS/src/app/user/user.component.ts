@@ -19,14 +19,14 @@ export class UserComponent implements OnInit {
   _ref:any;
 
   
-  public areaModel=new UserDto();
+  public userModel=new UserDto();
 
   constructor(private http:Http,@Inject(forwardRef(() => UserProfileComponent))public userProfileComponent:UserProfileComponent) {
 
    }
 
   ngOnInit() {
-    this.areaModel;
+    this.userModel;
   }
 
 
@@ -48,28 +48,33 @@ export class UserComponent implements OnInit {
     areaStatus=["Enable","Disable"];
     selectedAreaStatus = ['select status'];
 
+    userGroup=["Admin","Network Engineer","Sales Engineer"];
+
 
     onsubmitAddNewUser(){
-      this.areaModel.firstName;
-      this.areaModel.lastName;
-      this.areaModel.password;
-      this.areaModel.status;
-      alert("User value is :::"+JSON.stringify(this.areaModel));
-      //this.createCity(this.areaModel);
+      this.userModel.firstName;
+      this.userModel.lastName;
+      this.userModel.password;
+      let status=this.userModel.status[0];
+      this.userModel.status=status;
+      let usergroupName=this.userModel.userGroupName[0];
+      this.userModel.userGroupName=usergroupName;
+      alert("User value is :::"+JSON.stringify(this.userModel));
+      this.createCity(this.userModel);
 
     }
 
-    createCity(areaModel:UserDto)
+    createCity(userModel:UserDto)
     {
-      this.saveCity(areaModel).subscribe(result => {
+      this.saveCity(userModel).subscribe(result => {
       });
       
     }
  
  
-    saveCity(areaModel:UserDto) : Observable<Response>{
+    saveCity(userModel:UserDto) : Observable<Response>{
         return this.http
-       .post(`http://localhost:8081/location/area/save`,areaModel);
+       .post(`http://localhost:8081/user/add`,userModel);
       }
 
 

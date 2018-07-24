@@ -19,14 +19,14 @@ export class UserGroupComponent implements OnInit {
   _ref:any;
 
   
-  public areaModel=new UserGroupDto();
+  public userModel=new UserGroupDto();
 
   constructor(private http:Http,@Inject(forwardRef(() => UserGroupProfileComponent))public userGroupProfileComponent:UserGroupProfileComponent) {
 
    }
 
   ngOnInit() {
-    this.areaModel;
+    this.userModel;
   }
 
 
@@ -48,28 +48,30 @@ export class UserGroupComponent implements OnInit {
     areaStatus=["Enable","Disable"];
     selectedAreaStatus = ['select status'];
 
+    availableRole=["ServiceEngineer","Manager","Lead","Electrician"];
+
 
     onsubmitAddNewUser(){
-      this.areaModel.usergroup;
-      this.areaModel.role;
-      this.areaModel.userGroupDescription;
-      this.areaModel.status;
-      alert("User value is :::"+JSON.stringify(this.areaModel));
-      //this.createCity(this.areaModel);
+      this.userModel.userGroup;
+      this.userModel.role;
+      this.userModel.userGroupDescription;
+      this.userModel.status;
+      alert("User value is :::"+JSON.stringify(this.userModel));
+      this.createCity(this.userModel);
 
     }
 
-    createCity(areaModel:UserGroupDto)
+    createCity(userModel:UserGroupDto)
     {
-      this.saveCity(areaModel).subscribe(result => {
+      this.saveCity(userModel).subscribe(result => {
       });
       
     }
  
  
-    saveCity(areaModel:UserGroupDto) : Observable<Response>{
+    saveCity(userModel:UserGroupDto) : Observable<Response>{
         return this.http
-       .post(`http://localhost:8081/location/area/save`,areaModel);
+       .post(`http://localhost:8081/group/add`,userModel);
       }
 
 

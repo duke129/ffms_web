@@ -1,0 +1,24 @@
+.container-fluid {
+    max-width: 1100px;
+   // max-height: 500px;
+   // height: 100%;
+    //overflow-y: auto;
+    width: 100%;
+    //background-color:azure
+}
+#AssetId {
+	cursor: pointer;
+	color:brown;
+	display: block;
+	padding: 10px;
+	margin: 3px;
+}
+
+#Ticketheader {
+    background-color: ghostwhite;
+    padding: inherit;
+}
+
+#customerType {
+    padding: 10px;
+}
