@@ -6,10 +6,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/toPromise';
-import  { TicketViewModel } from '../ticket-management/ticket';
 import { AreaDto } from '../area/areaDto';
-import { AreaComponent } from '../area/area.component'
+import { AreaComponent } from '../area/area.component';
+import { AreaFilter } from './areaFilter'
 
 
 @Component({
@@ -29,15 +28,15 @@ export class AreamanagementComponent implements OnInit {
     showAreaCard=false;
     areaDetails:AreaDto;
     isshowTableView=true;
+    public areaFilter=new AreaFilter();
+    public totalGlobalCount;
 
     @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
    
     constructor(private http: Http,private _cfr: ComponentFactoryResolver) {
       
     }
-
-
-    config = {
+  config = {
       displayKey:"areaStatus", //if objects array passed which key to be displayed defaults to description,
       search:true //enables the search plugin to search in the list
       }
@@ -57,6 +56,8 @@ export class AreamanagementComponent implements OnInit {
               result => { 
                 
               });
+
+      this.getCountValue();
            
       }
 
@@ -81,26 +82,26 @@ export class AreamanagementComponent implements OnInit {
 	return Promise.reject(error.message || error);
     }	
      
-    reloadItems(params) {
-      this.observableArea.subscribe(
+    // reloadItems(params) {
+    //   this.observableArea.subscribe(
         
-                result => { 
-                  let num;
-                this.areaDto = result ;
-                  this.itemCount = result.length;
-                  for(num=0;num<result.length;num++){
-                    console.log("city status in city dto ::"+result[num].status);
-                    if(result[num].statusId=='1'){
-                      this.areaDto[num].status="Enable";
-                    }else{
-                     this. areaDto[num].status="Disable";
-                    }
-                    console.log("city status in city dsting::"+this.areaDto[num].status);
-                   }
-                      new DataTableResource(this.areaDto).query(params).then(items => this.items = items);
-                });
+    //             result => { 
+    //               let num;
+    //             this.areaDto = result ;
+    //               this.itemCount = 17;
+    //               for(num=0;num<result.length;num++){
+    //                 console.log("city status in city dto ::"+result[num].status);
+    //                 if(result[num].statusId=='1'){
+    //                   this.areaDto[num].status="Enable";
+    //                 }else{
+    //                  this. areaDto[num].status="Disable";
+    //                 }
+    //                 console.log("city status in city dsting::"+this.areaDto[num].status);
+    //                }
+    //                   new DataTableResource(this.areaDto).query(params).then(items => this.items = items);
+    //             });
       
-    }
+    // }
 
 public selectedArea=new AreaDto();
     rowClick(rowEvent) {
@@ -115,9 +116,7 @@ public selectedArea=new AreaDto();
       this.selectedArea.branchName=this.areaDetails.branchName;
       this.selectedArea.cityName=this.areaDetails.cityName;
       this.selectedArea.status=this.areaDetails.status;
-     // alert("selected area details is :::"+JSON.stringify(this.selectedArea));
-      
-        console.log('Clicked: ' + rowEvent.row.item);
+      console.log('Clicked: ' + rowEvent.row.item);
     }
 
     rowDoubleClick(rowEvent) {
@@ -205,5 +204,74 @@ public selectedArea=new AreaDto();
       var cityComponent = this.container.createComponent(comp);
       cityComponent.instance._ref = cityComponent;
   }
+
+
+  getFilter(areaFilter:AreaFilter){
+    
+    if(areaFilter.areaName!=null || areaFilter.code!=null ){
+    
+      this.getGridResultCount(areaFilter).subscribe(result=>{
+       this.totalGlobalCount=result;
+      // alert("*******"+JSON.stringify(this.totalGlobalCount));
+       });
+      
+       this.reloadItems(areaFilter);
+     }
+  }
+
+  getGridView(areaFilter:AreaFilter): Observable<AreaDto[]>{
+    return this.http
+    .post(`http://localhost:8081/location/areafilter`,areaFilter).map(this.extractData)
+    .catch(this.handleErrorObservable);
+    
+   }
+
+   getGridResultCount(areaFilter:AreaFilter): Observable<Number>{
+    return this.http
+    .post(`http://localhost:8081/location/areacount`,areaFilter).map(this.extractData)
+    .catch(this.handleErrorObservable);
+    
+   }
+
+   getCountValue(){
+    this.totalGlobalCount =this.getGridResultCount(this.areaFilter).subscribe(result=>{
+
+      this.totalGlobalCount=result;
+    });
+  }
+
+
+
+  reloadItems(params) {
+    this.areaFilter.offset=params.offset;
+    this.areaFilter.pageSize=params.limit;
+   
+     this.getGridView(this.areaFilter).subscribe(result => { 
+                  let i;
+                  this.areaDto = result ;
+                 // alert("City filter details in resload "+JSON.stringify(result));
+                    for(i=0;i<result.length;i++){
+                     
+                      if(result[i].statusId=="1"){
+                        this.areaDto[i].status="Enable";
+                      }else{
+                        this. areaDto[i].status="Disable";
+                      }
+                    }
+                    
+
+  if (this.areaDto !=[] && this.areaDto.length > 0) {
+    this.itemCount =this.totalGlobalCount;
+  }
+  else
+  {
+    this.itemCount =0;
+  }   
+           console.log("params :: "+JSON.stringify(params))
+                    new DataTableResource(this.areaDto).query(params);
+        });
+      
+  }
+
 
 }

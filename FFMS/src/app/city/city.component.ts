@@ -47,8 +47,9 @@ export class CityComponent implements OnInit {
   config = {
     displayKey:"cityName", //if objects array passed which key to be displayed defaults to cityName,
     search:true, //enables the search plugin to search in the list
-    height: 'auto' //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
-    }
+    height: 5, //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
+    placeholder: 'Select',  
+  }
 
     disableSearch(){
       this.config.search=false;
@@ -98,7 +99,7 @@ export class CityComponent implements OnInit {
       alert("create city method called"+city);
       this.saveCity(city).subscribe(result => {
       });
-      
+      this.clearFormData();
     }
  
  
@@ -117,5 +118,21 @@ export class CityComponent implements OnInit {
         this._ref.destroy();
         this.citymanagementComponent.showHideCityAddButton();
         this.citymanagementComponent.isShowCityTableView=true;
+    }
+
+    clearFormData(){
+      
+      this.cityDto.cityName="";
+      this.cityDto.code="";
+      this.cityDto.description="";
+     this.config.placeholder="Select";
+     this.cityDto.state=this.config.placeholder;
+      this.config.placeholder="Select";
+
+      let selectedDisplayText: string = "Select";
+      let selectedItems;
+
+     selectedDisplayText = this.config["placeholder"];
+
     }
 }

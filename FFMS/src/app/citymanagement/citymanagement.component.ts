@@ -15,7 +15,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CityComponent } from '../city/city.component'
+import { CityComponent } from '../city/city.component';
+import { CityFilter } from './cityFilter';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 @Component({
@@ -28,6 +31,8 @@ export class CitymanagementComponent implements OnInit {
 
 
   public cityDto: CityDto[];
+  public cityFilter=new CityFilter;
+
   observableCities: Observable<CityDto[]>
   itemResource = new DataTableResource([]); 
   errorMessage: String;
@@ -38,6 +43,8 @@ export class CitymanagementComponent implements OnInit {
     selectedpersonname= '';
     public  citiesList= [];
    cityDetails:CityDto;
+   public totalGlobalCount;
+
    config = {
     displayKey:"cityName", //if objects array passed which key to be displayed defaults to cityName,
     //search:true, //enables the search plugin to search in the list
@@ -46,6 +53,8 @@ export class CitymanagementComponent implements OnInit {
 
     cityStatus=["Enable","Disable"];
     selectedstatus = ['select stautus'];
+
+    public totalFilterCount;
 
     @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
 
@@ -65,6 +74,7 @@ export class CitymanagementComponent implements OnInit {
     
     ngOnInit() {
       var num:any;
+      this.getCountValue();
     
 
     this.observableCities = this.getCitiesWithObservable();
@@ -104,6 +114,8 @@ export class CitymanagementComponent implements OnInit {
         return cityModel;
     }
 
+
+
      convertServerCityModelIntoUICityModel(cityModel:CityDto):any {
 
       console.log("***************city model from server is ::: "+cityModel)
@@ -119,29 +131,104 @@ export class CitymanagementComponent implements OnInit {
 	return Promise.reject(error.message || error);
     }	
 
-   // itemResource = new DataTableResource(this.books);
+
+
+    getFilter(cityFilter:CityFilter){
     
+      if(cityFilter.name!=null || cityFilter.cityCode!=null ){
     
-    reloadItems(params) {
-     // this.observableCities = this.getCitiesWithObservable();
-      this.observableCities.subscribe(
-                result => { 
-                let num;
-                  this.cityDto = result ;
-                  console.log("result is :::"+result);
-                  this.itemCount = result.length;
-                  for(num=0;num<result.length;num++){
-                    console.log("city status in city dto ::"+result[num].status);
-                    if(result[num].statusId=='1'){
-                      this.cityDto[num].status="Enable";
-                    }else{
-                     this. cityDto[num].status="Disable";
-                    }
-                    console.log("city status in city dsting::"+this.cityDto[num].status);
-                   }
-                      new DataTableResource(this.cityDto).query(params).then(items => this.items = items);
-                });
+     this.getGridResultCount(cityFilter).subscribe(result=>{
+      this.totalGlobalCount=result;
+      });
+     
+      this.reloadItems(cityFilter);
+    }
+      //this.clearApplyData();
+    }
+
+
+
+    getGridView(cityFilter:CityFilter): Observable<CityDto[]>{
+      return this.http
+      .post(`http://localhost:8081/location/cityfilter`,cityFilter).map(this.extractData)
+      .catch(this.handleErrorObservable);
       
+     }
+
+     getGridResultCount(assetFilter:CityFilter): Observable<Number>{
+      return this.http
+      .post(`http://localhost:8081/location/citycount`,assetFilter).map(this.extractData)
+      .catch(this.handleErrorObservable);
+      
+     }
+
+
+
+
+    // reloadItems(params) {
+    //   this.observableCities.subscribe(
+    //             result => { 
+    //             let num;
+    //               this.cityDto = result ;
+    //               console.log("result is :::"+result);
+    //               this.itemCount = result.length;
+    //               for(num=0;num<result.length;num++){
+    //                 console.log("city status in city dto ::"+result[num].status);
+    //                 if(result[num].statusId=='1'){
+    //                   this.cityDto[num].status="Enable";
+    //                 }else{
+    //                  this. cityDto[num].status="Disable";
+    //                 }
+    //                 console.log("city status in city dsting::"+this.cityDto[num].status);
+    //                }
+    //                   new DataTableResource(this.cityDto).query(params).then(items => this.items = items);
+    //             });
+      
+    // }
+
+
+
+    getCountValue(){
+      this.totalGlobalCount =this.getGridResultCount(this.cityFilter).subscribe(result=>{
+
+        this.totalGlobalCount=result;
+      });
+    }
+
+
+
+
+
+
+    reloadItems(params) {
+      this.cityFilter.offset=params.offset;
+      this.cityFilter.pageSize=params.limit;
+     
+       this.getGridView(this.cityFilter).subscribe(result => { 
+                    let i;
+                    this.cityDto = result ;
+                   // alert("City filter details in resload "+JSON.stringify(result));
+                      for(i=0;i<result.length;i++){
+                       
+                        if(result[i].statusId=="1"){
+                          this.cityDto[i].status="Enable";
+                        }else{
+                          this. cityDto[i].status="Disable";
+                        }
+                      }
+                      
+
+    if (this.cityDto !=[] && this.cityDto.length > 0) {
+      this.itemCount =this.totalGlobalCount;
+    }
+    else
+    {
+      this.itemCount =0;
+    }   
+             console.log("params :: "+JSON.stringify(params))
+                      new DataTableResource(this.cityDto).query(params);
+          });
+        
     }
 
 
@@ -243,5 +330,10 @@ updateCity=new CityDto();
 
 }
      
+}
+
+clearApplyData(){
+  this.cityFilter.name="";
+  this.cityFilter.cityCode="";
 }
 }

@@ -11,9 +11,35 @@
             <div #parent></div>
         </div>
         <div style="padding-bottom: 20px"></div>
+        <div class="accordianPage">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title style="color: #003d79;">
+                            City Filter
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="col-md-4"><label for="serialNo">City Name</label>
+                            <input type="text" [(ngModel)]="cityFilter.name" class="form-control" id="name" placeholder="Enter City Name">
+                        </div>
+                        <div class="col-md-4"><label for="customerName">City Code</label>
+                            <input type="text" [(ngModel)]="cityFilter.cityCode" class="form-control" id="name" placeholder="Enter City Code">
+                        </div>
+
+                        <div class="col-md-4" id="div">
+                            <button mat-button (click)="getFilter(cityFilter)"><span style="text-align-last: left" >Apply</span></button>
+                        </div>
+                    </div>
+                    <!-- <mat-action-row>
+                        <button mat-button (click)="getFilter(cityFilter)">Apply</button>
+                    </mat-action-row> -->
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
 
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px; " *ngIf="isShowCityTableView">
-            <data-table id="persons-grid " headerTitle=" " [items]="items " [itemCount]="itemCount " (reload)="reloadItems($event) " (rowClick)="rowClick($event) " (rowDoubleClick)="rowDoubleClick($event) " [rowTooltip]="rowTooltip " [indexColumn]="false ">
+            <data-table id="persons-grid " headerTitle=" " [items]="cityDto" [itemCount]="itemCount " (reload)="reloadItems($event) " (rowClick)="rowClick($event) " (rowDoubleClick)="rowDoubleClick($event) " [rowTooltip]="rowTooltip " [indexColumn]="false ">
 
                 <data-table-column [property]=" 'cityName' " [header]=" 'Name' " [sortable]="true " [resizable]="true ">
 

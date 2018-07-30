@@ -10,6 +10,7 @@ import 'rxjs/add/operator/toPromise';
 import  { TicketViewModel } from '../ticket-management/ticket';
 import { BranchDto } from '../branch/branchDto';
 import { BranchComponent } from '../branch/branch.component'
+import { BranchFilter } from './branchFilter'
 
 
 @Component({
@@ -33,6 +34,10 @@ export class BranchmanagementComponent implements OnInit {
     selectedpersonname= '';
     branchDetails:BranchDto;
     isShowBranchTableView=true;
+
+    public branchFilter=new BranchFilter();
+
+    public totalGlobalCount;
 
  constructor(private http: Http,private _cfr: ComponentFactoryResolver) {
       
@@ -58,6 +63,8 @@ export class BranchmanagementComponent implements OnInit {
               result => { 
                 
               });
+
+        this.getCountValue();
            
       }
 
@@ -92,23 +99,23 @@ export class BranchmanagementComponent implements OnInit {
 
     
     
-    reloadItems(params) {
-      let i;
-      this.observableBranch.subscribe(
-                result => { 
-                  this.branchDto = result ;
-                  this.itemCount = result.length;
-                  for(i=0;i<result.length;i++){
-                    if(result[i].statusId=='1'){
-                      this.branchDto[i].status="Enable";
-                    }else{
-                      this.branchDto[i].status="Disable";
-                    }
+    // reloadItems(params) {
+    //   let i;
+    //   this.observableBranch.subscribe(
+    //             result => { 
+    //               this.branchDto = result ;
+    //               this.itemCount = result.length;
+    //               for(i=0;i<result.length;i++){
+    //                 if(result[i].statusId=='1'){
+    //                   this.branchDto[i].status="Enable";
+    //                 }else{
+    //                   this.branchDto[i].status="Disable";
+    //                 }
                    
-                  }
-                      new DataTableResource(this.branchDto).query(params).then(items => this.items = items);
-                });
-    }
+    //               }
+    //                   new DataTableResource(this.branchDto).query(params).then(items => this.items = items);
+    //             });
+    // }
    
     selectedBranch:any;
     rowClick(rowEvent) {
@@ -188,5 +195,73 @@ export class BranchmanagementComponent implements OnInit {
       cityComponent.instance._ref = cityComponent;
      
   }
+
+
+  getFilter(branchFilter:BranchFilter){
+    
+    if(branchFilter.branchName!=null || branchFilter.code!=null ){
+    
+      this.getGridResultCount(branchFilter).subscribe(result=>{
+       this.totalGlobalCount=result;
+      // alert("*******"+JSON.stringify(this.totalGlobalCount));
+       });
+      
+       this.reloadItems(branchFilter);
+     }
+  }
+
+
+  getGridView(branchFilter:BranchFilter): Observable<BranchDto[]>{
+    return this.http
+    .post(`http://localhost:8081/location/branchfilter`,branchFilter).map(this.extractData)
+    .catch(this.handleErrorObservable);
+    
+   }
+
+   getGridResultCount(branchFilter:BranchFilter): Observable<Number>{
+    return this.http
+    .post(`http://localhost:8081/location/branchcount`,branchFilter).map(this.extractData)
+    .catch(this.handleErrorObservable);
+    
+   }
+
+   getCountValue(){
+    this.totalGlobalCount =this.getGridResultCount(this.branchFilter).subscribe(result=>{
+
+      this.totalGlobalCount=result;
+    });
+  }
+
+  reloadItems(params) {
+    this.branchFilter.offset=params.offset;
+    this.branchFilter.pageSize=params.limit;
+   
+     this.getGridView(this.branchFilter).subscribe(result => { 
+                  let i;
+                  this.branchDto = result ;
+                 // alert("City filter details in resload "+JSON.stringify(result));
+                    for(i=0;i<result.length;i++){
+                     
+                      if(result[i].statusId=="1"){
+                        this.branchDto[i].status="Enable";
+                      }else{
+                        this. branchDto[i].status="Disable";
+                      }
+                    }
+                    
+
+  if (this.branchDto !=[] && this.branchDto.length > 0) {
+    this.itemCount =this.totalGlobalCount;
+  }
+  else
+  {
+    this.itemCount =0;
+  }   
+           console.log("params :: "+JSON.stringify(params))
+                    new DataTableResource(this.branchDto).query(params);
+        });
+      
+  }
+
 
 }

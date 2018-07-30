@@ -13,9 +13,34 @@
             <div #parent></div>
         </div>
         <div style="padding-bottom: 20px"></div>
+        <div class="accordianPage">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title style="color: #003d79;">
+                            Area Filter
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="col-md-4"><label for="serialNo">Area Name</label>
+                            <input type="text" [(ngModel)]="areaFilter.areaName" class="form-control" id="name" placeholder="Enter Area Name">
+                        </div>
+                        <div class="col-md-4"><label for="customerName">Area Code</label>
+                            <input type="text" [(ngModel)]="areaFilter.code" class="form-control" id="name" placeholder="Enter Area Code">
+                        </div>
+                        <div class="col-md-4" id="div">
+                            <button mat-button (click)="getFilter(areaFilter)"><span style="text-align-last: left" >Apply</span></button>
+                        </div>
+                    </div>
+                    <!-- <mat-action-row>
+                        <button mat-button (click)="getFilter(cityFilter)">Apply</button>
+                    </mat-action-row> -->
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
 
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;" *ngIf="isshowTableView">
-            <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
+            <data-table id="persons-grid" headerTitle="" [items]="areaDto" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip" [indexColumn]="false">
                 <!-- <data-table-column [property]="'areaId'" [header]="'Id'" [sortable]="true" [resizable]="true">
                 </data-table-column> -->
                 <data-table-column [property]="'areaName'" [header]="'Name'" [sortable]="true" [resizable]="true">
@@ -98,7 +123,7 @@
                                     <!-- <span>{{cityDetails?.cityState}}</span> -->
 
                                     <div *ngIf="!isEditable">
-                                        <span>{{cityDetails?.cityState}}</span>
+                                        <!-- <span>{{cityDetails?.cityState}}</span> -->
                                     </div>
                                     <div *ngIf="isEditable">
                                         <!-- <input [(ngModel)]="selectedCity.cityState " type="text " class="form-control " id="cityname " placeholder=" "> -->
@@ -175,3 +200,9 @@
         </div>
     </div>
 </div>
+
+<style>
+    .form-control {
+        background-image: none;
+    }
+</style>g

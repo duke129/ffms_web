@@ -12,8 +12,37 @@
             <div #parent></div>
         </div>
         <div style="padding-bottom: 20px"></div>
+        <div class="accordianPage">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title style="color: #003d79;">
+                            Branch Filter
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="col-md-4"><label for="serialNo">Branch Name</label>
+                            <input type="text" [(ngModel)]="branchFilter.branchName" class="form-control" id="name" placeholder="Enter Branch Name">
+                        </div>
+                        <div class="col-md-4"><label for="customerName">Branch Code</label>
+                            <input type="text" [(ngModel)]="branchFilter.code" class="form-control" id="name" placeholder="Enter Branch Code">
+                        </div>
+                        <div class="col-md-4" id="div">
+                            <button mat-button (click)="getFilter(branchFilter)"><span style="text-align-last: left" >Apply</span></button>
+                        </div>
+                    </div>
+                    <!-- <mat-action-row>
+                        <button mat-button (click)="getFilter(cityFilter)">Apply</button>
+                    </mat-action-row> -->
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+
+
+        <div style="padding-bottom: 20px"></div>
         <div style="margin: auto; max-width: 1000px; margin-bottom: 50px;" *ngIf="isShowBranchTableView">
-            <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" [indexColumn]="false">
+            <data-table id="persons-grid" headerTitle="" [items]="branchDto" [itemCount]="itemCount" (reload)="reloadItems($event)" (rowClick)="rowClick($event)" [indexColumn]="false">
                 <!-- <data-table-column [property]="'idBranch'" [header]="'Id'" [sortable]="true" [resizable]="true">
                 </data-table-column> -->
 

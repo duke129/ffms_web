@@ -101,6 +101,7 @@ this.reloadItems(assetFilter);
  }
     
 reloadItems(params) {
+  alert(JSON.stringify(params));
 
   this.assetFilter.offset=params.offset;
   this.assetFilter.pageSize=params.limit;
@@ -109,9 +110,8 @@ reloadItems(params) {
                 let i;
                   this.assets = result ;
                 
-                  for(i=0;i<result.length;i++){Asset
-
-                    
+                  for(i=0;i<result.length;i++){
+                    Asset
                     if(result[i].status=="1"){
                       this.assets[i].status="Enable";
                     }else{
