@@ -3,7 +3,8 @@ export class UserDto{
     lastName:string;
     password:String;
     statusBean:number;
-    userGroup:number;
+    userGroupId:number;
     status:string;
     phone:string;
+    userGroupName:string;
 }

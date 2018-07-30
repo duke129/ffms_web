@@ -21,6 +21,7 @@ import { AnalyticsComponent } from '../../analytics/analytics.component';
 import { UserManagementComponent } from '../../user-management/user-management.component';
 import { UserGroupComponent } from '../../user-group/user-group.component';
 import { UserGroupProfileComponent } from '../../user-group-profile/user-group-profile.component';
+import { CreateCustomerComponent } from '../../create-customer/create-customer.component';
 
 
 
@@ -85,4 +86,5 @@ export const AdminLayoutRoutes: Routes = [
    { path: 'customer-management', component: CustomerManagementComponent },
     { path: 'add-management', component: AddTicektComponent },
     { path: 'analytics-management', component: AnalyticsComponent },
+    { path: 'new-customer', component: CreateCustomerComponent },
 ];

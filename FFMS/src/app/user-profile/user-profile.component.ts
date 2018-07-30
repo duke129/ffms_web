@@ -73,7 +73,14 @@ export class UserProfileComponent implements OnInit {
                       }else{
                        this. areaDto[num].status="Disable";
                       }
+                     if(num==0){
+                        this.areaDto[num].userGroupName="Admin"; 
+                      }else{
+                        this.areaDto[num].userGroupName="Network Engineer";
+                      }
+                      
                      }
+                    
                         new DataTableResource(this.areaDto).query(params).then(items => this.items = items);
                   });
         
@@ -82,7 +89,7 @@ export class UserProfileComponent implements OnInit {
 
 
       addComponent(){
-        alert("dynamic component called!")
+       // alert("dynamic component called!")
        this.isshowTableView=false;
         var comp = this._cfr.resolveComponentFactory(UserComponent);
         var cityComponent = this.container.createComponent(comp);
@@ -92,7 +99,7 @@ export class UserProfileComponent implements OnInit {
     
 
     showHideAddButtonOfUser(){
-      alert("show/Hide function called")
+      //alert("show/Hide function called")
       if (document.getElementById("ButtonForAddNewUser").style.display == "none" ) {
         document.getElementById("ButtonForAddNewUser").style.display="";
  

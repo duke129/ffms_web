@@ -1,5 +1,5 @@
 export class UserGroupDto{
-    usergroup:string;
+    userGroup:string;
     role:string;
     userGroupDescription:string;
     status:string;
