@@ -93,8 +93,8 @@ export class NavbarComponent implements OnInit {
         body.classList.remove('nav-open');
     };
     sidebarToggle() {
-        // const toggleButton = this.toggleButton;
-        // const body = document.getElementsByTagName('body')[0];
+         const toggleButton = this.toggleButton;
+         //const body = document.getElementsByTagName('body')[0];
         var $toggle = document.getElementsByClassName('navbar-toggler')[0];
 
         if (this.sidebarVisible === false) {
@@ -168,7 +168,7 @@ export class NavbarComponent implements OnInit {
 
     getDashBoardCounts(){
 
-        return this.http.get('http://localhost:8081/ticket/dashboard-count')
+        return this.http.get('http://localhost:8081/ticket/dashboard-count/1')
 	        .map(res => res.json())
           .catch(this.handleErrorObservable);
           
